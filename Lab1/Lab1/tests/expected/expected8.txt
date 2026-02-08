@@ -1,0 +1,3 @@
+Usage:
+replace.exe <input file> <output file> <search string> <replace string>
+Or run without arguments to use stdin mode.
