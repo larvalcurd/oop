@@ -1,0 +1,4 @@
+Usage:
+	invert.exe			Read Matrix from stdin
+	invert.exe <file>	Read Matrix from file
+	invert.exe -h		Show help
