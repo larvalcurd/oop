@@ -154,40 +154,66 @@ echo  STDIN MODE TESTS
 echo ============================================================
 echo.
 
-REM --- Test 17: Stdin basic replacement (Example 1) ---
+REM --- Test 17: Stdin basic replacement ---
 set /a TOTAL+=1
 echo Test 17: Stdin - Basic replacement ("ma" -^> "mama")
-(echo ma & echo mama & echo mama delala pelmeni) | "%EXE%" > "%OUTPUT_DIR%\output17.txt"
+"%EXE%" < "%INPUT_DIR%\stdin17.txt" > "%OUTPUT_DIR%\output17.txt"
 fc "%OUTPUT_DIR%\output17.txt" "%EXPECTED_DIR%\expected17.txt" >nul 2>&1
 if !errorlevel! equ 0 (echo   [PASS] & set /a PASSED+=1) else (echo   [FAIL] & set /a FAILED+=1)
 
-REM --- Test 18: Stdin backtracking (Example 2) ---
+REM --- Test 18: Stdin backtracking ---
 set /a TOTAL+=1
 echo Test 18: Stdin - Backtracking ("1231234" -^> "XYZ")
-(echo 1231234 & echo XYZ & echo 12312312345) | "%EXE%" > "%OUTPUT_DIR%\output18.txt"
+"%EXE%" < "%INPUT_DIR%\stdin18.txt" > "%OUTPUT_DIR%\output18.txt"
 fc "%OUTPUT_DIR%\output18.txt" "%EXPECTED_DIR%\expected18.txt" >nul 2>&1
 if !errorlevel! equ 0 (echo   [PASS] & set /a PASSED+=1) else (echo   [FAIL] & set /a FAILED+=1)
 
-REM --- Test 19: Stdin empty search string (Example 3) ---
+REM --- Test 19: Stdin empty search string ---
 set /a TOTAL+=1
 echo Test 19: Stdin - Empty search string (no replacement)
-(echo. & echo tam & echo tut text) | "%EXE%" > "%OUTPUT_DIR%\output19.txt"
+"%EXE%" < "%INPUT_DIR%\stdin19.txt" > "%OUTPUT_DIR%\output19.txt"
 fc "%OUTPUT_DIR%\output19.txt" "%EXPECTED_DIR%\expected19.txt" >nul 2>&1
 if !errorlevel! equ 0 (echo   [PASS] & set /a PASSED+=1) else (echo   [FAIL] & set /a FAILED+=1)
 
 REM --- Test 20: Stdin multi-line text ---
 set /a TOTAL+=1
 echo Test 20: Stdin - Multi-line text
-(echo ma & echo mama & echo mama delala pelmeni & echo ya pokushal plotno) | "%EXE%" > "%OUTPUT_DIR%\output20.txt"
+"%EXE%" < "%INPUT_DIR%\stdin20.txt" > "%OUTPUT_DIR%\output20.txt"
 fc "%OUTPUT_DIR%\output20.txt" "%EXPECTED_DIR%\expected20.txt" >nul 2>&1
 if !errorlevel! equ 0 (echo   [PASS] & set /a PASSED+=1) else (echo   [FAIL] & set /a FAILED+=1)
 
-REM --- Test 21: Stdin no text after search/replace ---
+REM --- Test 21: Stdin no text lines ---
 set /a TOTAL+=1
 echo Test 21: Stdin - No text lines (only search and replace, then EOF)
-(echo search & echo replace) | "%EXE%" > "%OUTPUT_DIR%\output21.txt"
+"%EXE%" < "%INPUT_DIR%\stdin21.txt" > "%OUTPUT_DIR%\output21.txt"
 fc "%OUTPUT_DIR%\output21.txt" "%EXPECTED_DIR%\expected21.txt" >nul 2>&1
 if !errorlevel! equ 0 (echo   [PASS] & set /a PASSED+=1) else (echo   [FAIL] & set /a FAILED+=1)
+
+echo.
+echo ============================================================
+echo  STDIN ERROR TESTS (exit code must be 0)
+echo ============================================================
+echo.
+
+REM --- Test 22: Stdin error - missing replace string ---
+set /a TOTAL+=1
+echo Test 22: Stdin Error - Missing replace string (EOF after search)
+"%EXE%" < "%INPUT_DIR%\stdin22.txt" > "%OUTPUT_DIR%\output22.txt"
+set EXIT_CODE=!errorlevel!
+fc "%OUTPUT_DIR%\output22.txt" "%EXPECTED_DIR%\expected22.txt" >nul 2>&1
+if !errorlevel! equ 0 (
+    if !EXIT_CODE! equ 0 (echo   [PASS] & set /a PASSED+=1) else (echo   [FAIL] exit code=!EXIT_CODE!, expected 0 & set /a FAILED+=1)
+) else (echo   [FAIL] stdout mismatch & set /a FAILED+=1)
+
+REM --- Test 23: Stdin error - immediate EOF ---
+set /a TOTAL+=1
+echo Test 23: Stdin Error - Immediate EOF (no search string)
+"%EXE%" < "%INPUT_DIR%\stdin23.txt" > "%OUTPUT_DIR%\output23.txt"
+set EXIT_CODE=!errorlevel!
+fc "%OUTPUT_DIR%\output23.txt" "%EXPECTED_DIR%\expected23.txt" >nul 2>&1
+if !errorlevel! equ 0 (
+    if !EXIT_CODE! equ 0 (echo   [PASS] & set /a PASSED+=1) else (echo   [FAIL] exit code=!EXIT_CODE!, expected 0 & set /a FAILED+=1)
+) else (echo   [FAIL] stdout mismatch & set /a FAILED+=1)
 
 echo.
 echo ============================================================

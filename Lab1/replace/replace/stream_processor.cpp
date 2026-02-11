@@ -13,14 +13,14 @@ int processCLI(const std::string& inputFile,
 	std::ifstream in(inputFile);
 	if (!in.is_open())
 	{
-		std::cout << "ERROR";
+		std::cout << "ERROR" << std::endl;
 		return 1;
 	}
 
 	std::ofstream out(outputFile);
 	if (!out.is_open())
 	{
-		std::cout << "ERROR";
+		std::cout << "ERROR" << std::endl;
 		return 1;
 	}
 

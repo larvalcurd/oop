@@ -175,33 +175,14 @@
     <Text Include="tests\input\input11.txt" />
     <Text Include="tests\input\input12.txt" />
     <Text Include="tests\input\input13.txt" />
-    <Text Include="tests\output\output01.txt" />
-    <Text Include="tests\output\output03.txt" />
-    <Text Include="tests\output\output04.txt" />
-    <Text Include="tests\output\output05.txt" />
-    <Text Include="tests\output\output06.txt" />
-    <Text Include="tests\output\output07.txt" />
-    <Text Include="tests\output\output08.txt" />
-    <Text Include="tests\output\output09.txt" />
-    <Text Include="tests\output\output10.txt" />
-    <Text Include="tests\output\output11.txt" />
-    <Text Include="tests\output\output12.txt" />
-    <Text Include="tests\output\output13.txt" />
-    <Text Include="tests\output\output17.txt" />
-    <Text Include="tests\output\output18.txt" />
-    <Text Include="tests\output\output19.txt" />
-    <Text Include="tests\output\output20.txt" />
-    <Text Include="tests\output\output21.txt" />
-    <Text Include="tests\output\output22.txt" />
-    <Text Include="tests\output\output23.txt" />
-    <Text Include="tests\output\output24.txt" />
-    <Text Include="tests\output\stdout14.txt" />
-    <Text Include="tests\output\stdout15.txt" />
-    <Text Include="tests\output\stdout16.txt" />
+    <Text Include="tests\input\stdin17.txt" />
+    <Text Include="tests\input\stdin18.txt" />
+    <Text Include="tests\input\stdin19.txt" />
+    <Text Include="tests\input\stdin20.txt" />
+    <Text Include="tests\input\stdin21.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="task.md" />
-    <None Include="tests\output\output02.txt" />
     <None Include="tests\run_tests.bat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,46 +1,75 @@
-﻿#include <iostream>
+﻿#include "radix.h"
+
+#include <iostream>
 #include <string>
-#include "radix.h"
+
+namespace
+{
+	constexpr int REQUIRED_ARGC = 4;
+	constexpr int SUCCESS = 0;
+	constexpr int FAILURE = 1;
+
+	void PrintUsage()
+	{
+		std::cerr << "Usage: radix.exe <source radix> <destination radix> <value>\n";
+	}
+
+	bool TryParseRadix(const char* str, int& outRadix)
+	{
+		try
+		{
+			outRadix = std::stoi(str);
+			return true;
+		}
+		catch (...)
+		{
+			return false;
+		}
+	}
+}
 
 int main(int argc, char* argv[])
 {
-    if (argc != 4) {
-        std::cerr << "Usage: radix.exe <source radix> <destination radix> <value>\n";
-        return 1;
-    }
+	if (argc != REQUIRED_ARGC)
+	{
+		PrintUsage();
+		return FAILURE;
+	}
 
-    int srcRadix = 0;
-    int dstRadix = 0;
+	int sourceRadix = 0;
+	int destinationRadix = 0;
 
-    try {
-        srcRadix = std::stoi(argv[1]);
-        dstRadix = std::stoi(argv[2]);
-    }
-    catch (...) {
-        std::cerr << "Error: cannot parse radix. Expected an integer.\n";
-        return 1;
-    }
+	if (!TryParseRadix(argv[1], sourceRadix) || !TryParseRadix(argv[2], destinationRadix))
+	{
+		std::cerr << "Error: cannot parse radix. Expected an integer.\n";
+		return FAILURE;
+	}
 
-    if (!ValidateRadix(srcRadix) || !ValidateRadix(dstRadix)) {
-        std::cerr << "Error: radix must be between 2 and 36.\n";
-        return 1;
-    }
+	if (!IsValidRadix(sourceRadix) || !IsValidRadix(destinationRadix))
+	{
+		std::cerr << "Error: radix must be between "
+			<< MIN_RADIX << " and " << MAX_RADIX << ".\n";
+		return FAILURE;
+	}
 
-    const std::string valueStr = argv[3];
-    bool wasError = false;
+	const std::string valueStr = argv[3];
+	bool wasError = false;
 
-    int value = StringToInt(valueStr, srcRadix, wasError);
-    if (wasError) {
-        std::cerr << "Error: invalid input value or overflow in source radix.\n";
-        return 1;
-    }
+	const int value = StringToInt(valueStr, sourceRadix, wasError);
+	if (wasError)
+	{
+		std::cerr << "Error: invalid input value or overflow in source radix.\n";
+		return FAILURE;
+	}
 
-    std::string output = IntToString(value, dstRadix, wasError);
-    if (wasError) {
-        std::cerr << "Error: cannot convert integer to destination radix.\n";
-        return 1;
-    }
+	const std::string result = IntToString(value, destinationRadix, wasError);
+	if (wasError)
+	{
+		std::cerr << "Error: cannot convert to destination radix.\n";
+		return FAILURE;
+	}
 
-    std::cout << output << "\n";
-    return 0;
+	std::cout << result << "\n";
+
+	return SUCCESS;
 }
