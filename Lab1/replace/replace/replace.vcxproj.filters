@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="replace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stream_processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="replace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stream_processor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
+    <Text Include="output.txt" />
+    <Text Include="tests\input\input01.txt" />
+    <Text Include="tests\expected\expected01.txt" />
+    <Text Include="tests\output\output01.txt" />
+    <Text Include="tests\input\input02.txt" />
+    <Text Include="tests\expected\expected02.txt" />
+    <Text Include="tests\input\input03.txt" />
+    <Text Include="tests\expected\expected03.txt" />
+    <Text Include="tests\output\output03.txt" />
+    <Text Include="tests\input\input04.txt" />
+    <Text Include="tests\expected\expected04.txt" />
+    <Text Include="tests\input\input05.txt" />
+    <Text Include="tests\expected\expected05.txt" />
+    <Text Include="tests\output\output04.txt" />
+    <Text Include="tests\output\output05.txt" />
+    <Text Include="tests\input\input06.txt" />
+    <Text Include="tests\expected\expected06.txt" />
+    <Text Include="tests\output\output06.txt" />
+    <Text Include="tests\input\input07.txt" />
+    <Text Include="tests\expected\expected07.txt" />
+    <Text Include="tests\output\output07.txt" />
+    <Text Include="tests\input\input08.txt" />
+    <Text Include="tests\expected\expected08.txt" />
+    <Text Include="tests\output\output08.txt" />
+    <Text Include="tests\input\input09.txt" />
+    <Text Include="tests\expected\expected09.txt" />
+    <Text Include="tests\expected\expected10.txt" />
+    <Text Include="tests\expected\expected11.txt" />
+    <Text Include="tests\expected\expected12.txt" />
+    <Text Include="tests\expected\expected13.txt" />
+    <Text Include="tests\expected\expected14.txt" />
+    <Text Include="tests\expected\expected15.txt" />
+    <Text Include="tests\expected\expected16.txt" />
+    <Text Include="tests\expected\expected17.txt" />
+    <Text Include="tests\expected\expected18.txt" />
+    <Text Include="tests\expected\expected19.txt" />
+    <Text Include="tests\expected\expected20.txt" />
+    <Text Include="tests\expected\expected21.txt" />
+    <Text Include="tests\expected\expected22.txt" />
+    <Text Include="tests\expected\expected23.txt" />
+    <Text Include="tests\expected\expected24.txt" />
+    <Text Include="tests\input\input10.txt" />
+    <Text Include="tests\input\input11.txt" />
+    <Text Include="tests\input\input12.txt" />
+    <Text Include="tests\input\input13.txt" />
+    <Text Include="tests\output\output09.txt" />
+    <Text Include="tests\output\output10.txt" />
+    <Text Include="tests\output\output11.txt" />
+    <Text Include="tests\output\output12.txt" />
+    <Text Include="tests\output\output13.txt" />
+    <Text Include="tests\output\output17.txt" />
+    <Text Include="tests\output\output18.txt" />
+    <Text Include="tests\output\output19.txt" />
+    <Text Include="tests\output\output20.txt" />
+    <Text Include="tests\output\output21.txt" />
+    <Text Include="tests\output\output22.txt" />
+    <Text Include="tests\output\output23.txt" />
+    <Text Include="tests\output\output24.txt" />
+    <Text Include="tests\output\stdout14.txt" />
+    <Text Include="tests\output\stdout15.txt" />
+    <Text Include="tests\output\stdout16.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="task.md" />
+    <None Include="tests\run_tests.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="tests\output\output02.txt" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{97b0851b-db8e-45a8-a1b0-da99c9b7f37b}</ProjectGuid>
+    <RootNamespace>replace</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="replace.cpp" />
+    <ClCompile Include="stream_processor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="replace.h" />
+    <ClInclude Include="stream_processor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
+    <Text Include="output.txt" />
+    <Text Include="tests\expected\expected01.txt" />
+    <Text Include="tests\expected\expected02.txt" />
+    <Text Include="tests\expected\expected03.txt" />
+    <Text Include="tests\expected\expected04.txt" />
+    <Text Include="tests\expected\expected05.txt" />
+    <Text Include="tests\expected\expected06.txt" />
+    <Text Include="tests\expected\expected07.txt" />
+    <Text Include="tests\expected\expected08.txt" />
+    <Text Include="tests\expected\expected09.txt" />
+    <Text Include="tests\expected\expected10.txt" />
+    <Text Include="tests\expected\expected11.txt" />
+    <Text Include="tests\expected\expected12.txt" />
+    <Text Include="tests\expected\expected13.txt" />
+    <Text Include="tests\expected\expected14.txt" />
+    <Text Include="tests\expected\expected15.txt" />
+    <Text Include="tests\expected\expected16.txt" />
+    <Text Include="tests\expected\expected17.txt" />
+    <Text Include="tests\expected\expected18.txt" />
+    <Text Include="tests\expected\expected19.txt" />
+    <Text Include="tests\expected\expected20.txt" />
+    <Text Include="tests\expected\expected21.txt" />
+    <Text Include="tests\expected\expected22.txt" />
+    <Text Include="tests\expected\expected23.txt" />
+    <Text Include="tests\expected\expected24.txt" />
+    <Text Include="tests\input\input05.txt" />
+    <Text Include="tests\input\input01.txt" />
+    <Text Include="tests\input\input02.txt" />
+    <Text Include="tests\input\input03.txt" />
+    <Text Include="tests\input\input04.txt" />
+    <Text Include="tests\input\input06.txt" />
+    <Text Include="tests\input\input07.txt" />
+    <Text Include="tests\input\input08.txt" />
+    <Text Include="tests\input\input09.txt" />
+    <Text Include="tests\input\input10.txt" />
+    <Text Include="tests\input\input11.txt" />
+    <Text Include="tests\input\input12.txt" />
+    <Text Include="tests\input\input13.txt" />
+    <Text Include="tests\output\output01.txt" />
+    <Text Include="tests\output\output03.txt" />
+    <Text Include="tests\output\output04.txt" />
+    <Text Include="tests\output\output05.txt" />
+    <Text Include="tests\output\output06.txt" />
+    <Text Include="tests\output\output07.txt" />
+    <Text Include="tests\output\output08.txt" />
+    <Text Include="tests\output\output09.txt" />
+    <Text Include="tests\output\output10.txt" />
+    <Text Include="tests\output\output11.txt" />
+    <Text Include="tests\output\output12.txt" />
+    <Text Include="tests\output\output13.txt" />
+    <Text Include="tests\output\output17.txt" />
+    <Text Include="tests\output\output18.txt" />
+    <Text Include="tests\output\output19.txt" />
+    <Text Include="tests\output\output20.txt" />
+    <Text Include="tests\output\output21.txt" />
+    <Text Include="tests\output\output22.txt" />
+    <Text Include="tests\output\output23.txt" />
+    <Text Include="tests\output\output24.txt" />
+    <Text Include="tests\output\stdout14.txt" />
+    <Text Include="tests\output\stdout15.txt" />
+    <Text Include="tests\output\stdout16.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="task.md" />
+    <None Include="tests\output\output02.txt" />
+    <None Include="tests\run_tests.bat" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
