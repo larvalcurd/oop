@@ -1,9 +1,14 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set EXE=D:\university\second_grade\oop\Lab1\radix\radix\x64\Debug\radix.exe
+if "%~1"=="" (
+    echo Usage: run_tests.bat ^<path_to_exe^>
+    exit /b 1
+)
 
-echo Running tests...
+set EXE=%~1
+
+echo Running tests for: %EXE%
 
 if not exist tests\output mkdir tests\output
 
@@ -11,7 +16,7 @@ del tests\output\*.txt > nul 2>&1
 
 for %%f in (tests\input\*.txt) do (
     set fname=%%~nf
-
+        
     for /f "usebackq tokens=* delims=" %%l in ("%%f") do (
         set OUTFILE=tests\output\!fname!.txt
 

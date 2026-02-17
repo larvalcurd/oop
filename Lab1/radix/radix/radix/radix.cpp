@@ -6,38 +6,37 @@
 
 namespace
 {
-	constexpr int INVALID_DIGIT = -1;
-	constexpr char INVALID_CHAR = '?';
-	constexpr long long INT_MAX_LL = std::numeric_limits<int>::max();
-	constexpr long long INT_MIN_LL = std::numeric_limits<int>::min();
+const int INVALID_DIGIT = -1;
+const char INVALID_CHAR = '?';
+constexpr long long INT_MAX_LL = std::numeric_limits<int>::max();
+constexpr long long INT_MIN_LL = std::numeric_limits<int>::min();
 
-	bool IsPositiveSign(char c)
-	{
-		return c == '+';
-
-	}
-
-	bool IsNegativeSign(char c)
-	{
-		return c == '-';
-	}
-
-	bool IsSign(char c)
-	{
-		return IsPositiveSign(c) || IsNegativeSign(c);
-	}
-
-	bool WouldOverFlowPositive(long long currentAcc, int digit, int radix)
-	{
-		return currentAcc > (INT_MAX_LL - digit) / radix;
-	}
-
-	bool WouldOverFlowNegative(long long currentAcc, int digit, int radix)
-	{
-		constexpr long long NEGATIVE_LIMIT = -INT_MIN_LL;
-		return currentAcc > (NEGATIVE_LIMIT - digit) / radix;
-	}
+bool IsPositiveSign(char c)
+{
+	return c == '+';
 }
+
+bool IsNegativeSign(char c)
+{
+	return c == '-';
+}
+
+bool IsSign(char c)
+{
+	return IsPositiveSign(c) || IsNegativeSign(c);
+}
+
+bool WouldOverFlowPositive(long long currentAcc, int digit, int radix)
+{
+	return currentAcc > (INT_MAX_LL - digit) / radix;
+}
+
+bool WouldOverFlowNegative(long long currentAcc, int digit, int radix)
+{
+	constexpr long long NEGATIVE_LIMIT = -INT_MIN_LL;
+	return currentAcc > (NEGATIVE_LIMIT - digit) / radix;
+}
+} // namespace
 
 bool IsValidRadix(int radix)
 {
@@ -135,7 +134,7 @@ std::string IntToString(int n, int radix, bool& wasError)
 
 	if (!IsValidRadix(radix))
 	{
-		wasError = true;
+		//wasError = true;
 		return "";
 	}
 

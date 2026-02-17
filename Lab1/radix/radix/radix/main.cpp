@@ -5,28 +5,28 @@
 
 namespace
 {
-	constexpr int REQUIRED_ARGC = 4;
-	constexpr int SUCCESS = 0;
-	constexpr int FAILURE = 1;
+const int REQUIRED_ARGC = 4;
+const int SUCCESS = 0;
+const int FAILURE = 1;
 
-	void PrintUsage()
+void PrintUsage()
+{
+	std::cerr << "Usage: radix.exe <source radix> <destination radix> <value>\n";
+}
+
+bool TryParseRadix(const char* str, int& outRadix)
+{
+	try
 	{
-		std::cerr << "Usage: radix.exe <source radix> <destination radix> <value>\n";
+		outRadix = std::stoi(str);
+		return true;
 	}
-
-	bool TryParseRadix(const char* str, int& outRadix)
+	catch (...)
 	{
-		try
-		{
-			outRadix = std::stoi(str);
-			return true;
-		}
-		catch (...)
-		{
-			return false;
-		}
+		return false;
 	}
 }
+} // namespace
 
 int main(int argc, char* argv[])
 {
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 	if (!IsValidRadix(sourceRadix) || !IsValidRadix(destinationRadix))
 	{
 		std::cerr << "Error: radix must be between "
-			<< MIN_RADIX << " and " << MAX_RADIX << ".\n";
+				  << MIN_RADIX << " and " << MAX_RADIX << ".\n";
 		return FAILURE;
 	}
 

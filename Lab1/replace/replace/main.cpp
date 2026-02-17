@@ -36,7 +36,12 @@ void CopyStreamWithReplacement(std::istream& input, std::ostream& output,
 
 	while (std::getline(input, line))
 	{
-		output << ReplaceString(line, searchString, replacementString) << "\n";
+		if (!firstLine)
+		{
+			output << "\n";
+		}
+		output << ReplaceString(line, searchString, replacementString);
+		firstLine = false;
 	}
 }
 
@@ -79,13 +84,21 @@ int ProcessStdin()
 {
 	std::string search, replace;
 
-	if (!std::getline(std::cin, search) || !std::getline(std::cin, replace))
+	if (!std::getline(std::cin, search))
 	{
 		std::cout << "ERROR" << std::endl;
-		return 0;  
+		return 0;
+	}
+
+	if (!std::getline(std::cin, replace))
+	{
+		std::cout << "ERROR" << std::endl;
+		return 0;
 	}
 
 	CopyStreamWithReplacement(std::cin, std::cout, search, replace);
+
+	std::cout << std::endl;
 	return 0;
 }
 

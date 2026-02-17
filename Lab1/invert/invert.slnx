@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="invert/invert.vcxproj" />
+  <Project Path="invert/invert.vcxproj" Id="5cd94466-b3ae-44c0-b044-8793f7ec4b1b" />
 </Solution>

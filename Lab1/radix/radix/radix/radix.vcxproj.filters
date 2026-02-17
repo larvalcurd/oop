@@ -27,6 +27,7 @@
     <None Include="run_tests.bat">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="radix.h">

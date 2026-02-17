@@ -58,8 +58,9 @@
     <Text Include="tests\input\t02_input.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="tests\run_tests.bat">
+    <None Include="run_tests.bat">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="tests\create_tests.ps1" />
   </ItemGroup>
 </Project>
