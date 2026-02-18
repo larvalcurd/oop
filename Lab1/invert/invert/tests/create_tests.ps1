@@ -1,156 +1,251 @@
 # create_tests.ps1
-# Запуск: powershell -ExecutionPolicy Bypass -File create_tests.ps1
+# Creates test files for 3x3 matrix inversion program
+# Run: powershell -ExecutionPolicy Bypass -File create_tests.ps1
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$base = if ($PSScriptRoot) { $PSScriptRoot } else { (Get-Location).Path }
+#region === SETTINGS ===
 
-foreach ($d in @("input", "expected", "output")) {
-    $p = Join-Path $base $d
-    if (!(Test-Path $p)) { New-Item -ItemType Directory $p | Out-Null }
+$BaseDirectory = if ($PSScriptRoot) { $PSScriptRoot } else { (Get-Location).Path }
+
+$Tab  = "`t"
+$Crlf = "`r`n"
+
+#endregion
+
+#region === HELPER FUNCTIONS ===
+
+function Initialize-TestDirectories {
+    $directories = @("input", "expected", "output")
+    
+    foreach ($dirName in $directories) {
+        $dirPath = Join-Path $BaseDirectory $dirName
+        if (-not (Test-Path $dirPath)) {
+            New-Item -ItemType Directory -Path $dirPath | Out-Null
+        }
+    }
 }
 
-function W([string]$relPath, [string]$content) {
-    $full = Join-Path $base $relPath
-    [System.IO.File]::WriteAllText($full, $content)
+function Write-TestFile {
+    param(
+        [string]$RelativePath,
+        [string]$Content
+    )
+    
+    $fullPath = Join-Path $BaseDirectory $RelativePath
+    [System.IO.File]::WriteAllText($fullPath, $Content)
 }
 
-# =====================================================================
-#  01  Целочисленная матрица (пример 1 из задания)
-# =====================================================================
-W "input\t01_input.txt" `
-    "1`t2`t3`r`n0`t1`t4`r`n5`t6`t0`r`n"
+function Format-MatrixRow {
+    param([array]$Values)
+    return ($Values -join $Tab) + $Crlf
+}
 
-W "expected\t01_expected.txt" `
-    "-24.000`t18.000`t5.000`r`n20.000`t-15.000`t-4.000`r`n-5.000`t4.000`t1.000`r`n"
+function Format-Matrix {
+    param(
+        [array]$Row1,
+        [array]$Row2,
+        [array]$Row3
+    )
+    
+    return (Format-MatrixRow $Row1) + 
+           (Format-MatrixRow $Row2) + 
+           (Format-MatrixRow $Row3)
+}
 
-# =====================================================================
-#  02  Дробные коэффициенты (пример 2)
-# =====================================================================
-W "input\t02_input.txt" `
-    "4`t7`t2.3`r`n2`t1`t1`r`n3`t-2`t-2.31`r`n"
+#endregion
 
-W "expected\t02_expected.txt" `
-    "-0.009`t0.321`t0.131`r`n0.212`t-0.448`t0.017`r`n-0.194`t0.806`t-0.278`r`n"
+#region === CREATE TESTS ===
 
-# =====================================================================
-#  03  Вырожденная матрица — det = 0 (пример 3)
-# =====================================================================
-W "input\t03_input.txt" `
-    "1`t2`t3`r`n2`t4`t6`r`n1`t2`t3`r`n"
+Initialize-TestDirectories
 
-W "expected\t03_expected.txt" `
-    "Non-invertible`r`n"
+# ---------------------------------------------------------------------
+#  TEST 01: Integer matrix (example 1)
+# ---------------------------------------------------------------------
+Write-TestFile "input\t01_input.txt" (Format-Matrix `
+    @(1, 2, 3) `
+    @(0, 1, 4) `
+    @(5, 6, 0)
+)
 
-# =====================================================================
-#  04  Нечисловое значение "a" (пример 4)
-# =====================================================================
-W "input\t04_input.txt" `
-    "1`t2`ta`r`n2`t4`t6`r`n1`t2`t3`r`n"
+Write-TestFile "expected\t01_expected.txt" (Format-Matrix `
+    @("-24.000", "18.000",  "5.000") `
+    @("20.000",  "-15.000", "-4.000") `
+    @("-5.000",  "4.000",   "1.000")
+)
 
-W "expected\t04_expected.txt" `
-    "Invalid matrix`r`n"
+# ---------------------------------------------------------------------
+#  TEST 02: Fractional coefficients (example 2)
+# ---------------------------------------------------------------------
+Write-TestFile "input\t02_input.txt" (Format-Matrix `
+    @(4, 7, 2.3) `
+    @(2, 1, 1) `
+    @(3, -2, -2.31)
+)
 
-# =====================================================================
-#  05  Частично числовой токен "3abc"
-# =====================================================================
-W "input\t05_input.txt" `
-    "1`t2`t3abc`r`n2`t4`t6`r`n1`t2`t3`r`n"
+Write-TestFile "expected\t02_expected.txt" (Format-Matrix `
+    @("-0.009", "0.321",  "0.131") `
+    @("0.212",  "-0.448", "0.017") `
+    @("-0.194", "0.806",  "-0.278")
+)
 
-W "expected\t05_expected.txt" `
-    "Invalid matrix`r`n"
+# ---------------------------------------------------------------------
+#  TEST 03: Singular matrix - det = 0 (example 3)
+# ---------------------------------------------------------------------
+Write-TestFile "input\t03_input.txt" (Format-Matrix `
+    @(1, 2, 3) `
+    @(2, 4, 6) `
+    @(1, 2, 3)
+)
 
-# =====================================================================
-#  06  Только 2 строки (не хватает строки)
-# =====================================================================
-W "input\t06_input.txt" `
-    "1`t2`t3`r`n4`t5`t6`r`n"
+Write-TestFile "expected\t03_expected.txt" "Non-invertible$Crlf"
 
-W "expected\t06_expected.txt" `
-    "Invalid matrix format`r`n"
+# ---------------------------------------------------------------------
+#  TEST 04: Non-numeric value "a" (example 4)
+# ---------------------------------------------------------------------
+Write-TestFile "input\t04_input.txt" (Format-Matrix `
+    @(1, 2, "a") `
+    @(2, 4, 6) `
+    @(1, 2, 3)
+)
 
-# =====================================================================
-#  07  4 элемента в строке (лишний столбец)
-# =====================================================================
-W "input\t07_input.txt" `
-    "1`t2`t3`t4`r`n5`t6`t7`t8`r`n9`t10`t11`t12`r`n"
+Write-TestFile "expected\t04_expected.txt" "Invalid matrix$Crlf"
 
-W "expected\t07_expected.txt" `
-    "Invalid matrix format`r`n"
+# ---------------------------------------------------------------------
+#  TEST 05: Partially numeric token "3abc"
+# ---------------------------------------------------------------------
+Write-TestFile "input\t05_input.txt" (Format-Matrix `
+    @(1, 2, "3abc") `
+    @(2, 4, 6) `
+    @(1, 2, 3)
+)
 
-# =====================================================================
-#  08  2 элемента в строке (не хватает столбца)
-# =====================================================================
-W "input\t08_input.txt" `
-    "1`t2`r`n3`t4`r`n5`t6`r`n"
+Write-TestFile "expected\t05_expected.txt" "Invalid matrix$Crlf"
 
-W "expected\t08_expected.txt" `
-    "Invalid matrix format`r`n"
+# ---------------------------------------------------------------------
+#  TEST 06: Only 2 rows (missing row)
+# ---------------------------------------------------------------------
+Write-TestFile "input\t06_input.txt" `
+    ((Format-MatrixRow @(1, 2, 3)) + (Format-MatrixRow @(4, 5, 6)))
 
-# =====================================================================
-#  09  Пустой файл
-# =====================================================================
-W "input\t09_input.txt" `
-    ""
+Write-TestFile "expected\t06_expected.txt" "Invalid matrix format$Crlf"
 
-W "expected\t09_expected.txt" `
-    "Invalid matrix format`r`n"
+# ---------------------------------------------------------------------
+#  TEST 07: 4 elements per row (extra column)
+# ---------------------------------------------------------------------
+Write-TestFile "input\t07_input.txt" (
+    (Format-MatrixRow @(1, 2, 3, 4)) +
+    (Format-MatrixRow @(5, 6, 7, 8)) +
+    (Format-MatrixRow @(9, 10, 11, 12))
+)
 
-# =====================================================================
-#  10  Единичная матрица — обратная = она же
-# =====================================================================
-W "input\t10_input.txt" `
-    "1`t0`t0`r`n0`t1`t0`r`n0`t0`t1`r`n"
+Write-TestFile "expected\t07_expected.txt" "Invalid matrix format$Crlf"
 
-W "expected\t10_expected.txt" `
-    "1.000`t0.000`t0.000`r`n0.000`t1.000`t0.000`r`n0.000`t0.000`t1.000`r`n"
+# ---------------------------------------------------------------------
+#  TEST 08: 2 elements per row (missing column)
+# ---------------------------------------------------------------------
+Write-TestFile "input\t08_input.txt" (
+    (Format-MatrixRow @(1, 2)) +
+    (Format-MatrixRow @(3, 4)) +
+    (Format-MatrixRow @(5, 6))
+)
 
-# =====================================================================
-#  11  Диагональная матрица diag(2,4,5) → diag(0.5, 0.25, 0.2)
-# =====================================================================
-W "input\t11_input.txt" `
-    "2`t0`t0`r`n0`t4`t0`r`n0`t0`t5`r`n"
+Write-TestFile "expected\t08_expected.txt" "Invalid matrix format$Crlf"
 
-W "expected\t11_expected.txt" `
-    "0.500`t0.000`t0.000`r`n0.000`t0.250`t0.000`r`n0.000`t0.000`t0.200`r`n"
+# ---------------------------------------------------------------------
+#  TEST 09: Empty file
+# ---------------------------------------------------------------------
+Write-TestFile "input\t09_input.txt" ""
 
-# =====================================================================
-#  12  Все отрицательные (кроме нулей), det = -1
-# =====================================================================
-W "input\t12_input.txt" `
-    "-1`t-2`t-3`r`n0`t-1`t-4`r`n-5`t-6`t0`r`n"
+Write-TestFile "expected\t09_expected.txt" "Invalid matrix format$Crlf"
 
-W "expected\t12_expected.txt" `
-    "24.000`t-18.000`t-5.000`r`n-20.000`t15.000`t4.000`r`n5.000`t-4.000`t-1.000`r`n"
+# ---------------------------------------------------------------------
+#  TEST 10: Identity matrix - inverse equals itself
+# ---------------------------------------------------------------------
+Write-TestFile "input\t10_input.txt" (Format-Matrix `
+    @(1, 0, 0) `
+    @(0, 1, 0) `
+    @(0, 0, 1)
+)
 
-# =====================================================================
-#  13  Stdin через pipe (тот же вход, что и t01)
-#      Входной файл не нужен — используется t01_input.txt через pipe
-# =====================================================================
-W "expected\t13_expected.txt" `
-    "-24.000`t18.000`t5.000`r`n20.000`t-15.000`t-4.000`r`n-5.000`t4.000`t1.000`r`n"
+Write-TestFile "expected\t10_expected.txt" (Format-Matrix `
+    @("1.000", "0.000", "0.000") `
+    @("0.000", "1.000", "0.000") `
+    @("0.000", "0.000", "1.000")
+)
 
-# =====================================================================
-#  14  Флаг -h  (справка)
-#      ВАЖНО: количество табов должно совпадать с PrintHelp()
-# =====================================================================
-W "expected\t14_expected.txt" `
-    "Usage:`r`n`tinvert.exe`t`t`tRead Matrix from stdin`r`n`tinvert.exe <file>`tRead Matrix from file`r`n`tinvert.exe -h`t`tShow help`r`n"
+# ---------------------------------------------------------------------
+#  TEST 11: Diagonal matrix diag(2, 4, 5) -> diag(0.5, 0.25, 0.2)
+# ---------------------------------------------------------------------
+Write-TestFile "input\t11_input.txt" (Format-Matrix `
+    @(2, 0, 0) `
+    @(0, 4, 0) `
+    @(0, 0, 5)
+)
 
-# =====================================================================
-#  15  Несуществующий файл
-# =====================================================================
-W "expected\t15_expected.txt" `
-    "Failed to open file: nonexistent.txt`r`n"
+Write-TestFile "expected\t11_expected.txt" (Format-Matrix `
+    @("0.500", "0.000", "0.000") `
+    @("0.000", "0.250", "0.000") `
+    @("0.000", "0.000", "0.200")
+)
 
-# =====================================================================
-#  16  Слишком много аргументов
-# =====================================================================
-W "expected\t16_expected.txt" `
-    "Too many arguments. Use -h for help.`r`n"
+# ---------------------------------------------------------------------
+#  TEST 12: All negative (except zeros), det = -1
+# ---------------------------------------------------------------------
+Write-TestFile "input\t12_input.txt" (Format-Matrix `
+    @(-1, -2, -3) `
+    @(0,  -1, -4) `
+    @(-5, -6,  0)
+)
 
-Write-Host "All test files created successfully in: $base"
-Write-Host "  input\    - 12 files"
-Write-Host "  expected\ - 16 files"
-Write-Host "  output\   - (empty, filled by run_tests.bat)"
+Write-TestFile "expected\t12_expected.txt" (Format-Matrix `
+    @("24.000",  "-18.000", "-5.000") `
+    @("-20.000", "15.000",  "4.000") `
+    @("5.000",   "-4.000",  "-1.000")
+)
+
+# ---------------------------------------------------------------------
+#  TEST 13: Stdin via pipe (uses t01_input.txt)
+# ---------------------------------------------------------------------
+Write-TestFile "expected\t13_expected.txt" (Format-Matrix `
+    @("-24.000", "18.000",  "5.000") `
+    @("20.000",  "-15.000", "-4.000") `
+    @("-5.000",  "4.000",   "1.000")
+)
+
+# ---------------------------------------------------------------------
+#  TEST 14: Flag -h (help)
+# ---------------------------------------------------------------------
+$helpText = "Usage:${Crlf}${Tab}invert.exe${Tab}${Tab}${Tab}Read Matrix from stdin${Crlf}${Tab}invert.exe <file>${Tab}Read Matrix from file${Crlf}${Tab}invert.exe -h${Tab}${Tab}Show help${Crlf}"
+
+Write-TestFile "expected\t14_expected.txt" $helpText
+
+# ---------------------------------------------------------------------
+#  TEST 15: Non-existent file
+# ---------------------------------------------------------------------
+Write-TestFile "expected\t15_expected.txt" "Failed to open file: nonexistent.txt$Crlf"
+
+# ---------------------------------------------------------------------
+#  TEST 16: Too many arguments
+# ---------------------------------------------------------------------
+Write-TestFile "expected\t16_expected.txt" "Too many arguments. Use -h for help.$Crlf"
+
+#endregion
+
+#region === SUMMARY ===
+
+Write-Host ""
+Write-Host "=======================================================" -ForegroundColor Green
+Write-Host "  All test files created successfully!" -ForegroundColor Green
+Write-Host "=======================================================" -ForegroundColor Green
+Write-Host ""
+Write-Host "  Base directory: $BaseDirectory"
+Write-Host ""
+Write-Host "  Created directories:"
+Write-Host "    input\     - 12 input files"
+Write-Host "    expected\  - 16 expected result files"
+Write-Host "    output\    - empty (filled by run_tests.bat)"
+Write-Host ""
+
+#endregion
