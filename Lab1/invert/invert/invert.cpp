@@ -2,11 +2,49 @@
 #include <fstream>
 #include <string>
 
+static bool OpenInputFile(const std::string& path, std::ifstream& file)
+{
+	file.open(path);
+	if (!file)
+	{
+		std::cerr << "Failed to open file: " << path << "\n";
+		return false;
+	}
+	return true;
+}
+
+static bool ProcessMatrix(std::istream& input)
+{
+	Matrix3x3 matrix;
+	ReadResult rc = ReadMatrix(input, matrix);
+
+	if (rc == ReadResult::InvalidFormat)
+	{
+		std::cerr << "Invalid matrix format\n";
+		return false;
+	}
+	if (rc == ReadResult::InvalidValue)
+	{
+		std::cerr << "Invalid matrix\n";
+		return false;
+	}
+
+	Matrix3x3 inverse;
+	if (!Invert(matrix, inverse))
+	{
+		std::cout << "Non-invertible\n";
+		return false;
+	}
+
+	PrintMatrix(std::cout, inverse);
+	return true;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc > 2)
 	{
-		std::cout << "Too many arguments. Use -h for help.\n";
+		std::cerr << "Too many arguments. Use -h for help.\n";
 		return 1;
 	}
 
@@ -21,36 +59,17 @@ int main(int argc, char* argv[])
 
 	if (argc == 2)
 	{
-		file.open(argv[1]);
-		if (!file.is_open())
+		if (!OpenInputFile(argv[1], file))
 		{
-			std::cout << "Failed to open file: " << argv[1] << "\n";
 			return 1;
 		}
 		input = &file;
 	}
 
-	Matrix3x3 matrix;
-	int rc = ReadMatrix(*input, matrix);
-
-	if (rc == 1)
+	if (!ProcessMatrix(*input))
 	{
-		std::cout << "Invalid matrix format" << "\n";
-		return 1;
-	}
-	else if (rc == 2)
-	{
-		std::cout << "Invalid matrix" << "\n";
 		return 1;
 	}
 
-	Matrix3x3 inverse;
-	if (!Invert(matrix, inverse))
-	{
-		std::cout << "Non-invertible" << '\n';
-		return 1;
-	}
-
-	PrintMatrix(std::cout, inverse);
 	return 0;
 }
