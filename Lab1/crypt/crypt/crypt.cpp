@@ -18,7 +18,7 @@ static bool ParseKey(const std::string& str, int& outKey)
 		outKey = std::stoi(str, &pos);
 		return pos == str.size() && outKey >= 0 && outKey <= 255;
 	}
-	catch (const std::exception&)
+	catch (...)
 	{
 		return false;
 	}
@@ -59,6 +59,51 @@ static bool ParseArgs(int argc, char* argv[], Args& args)
 	return true;
 }
 
+static bool OpenFiles(const Args& args,
+	std::ifstream& input,
+	std::ofstream& output)
+{
+	input.open(args.inputPath, std::ios::binary);
+	if (!input)
+	{
+		std::cerr << "Error: cannot open input file '" << args.inputPath << "'\n";
+		return false;
+	}
+
+	output.open(args.outputPath, std::ios::binary);
+	if (!output)
+	{
+		std::cerr << "Error: cannot open output file '" << args.outputPath << "'\n";
+		return false;
+	}
+
+	return true;
+}
+
+static bool ProcessCipher(const Args& args)
+{
+	std::ifstream input;
+	std::ofstream output;
+	if (!OpenFiles(args, input, output))
+	{
+		return false;
+	}
+
+	LookupTable encTable;
+	LookupTable decTable;
+	BuildLookupTables(encTable, decTable, args.key);
+
+	const LookupTable& table = (args.mode == "crypt") ? encTable : decTable;
+
+	if (!TransformFile(input, output, table))
+	{
+		std::cerr << "Error: file processing failed\n";
+		return false;
+	}
+
+	return true;
+}
+
 int main(int argc, char* argv[])
 {
 	Args args;
@@ -67,29 +112,8 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	std::ifstream input(args.inputPath, std::ios::binary);
-	if (!input.is_open())
+	if (!ProcessCipher(args))
 	{
-		std::cerr << "Error: cannot open input file '" << args.inputPath << "'\n";
-		return 1;
-	}
-
-	std::ofstream output(args.outputPath, std::ios::binary);
-	if (!output.is_open())
-	{
-		std::cerr << "Error: cannot open output file '" << args.outputPath << "'\n";
-		return 1;
-	}
-
-	uint8_t encTable[256];
-	uint8_t decTable[256];
-	BuildLookupTables(encTable, decTable, args.key);
-
-	const uint8_t* table = (args.mode == "crypt") ? encTable : decTable;
-
-	if (!TransformFile(input, output, table))
-	{
-		std::cerr << "Error: file processing failed\n";
 		return 1;
 	}
 

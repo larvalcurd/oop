@@ -4,49 +4,65 @@
 namespace
 {
 
-const std::pair<int, int> BIT_MAP[] = {
-	{ 7, 5 }, { 6, 1 }, { 5, 0 }, { 4, 7 },
-	{ 3, 6 }, { 2, 4 }, { 1, 3 }, { 0, 2 }
-};
+constexpr std::array<std::pair<int, int>, 8> BIT_MAP = { { { 7, 5 }, { 6, 1 }, { 5, 0 }, { 4, 7 },
+	{ 3, 6 }, { 2, 4 }, { 1, 3 }, { 0, 2 } } };
 
-const size_t BUFFER_SIZE = 8192;
+constexpr size_t BUFFER_SIZE = 8192;
 
 } // namespace
 
-void BuildLookupTables(uint8_t encTable[256], uint8_t decTable[256], uint8_t key)
+void BuildLookupTables(LookupTable& encTable,
+	LookupTable& decTable,
+	uint8_t key)
 {
-	for (int i = 0; i < 256; ++i)
+	for (size_t i = 0; i < encTable.size(); ++i)
 	{
-		uint8_t xored = static_cast<uint8_t>(i) ^ key;
+		uint8_t value = static_cast<uint8_t>(i);
+		uint8_t xored = static_cast<uint8_t>(value ^ key);
 		uint8_t shuffled = 0;
-		for (const auto& mapping : BIT_MAP)
+
+		for (const auto& [from, to] : BIT_MAP)
 		{
-			shuffled |= ((xored >> mapping.first) & 1) << mapping.second;
+			const uint8_t bit = (xored >> from) & 1u;
+			shuffled |= static_cast<uint8_t>(bit << to);
 		}
+
 		encTable[i] = shuffled;
-		decTable[shuffled] = static_cast<uint8_t>(i);
+		decTable[shuffled] = value;
 	}
 }
 
-bool TransformFile(std::ifstream& input, std::ofstream& output, const uint8_t table[256])
+bool TransformFile(std::ifstream& input,
+	std::ofstream& output,
+	const LookupTable& table)
 {
-	char buffer[BUFFER_SIZE];
+	std::array<char, BUFFER_SIZE> buffer;
 
-	while (input.read(buffer, BUFFER_SIZE) || input.gcount() > 0)
+	while (true)
 	{
+		input.read(buffer.data(), buffer.size());
 		std::streamsize bytesRead = input.gcount();
 
-		for (std::streamsize i = 0; i < bytesRead; ++i)
+		if (bytesRead > 0)
 		{
-			buffer[i] = static_cast<char>(table[static_cast<uint8_t>(buffer[i])]);
+			for (std::streamsize i = 0; i < bytesRead; ++i)
+			{
+				unsigned char byte = static_cast<unsigned char>(buffer[i]);
+
+				buffer[i] = static_cast<char>(table[byte]);
+			}
+
+			output.write(buffer.data(), bytesRead);
+			if (!output)
+				return false;
 		}
 
-		output.write(buffer, bytesRead);
-		if (!output)
-		{
+		if (input.eof())
+			break;
+
+		if (input.fail())
 			return false;
-		}
 	}
 
-	return input.eof();
+	return true;
 }
