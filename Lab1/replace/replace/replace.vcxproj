@@ -110,6 +110,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>cd /d "$(ProjectDir)." &amp;&amp; call "$(ProjectDir)run_tests.bat" </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -183,7 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="task.md" />
-    <None Include="tests\run_tests.bat" />
+    <None Include="run_tests.bat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

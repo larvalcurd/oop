@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="task.md" />
-    <None Include="tests\run_tests.bat">
+    <None Include="run_tests.bat">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
