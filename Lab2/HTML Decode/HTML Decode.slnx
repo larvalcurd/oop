@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="HTML Decode/HTML Decode.vcxproj" Id="0cc3a421-2dcd-4668-aeb1-79e83d3959be" />
+</Solution>
