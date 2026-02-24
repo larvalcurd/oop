@@ -1,6 +1,6 @@
 #include "Dictionary.h"
 #include "StringUtils.h"
-#include <cstdio>
+#include <filesystem>
 #include <fstream>
 #include <gtest/gtest.h>
 
@@ -15,7 +15,7 @@ std::string createTempFile(const std::string& content)
 
 void removeTempFile(const std::string& filename)
 {
-	std::remove(filename.c_str());
+	std::filesystem::remove(filename);
 }
 
 // ==================== addEntry ====================
