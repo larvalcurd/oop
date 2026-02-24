@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 
+namespace
+{
+
 struct Args
 {
 	std::string mode;
@@ -10,13 +13,20 @@ struct Args
 	uint8_t key;
 };
 
-static bool ParseKey(const std::string& str, int& outKey)
+bool ParseKey(const std::string& str, uint8_t& outKey)
 {
 	try
 	{
-		size_t pos = 0;
-		outKey = std::stoi(str, &pos);
-		return pos == str.size() && outKey >= 0 && outKey <= 255;
+		std::size_t pos = 0;
+		int value = std::stoi(str, &pos);
+
+		if (pos != str.size() || value < 0 || value > 255)
+		{
+			return false;
+		}
+
+		outKey = static_cast<uint8_t>(value);
+		return true;
 	}
 	catch (...)
 	{
@@ -24,7 +34,7 @@ static bool ParseKey(const std::string& str, int& outKey)
 	}
 }
 
-static bool ParseArgs(int argc, char* argv[], Args& args)
+bool ParseArgs(int argc, char* argv[], Args& args)
 {
 	if (argc != 5)
 	{
@@ -33,9 +43,11 @@ static bool ParseArgs(int argc, char* argv[], Args& args)
 	}
 
 	args.mode = argv[1];
-	if (args.mode != "crypt" && args.mode != "decrypt")
+
+	if (args.mode != MODE_CRYPT && args.mode != MODE_DECRYPT)
 	{
-		std::cerr << "Error: first argument must be 'crypt' or 'decrypt'\n";
+		std::cerr << "Error: first argument must be '"
+				  << MODE_CRYPT << "' or '" << MODE_DECRYPT << "'\n";
 		return false;
 	}
 
@@ -48,22 +60,21 @@ static bool ParseArgs(int argc, char* argv[], Args& args)
 		return false;
 	}
 
-	int key;
-	if (!ParseKey(argv[4], key))
+	if (!ParseKey(argv[4], args.key))
 	{
 		std::cerr << "Error: key must be a number between 0 and 255\n";
 		return false;
 	}
-	args.key = static_cast<uint8_t>(key);
 
 	return true;
 }
 
-static bool OpenFiles(const Args& args,
+bool OpenFiles(const Args& args,
 	std::ifstream& input,
 	std::ofstream& output)
 {
 	input.open(args.inputPath, std::ios::binary);
+
 	if (!input)
 	{
 		std::cerr << "Error: cannot open input file '" << args.inputPath << "'\n";
@@ -71,6 +82,7 @@ static bool OpenFiles(const Args& args,
 	}
 
 	output.open(args.outputPath, std::ios::binary);
+
 	if (!output)
 	{
 		std::cerr << "Error: cannot open output file '" << args.outputPath << "'\n";
@@ -80,22 +92,20 @@ static bool OpenFiles(const Args& args,
 	return true;
 }
 
-static bool ProcessCipher(const Args& args)
+bool EncryptOrDecrypt(const Args& args)
 {
 	std::ifstream input;
 	std::ofstream output;
+
 	if (!OpenFiles(args, input, output))
 	{
 		return false;
 	}
 
-	LookupTable encTable;
-	LookupTable decTable;
-	BuildLookupTables(encTable, decTable, args.key);
+	bool encrypt = (args.mode == MODE_CRYPT);
+	LookupTable table = BuildLookupTable(args.key, encrypt);
 
-	const LookupTable& table = (args.mode == "crypt") ? encTable : decTable;
-
-	if (!TransformFile(input, output, table))
+	if (!ApplyTableToStream(input, output, table))
 	{
 		std::cerr << "Error: file processing failed\n";
 		return false;
@@ -104,15 +114,18 @@ static bool ProcessCipher(const Args& args)
 	return true;
 }
 
+} // namespace
+
 int main(int argc, char* argv[])
 {
 	Args args;
+
 	if (!ParseArgs(argc, argv, args))
 	{
 		return 1;
 	}
 
-	if (!ProcessCipher(args))
+	if (!EncryptOrDecrypt(args))
 	{
 		return 1;
 	}
