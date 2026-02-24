@@ -2,22 +2,35 @@
 
 #include <array>
 #include <iostream>
+#include <optional>
 
-using Matrix3x3 = std::array<std::array<double, 3>, 3>;
+constexpr std::size_t MATRIX_SIZE = 3;
 
-enum class ReadResult
+using Matrix3x3 = std::array<std::array<double, MATRIX_SIZE>, MATRIX_SIZE>;
+
+enum class ReadError
 {
-	Success,
-	InvalidFormat, 
-	InvalidValue 
+	None,
+	InvalidFormat,
+	InvalidValue
 };
 
-ReadResult ReadMatrix(std::istream& input, Matrix3x3& matrix);
+struct ReadMatrixResult
+{
+	Matrix3x3 matrix;
+	ReadError error;
+};
+
+ReadMatrixResult ReadMatrix(std::istream& input);
 
 double Determinant(const Matrix3x3& matrix);
 
-bool Invert(const Matrix3x3& matrix, Matrix3x3& result);
+Matrix3x3 ComputeAdjugate(const Matrix3x3& matrix);
 
-void PrintMatrix(std::ostream& output, const Matrix3x3& m);
+std::optional<Matrix3x3> Invert(const Matrix3x3& matrix);
+
+void PrintMatrix(std::ostream& output, const Matrix3x3& matrix);
 
 void PrintHelp();
+
+const char* GetReadErrorMessage(ReadError error);

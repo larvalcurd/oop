@@ -2,45 +2,45 @@
 #include <fstream>
 #include <string>
 
-static bool OpenInputFile(const std::string& path, std::ifstream& file)
+namespace
 {
-	file.open(path);
+
+bool ProcessStream(std::istream& input)
+{
+	auto [matrix, error] = ReadMatrix(input);
+
+	if (error != ReadError::None)
+	{
+		std::cerr << GetReadErrorMessage(error) << '\n';
+		return false;
+	}
+
+	auto inverse = Invert(matrix);
+
+	if (!inverse.has_value())
+	{
+		std::cerr << "Non-invertible\n";
+		return false;
+	}
+
+	PrintMatrix(std::cout, inverse.value());
+	return true;
+}
+
+bool ProcessFile(const std::string& path)
+{
+	std::ifstream file(path);
+
 	if (!file)
 	{
-		std::cerr << "Failed to open file: " << path << "\n";
+		std::cerr << "Failed to open file: " << path << '\n';
 		return false;
 	}
-	return true;
+
+	return ProcessStream(file);
 }
 
-static bool ProcessMatrix(std::istream& input)
-{
-	Matrix3x3 matrix;
-	ReadResult rc = ReadMatrix(input, matrix);
-
-	if (rc == ReadResult::InvalidFormat)
-	{
-		std::cerr << "Invalid matrix format\n";
-		return false;
-	}
-	if (rc == ReadResult::InvalidValue)
-	{
-		std::cerr << "Invalid matrix\n";
-		return false;
-	}
-
-	Matrix3x3 inverse;
-	if (!Invert(matrix, inverse))
-	{
-		std::cout << "Non-invertible\n";
-		return false;
-	}
-
-	PrintMatrix(std::cout, inverse);
-	return true;
-}
-
-int main(int argc, char* argv[])
+int Run(int argc, char* argv[])
 {
 	if (argc > 2)
 	{
@@ -48,28 +48,25 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	if (argc == 2 && std::string(argv[1]) == "-h")
-	{
-		PrintHelp();
-		return 0;
-	}
-
-	std::ifstream file;
-	std::istream* input = &std::cin;
-
 	if (argc == 2)
 	{
-		if (!OpenInputFile(argv[1], file))
+		std::string arg = argv[1];
+
+		if (arg == "-h")
 		{
-			return 1;
+			PrintHelp();
+			return 0;
 		}
-		input = &file;
+
+		return ProcessFile(arg) ? 0 : 1;
 	}
 
-	if (!ProcessMatrix(*input))
-	{
-		return 1;
-	}
+	return ProcessStream(std::cin) ? 0 : 1;
+}
 
-	return 0;
+} // namespace
+
+int main(int argc, char* argv[])
+{
+	return Run(argc, argv);
 }

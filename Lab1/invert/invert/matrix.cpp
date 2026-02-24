@@ -9,73 +9,85 @@ namespace
 
 constexpr double EPSILON = 1e-9;
 
-bool ParseDouble(const std::string& token, double& value)
+std::optional<double> ParseDouble(const std::string& token)
 {
+	if (token.empty())
+	{
+		return std::nullopt;
+	}
+
 	std::size_t idx = 0;
+	double value;
+
 	try
 	{
 		value = std::stod(token, &idx);
 	}
-	catch (const std::invalid_argument&)
+	catch (...)
 	{
-		return false;
+		return std::nullopt;
 	}
-	catch (const std::out_of_range&)
+
+	if (idx != token.size())
 	{
-		return false;
+		return std::nullopt;
 	}
-	return idx == token.size();
+
+	return value;
+}
+
+std::string TrimCarriageReturn(std::string line)
+{
+	if (!line.empty() && line.back() == '\r')
+	{
+		line.pop_back();
+	}
+	return line;
 }
 
 } // namespace
 
-ReadResult ReadMatrix(std::istream& input, Matrix3x3& matrix)
+ReadMatrixResult ReadMatrix(std::istream& input)
 {
+	Matrix3x3 matrix{};
 	std::string line;
-	for (int i = 0; i < 3; i++)
+
+	for (std::size_t row = 0; row < MATRIX_SIZE; ++row)
 	{
 		if (!std::getline(input, line))
 		{
-			return ReadResult::InvalidFormat;
+			return { {}, ReadError::InvalidFormat };
 		}
 
-		if (!line.empty() && line.back() == '\r')
-		{
-			line.pop_back();
-		}
-
-		std::stringstream ss(line);
+		line = TrimCarriageReturn(line);
+		std::istringstream ss(line);
 		std::string token;
-		int col = 0;
+		std::size_t col = 0;
 
 		while (std::getline(ss, token, '\t'))
 		{
-			if (col >= 3)
+			if (col >= MATRIX_SIZE)
 			{
-				return ReadResult::InvalidFormat;
+				return { {}, ReadError::InvalidFormat };
 			}
 
-			if (token.empty())
+			auto value = ParseDouble(token);
+			if (!value.has_value())
 			{
-				return ReadResult::InvalidValue;
+				return { {}, ReadError::InvalidValue };
 			}
 
-			double value;
-			if (!ParseDouble(token, value))
-			{
-				return ReadResult::InvalidValue;
-			}
-
-			matrix[i][col] = value;
-			col++;
+			matrix[row][col] = value.value();
+			++col;
 		}
 
-		if (col != 3)
+		if (col != MATRIX_SIZE)
 		{
-			return ReadResult::InvalidFormat;
+			return { {}, ReadError::InvalidFormat };
 		}
 	}
-	return ReadResult::Success;
+
+	return { matrix, ReadError::None };
 }
 
 double Determinant(const Matrix3x3& m)
@@ -85,37 +97,64 @@ double Determinant(const Matrix3x3& m)
 		+ m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
 }
 
-bool Invert(const Matrix3x3& matrix, Matrix3x3& result)
+Matrix3x3 ComputeAdjugate(const Matrix3x3& m)
+{
+	Matrix3x3 adj{};
+
+	adj[0][0] = m[1][1] * m[2][2] - m[1][2] * m[2][1];
+	adj[0][1] = m[0][2] * m[2][1] - m[0][1] * m[2][2];
+	adj[0][2] = m[0][1] * m[1][2] - m[0][2] * m[1][1];
+
+	adj[1][0] = m[1][2] * m[2][0] - m[1][0] * m[2][2];
+	adj[1][1] = m[0][0] * m[2][2] - m[0][2] * m[2][0];
+	adj[1][2] = m[0][2] * m[1][0] - m[0][0] * m[1][2];
+
+	adj[2][0] = m[1][0] * m[2][1] - m[1][1] * m[2][0];
+	adj[2][1] = m[0][1] * m[2][0] - m[0][0] * m[2][1];
+	adj[2][2] = m[0][0] * m[1][1] - m[0][1] * m[1][0];
+
+	return adj;
+}
+
+std::optional<Matrix3x3> Invert(const Matrix3x3& matrix)
 {
 	double det = Determinant(matrix);
+
 	if (std::abs(det) < EPSILON)
 	{
-		return false;
+		return std::nullopt;
 	}
 
+	Matrix3x3 adjugate = ComputeAdjugate(matrix);
+	Matrix3x3 result{};
 	double invDet = 1.0 / det;
 
-	result[0][0] = invDet * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]);
-	result[0][1] = invDet * (matrix[0][2] * matrix[2][1] - matrix[0][1] * matrix[2][2]);
-	result[0][2] = invDet * (matrix[0][1] * matrix[1][2] - matrix[0][2] * matrix[1][1]);
+	for (std::size_t i = 0; i < MATRIX_SIZE; ++i)
+	{
+		for (std::size_t j = 0; j < MATRIX_SIZE; ++j)
+		{
+			result[i][j] = adjugate[i][j] * invDet;
+		}
+	}
 
-	result[1][0] = invDet * (matrix[1][2] * matrix[2][0] - matrix[1][0] * matrix[2][2]);
-	result[1][1] = invDet * (matrix[0][0] * matrix[2][2] - matrix[0][2] * matrix[2][0]);
-	result[1][2] = invDet * (matrix[0][2] * matrix[1][0] - matrix[0][0] * matrix[1][2]);
-
-	result[2][0] = invDet * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0]);
-	result[2][1] = invDet * (matrix[0][1] * matrix[2][0] - matrix[0][0] * matrix[2][1]);
-	result[2][2] = invDet * (matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]);
-
-	return true;
+	return result;
 }
 
 void PrintMatrix(std::ostream& output, const Matrix3x3& m)
 {
 	output << std::fixed << std::setprecision(3);
-	for (int i = 0; i < 3; i++)
+
+	for (std::size_t i = 0; i < MATRIX_SIZE; ++i)
 	{
-		output << m[i][0] << "\t" << m[i][1] << "\t" << m[i][2] << "\n";
+		for (std::size_t j = 0; j < MATRIX_SIZE; ++j)
+		{
+			if (j > 0)
+			{
+				output << '\t';
+			}
+			output << m[i][j];
+		}
+		output << '\n';
 	}
 }
 
@@ -125,4 +164,17 @@ void PrintHelp()
 				 "	invert.exe			Read Matrix from stdin\n"
 				 "	invert.exe <file>	Read Matrix from file\n"
 				 "	invert.exe -h		Show help\n";
+}
+
+const char* GetReadErrorMessage(ReadError error)
+{
+	switch (error)
+	{
+	case ReadError::InvalidFormat:
+		return "Invalid matrix format";
+	case ReadError::InvalidValue:
+		return "Invalid matrix";
+	default:
+		return "Unknown error";
+	}
 }
