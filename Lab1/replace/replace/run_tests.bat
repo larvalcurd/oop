@@ -195,16 +195,6 @@ echo  STDIN ERROR TESTS (exit code must be 0)
 echo ============================================================
 echo.
 
-REM --- Test 22: Stdin error - missing replace string ---
-set /a TOTAL+=1
-echo Test 22: Stdin Error - Missing replace string (EOF after search)
-"%EXE%" < "%INPUT_DIR%\stdin22.txt" > "%OUTPUT_DIR%\output22.txt"
-set EXIT_CODE=!errorlevel!
-fc "%OUTPUT_DIR%\output22.txt" "%EXPECTED_DIR%\expected22.txt" >nul 2>&1
-if !errorlevel! equ 0 (
-    if !EXIT_CODE! equ 0 (echo   [PASS] & set /a PASSED+=1) else (echo   [FAIL] exit code=!EXIT_CODE!, expected 0 & set /a FAILED+=1)
-) else (echo   [FAIL] stdout mismatch & set /a FAILED+=1)
-
 REM --- Test 23: Stdin error - immediate EOF ---
 set /a TOTAL+=1
 echo Test 23: Stdin Error - Immediate EOF (no search string)

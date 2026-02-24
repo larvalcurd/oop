@@ -98,7 +98,6 @@ int ProcessStdin()
 
 	CopyStreamWithReplacement(std::cin, std::cout, search, replace);
 
-	std::cout << std::endl;
 	return 0;
 }
 
