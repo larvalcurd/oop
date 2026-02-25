@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "html_decode.h"
+#include "HtmlDecode.h"
 
 // ============================================================
 // TryDecodeEntity tests

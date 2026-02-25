@@ -1,7 +1,7 @@
 ﻿# Библиотека с логикой
 add_library(html_decode_lib
-    html_decode.cpp
-    html_decode.h
+    HtmlDecode.cpp
+    HtmlDecode.h
 )
 target_include_directories(html_decode_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

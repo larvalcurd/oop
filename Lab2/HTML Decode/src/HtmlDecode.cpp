@@ -1,4 +1,4 @@
-#include "html_decode.h"
+#include "HtmlDecode.h"
 #include <algorithm>
 
 std::optional<char> TryDecodeEntity(const std::string& entity)
