@@ -33,7 +33,7 @@ bool ReadNumbers(std::istream& input, std::vector<double>& numbers)
     return true;
 }
 
-void ProcessNumbers(std::vector<double>& numbers)
+void addArithmeticMeanOfPositiveElements(std::vector<double>& numbers)
 {
     if (numbers.empty())
     {

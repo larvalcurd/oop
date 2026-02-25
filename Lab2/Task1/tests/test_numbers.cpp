@@ -82,73 +82,73 @@ TEST(ReadNumbers, ClearsVectorBeforeReading)
 }
 
 // ============================================================
-// ProcessNumbers tests
+// addArithmeticMeanOfPositiveElements tests
 // ============================================================
 
-TEST(ProcessNumbers, EmptyVector)
+TEST(addArithmeticMeanOfPositiveElements, EmptyVector)
 {
     std::vector<double> numbers;
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     EXPECT_TRUE(numbers.empty());
 }
 
-TEST(ProcessNumbers, AllNegative)
+TEST(addArithmeticMeanOfPositiveElements, AllNegative)
 {
     std::vector<double> numbers = { -1.0, -2.0, -3.0 };
     std::vector<double> original = numbers;
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     for (size_t i = 0; i < numbers.size(); ++i)
     {
         EXPECT_DOUBLE_EQ(numbers[i], original[i]);
     }
 }
 
-TEST(ProcessNumbers, AllPositive)
+TEST(addArithmeticMeanOfPositiveElements, AllPositive)
 {
     // {1, 2, 3} -> avg = 2.0 -> {3, 4, 5}
     std::vector<double> numbers = { 1.0, 2.0, 3.0 };
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     EXPECT_DOUBLE_EQ(numbers[0], 3.0);
     EXPECT_DOUBLE_EQ(numbers[1], 4.0);
     EXPECT_DOUBLE_EQ(numbers[2], 5.0);
 }
 
-TEST(ProcessNumbers, MixedNumbers)
+TEST(addArithmeticMeanOfPositiveElements, MixedNumbers)
 {
     // {4, 16, -30, 10} -> positive avg = 10 -> {14, 26, -20, 20}
     std::vector<double> numbers = { 4.0, 16.0, -30.0, 10.0 };
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     EXPECT_DOUBLE_EQ(numbers[0], 14.0);
     EXPECT_DOUBLE_EQ(numbers[1], 26.0);
     EXPECT_DOUBLE_EQ(numbers[2], -20.0);
     EXPECT_DOUBLE_EQ(numbers[3], 20.0);
 }
 
-TEST(ProcessNumbers, Example1)
+TEST(addArithmeticMeanOfPositiveElements, Example1)
 {
     std::vector<double> numbers = { 1.0, 2.0, 3.659512 };
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     double avg = 6.659512 / 3.0;
     EXPECT_NEAR(numbers[0], 1.0 + avg, 1e-9);
     EXPECT_NEAR(numbers[1], 2.0 + avg, 1e-9);
     EXPECT_NEAR(numbers[2], 3.659512 + avg, 1e-9);
 }
 
-TEST(ProcessNumbers, ZerosAreNotPositive)
+TEST(addArithmeticMeanOfPositiveElements, ZerosAreNotPositive)
 {
     std::vector<double> numbers = { 0.0, 0.0, -1.0 };
     std::vector<double> original = numbers;
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     for (size_t i = 0; i < numbers.size(); ++i)
     {
         EXPECT_DOUBLE_EQ(numbers[i], original[i]);
     }
 }
 
-TEST(ProcessNumbers, SinglePositive)
+TEST(addArithmeticMeanOfPositiveElements, SinglePositive)
 {
     std::vector<double> numbers = { 5.0 };
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     EXPECT_DOUBLE_EQ(numbers[0], 10.0);
 }
 
@@ -214,7 +214,7 @@ TEST(Integration, Example1)
     std::istringstream input("1.0 2 3.659512");
     std::vector<double> numbers;
     ASSERT_TRUE(ReadNumbers(input, numbers));
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     std::ostringstream output;
     PrintSortedNumbers(numbers, output);
     EXPECT_EQ(output.str(), "3.220 4.220 5.879");
@@ -225,7 +225,7 @@ TEST(Integration, Example2)
     std::istringstream input("4 16 -30 10");
     std::vector<double> numbers;
     ASSERT_TRUE(ReadNumbers(input, numbers));
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     std::ostringstream output;
     PrintSortedNumbers(numbers, output);
     EXPECT_EQ(output.str(), "-20.000 14.000 20.000 26.000");
@@ -236,7 +236,7 @@ TEST(Integration, Example3)
     std::istringstream input("-1.0004000 -703 -3.659512 -11");
     std::vector<double> numbers;
     ASSERT_TRUE(ReadNumbers(input, numbers));
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     std::ostringstream output;
     PrintSortedNumbers(numbers, output);
     EXPECT_EQ(output.str(), "-703.000 -11.000 -3.660 -1.000");
@@ -254,7 +254,7 @@ TEST(Integration, EmptyInput)
     std::istringstream input("");
     std::vector<double> numbers;
     ASSERT_TRUE(ReadNumbers(input, numbers));
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     std::ostringstream output;
     PrintSortedNumbers(numbers, output);
     EXPECT_EQ(output.str(), "");

@@ -11,7 +11,7 @@ int main()
         return 0;
     }
 
-    ProcessNumbers(numbers);
+    addArithmeticMeanOfPositiveElements(numbers);
     PrintSortedNumbers(numbers, std::cout);
 
     if (!numbers.empty())
