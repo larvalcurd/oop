@@ -1,40 +1,57 @@
-#include "life.h"
+#include "Life.h"
 #include <fstream>
-#include <iostream>
+
+namespace
+{
+void printUsage(const char* programName)
+{
+	std::cerr << "Usage: " << programName << " <input> [output]\n";
+}
+
+std::ifstream openInput(const char* filename)
+{
+	std::ifstream file(filename);
+	if (!file)
+		std::cerr << "Cannot open: " << filename << "\n";
+	return file;
+}
+
+std::ofstream openOutput(const char* filename)
+{
+	std::ofstream file(filename);
+	if (!file)
+		std::cerr << "Cannot write: " << filename << "\n";
+	return file;
+}
+
+void writeResult(const Grid& result, int argc, char* argv[])
+{
+	if (argc >= 3)
+	{
+		if (auto out = openOutput(argv[2]))
+			Life::writeField(result, out);
+	}
+	else
+	{
+		Life::writeField(result, std::cout);
+	}
+}
+} // namespace
 
 int main(int argc, char* argv[])
 {
 	if (argc < 2)
 	{
-		std::cerr << "Usage: live.exe <input file> [<output file>]\n";
+		printUsage(argv[0]);
 		return 1;
 	}
 
-	std::ifstream fin(argv[1]);
-	if (!fin.is_open())
-	{
-		std::cerr << "Error: cannot open " << argv[1] << "\n";
+	auto inputFile = openInput(argv[1]);
+	if (!inputFile)
 		return 1;
-	}
-	Grid grid = readField(fin);
-	fin.close();
 
-	Grid next = calculateNextGeneration(grid);
+	Grid result = Life::calculateNextGeneration(Life::readField(inputFile));
 
-	if (argc >= 3)
-	{
-		std::ofstream fout(argv[2]);
-		if (!fout.is_open())
-		{
-			std::cerr << "Error: cannot open " << argv[2] << " for writing\n";
-			return 1;
-		}
-		writeField(next, fout);
-	}
-	else
-	{
-		writeField(next, std::cout);
-	}
-
+	writeResult(result, argc, argv);
 	return 0;
 }
