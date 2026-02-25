@@ -130,13 +130,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArgsParser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="replace.cpp" />
-    <ClCompile Include="stream_processor.cpp" />
+    <ClCompile Include="StreamProcessor.cpp" />
+    <ClCompile Include="StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArgsParser.h" />
     <ClInclude Include="replace.h" />
-    <ClInclude Include="stream_processor.h" />
+    <ClInclude Include="StreamProcessor.h" />
+    <ClInclude Include="StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />

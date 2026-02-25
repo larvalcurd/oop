@@ -21,7 +21,13 @@
     <ClCompile Include="replace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stream_processor.cpp">
+    <ClCompile Include="StreamProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgsParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +35,13 @@
     <ClInclude Include="replace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stream_processor.h">
+    <ClInclude Include="StreamProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgsParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
