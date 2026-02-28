@@ -1,46 +1,63 @@
 #include "PrimeGenerator.h"
 
-#include <cmath>
 #include <vector>
 
 namespace
 {
 
+int NumberToIndex(int number)
+{
+	return (number - 3) / 2;
+}
+
+int IndexToNumber(int index)
+{
+	return 2 * index + 3;
+}
+
+int SieveSize(int upperBound)
+{
+	return (upperBound - 1) / 2;
+}
+
 std::vector<bool> BuildPrimeSieve(int upperBound)
 {
-	std::vector<bool> isPrime(upperBound + 1, true);
+	int size = SieveSize(upperBound);
+	std::vector<bool> isPrime(size, true);
 
-	isPrime[0] = false;
-	isPrime[1] = false;
-
-	int sieveLimit = static_cast<int>(std::sqrt(static_cast<double>(upperBound)));
-
-	for (int number = MIN_PRIME; number <= sieveLimit; ++number)
+	for (int number = 3; number * number <= upperBound; number += 2)
 	{
-		if (!isPrime[number])
+		int index = NumberToIndex(number);
+
+		if (!isPrime[index])
 		{
 			continue;
 		}
 
-		long long firstMultiple = static_cast<long long>(number) * number;
-		for (long long multiple = firstMultiple; multiple <= upperBound; multiple += number)
+		for (int multiple = number * number; multiple <= upperBound; multiple += 2 * number)
 		{
-			isPrime[multiple] = false;
+			isPrime[NumberToIndex(multiple)] = false;
 		}
 	}
 
 	return isPrime;
 }
 
-std::set<int> CollectPrimesFromSieve(const std::vector<bool>& sieve)
+std::set<int> CollectPrimesFromSieve(const std::vector<bool>& sieve, int upperBound)
 {
 	std::set<int> primes;
 
-	for (size_t number = MIN_PRIME; number < sieve.size(); ++number)
+	if (upperBound >= 2)
 	{
-		if (sieve[number])
+		primes.insert(2);
+	}
+
+	int size = SieveSize(upperBound);
+	for (int index = 0; index < size; ++index)
+	{
+		if (sieve[index])
 		{
-			primes.insert(primes.end(), static_cast<int>(number));
+			primes.insert(primes.end(), IndexToNumber(index));
 		}
 	}
 
@@ -58,5 +75,5 @@ std::set<int> GeneratePrimeNumbersSet(int upperBound)
 
 	std::vector<bool> sieve = BuildPrimeSieve(upperBound);
 
-	return CollectPrimesFromSieve(sieve);
+	return CollectPrimesFromSieve(sieve, upperBound);
 }
