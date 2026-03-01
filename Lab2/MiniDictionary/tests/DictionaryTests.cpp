@@ -23,7 +23,8 @@ void removeTempFile(const std::string& filename)
 TEST(AddEntry, SingleEntry)
 {
 	DictionaryData dict;
-	addEntry(dict, "cat", "кот");
+	auto status = addEntry(dict, "cat", "кот");
+	EXPECT_EQ(status, AddStatus::Added);
 
 	auto result = translateEngToRus(dict, "cat");
 	ASSERT_EQ(result.size(), 1);
@@ -33,8 +34,8 @@ TEST(AddEntry, SingleEntry)
 TEST(AddEntry, MultipleTranslations)
 {
 	DictionaryData dict;
-	addEntry(dict, "cat", "кот");
-	addEntry(dict, "cat", "кошка");
+	EXPECT_EQ(addEntry(dict, "cat", "кот"), AddStatus::Added);
+	EXPECT_EQ(addEntry(dict, "cat", "кошка"), AddStatus::Added);
 
 	auto result = translateEngToRus(dict, "cat");
 	ASSERT_EQ(result.size(), 2);
@@ -61,6 +62,29 @@ TEST(AddEntry, StoresOriginalEntry)
 	EXPECT_EQ(dict.entries[0].second, "Красная Площадь");
 }
 
+TEST(AddEntry_DuplicateCaseInsensitive, BothDirections)
+{
+	DictionaryData dict;
+
+	EXPECT_EQ(addEntry(dict, "cat", "кот"), AddStatus::Added);
+	EXPECT_EQ(addEntry(dict, "cat", "КОТ"), AddStatus::AlreadyExists);
+	EXPECT_EQ(addEntry(dict, "CAT", "кот"), AddStatus::AlreadyExists);
+
+	auto rus1 = translateEngToRus(dict, toLower("cat"));
+	auto rus2 = translateEngToRus(dict, toLower("CAT"));
+	EXPECT_EQ(rus1.size(), 1);
+	EXPECT_EQ(rus2.size(), 1);
+	EXPECT_TRUE(rus1.count("кот"));
+	EXPECT_TRUE(rus2.count("кот"));
+
+	auto eng1 = translateRusToEng(dict, toLower("кот"));
+	auto eng2 = translateRusToEng(dict, toLower("КОТ"));
+	EXPECT_EQ(eng1.size(), 1);
+	EXPECT_EQ(eng2.size(), 1);
+	EXPECT_TRUE(eng1.count("cat"));
+	EXPECT_TRUE(eng2.count("cat"));
+}
+
 // ==================== translateEngToRus ====================
 
 TEST(TranslateEngToRus, ExistingWord)
@@ -85,10 +109,10 @@ TEST(TranslateEngToRus, CaseInsensitive)
 	DictionaryData dict;
 	addEntry(dict, "cat", "кот");
 
-	EXPECT_FALSE(translateEngToRus(dict, "CAT").empty());
-	EXPECT_FALSE(translateEngToRus(dict, "Cat").empty());
-	EXPECT_FALSE(translateEngToRus(dict, "cAt").empty());
-	EXPECT_FALSE(translateEngToRus(dict, "cat").empty());
+	EXPECT_FALSE(translateEngToRus(dict, toLower("CAT")).empty());
+	EXPECT_FALSE(translateEngToRus(dict, toLower("Cat")).empty());
+	EXPECT_FALSE(translateEngToRus(dict, toLower("cAt")).empty());
+	EXPECT_FALSE(translateEngToRus(dict, toLower("cat")).empty());
 }
 
 TEST(TranslateEngToRus, PreservesTranslationCase)
@@ -96,7 +120,7 @@ TEST(TranslateEngToRus, PreservesTranslationCase)
 	DictionaryData dict;
 	addEntry(dict, "the red square", "Красная Площадь");
 
-	auto result = translateEngToRus(dict, "THE RED SQUARE");
+	auto result = translateEngToRus(dict, toLower("THE RED SQUARE"));
 	ASSERT_EQ(result.size(), 1);
 	EXPECT_EQ(*result.begin(), "Красная Площадь");
 }
@@ -132,9 +156,9 @@ TEST(TranslateRusToEng, CaseInsensitiveCyrillic)
 	DictionaryData dict;
 	addEntry(dict, "cat", "кот");
 
-	EXPECT_FALSE(translateRusToEng(dict, "кот").empty());
-	EXPECT_FALSE(translateRusToEng(dict, "КОТ").empty());
-	EXPECT_FALSE(translateRusToEng(dict, "Кот").empty());
+	EXPECT_FALSE(translateRusToEng(dict, toLower("кот")).empty());
+	EXPECT_FALSE(translateRusToEng(dict, toLower("КОТ")).empty());
+	EXPECT_FALSE(translateRusToEng(dict, toLower("Кот")).empty());
 }
 
 TEST(TranslateRusToEng, MultipleRussianToSameEnglish)
@@ -158,7 +182,7 @@ TEST(TranslateRusToEng, PreservesOriginalCase)
 	DictionaryData dict;
 	addEntry(dict, "The Red Square", "Красная Площадь");
 
-	auto result = translateRusToEng(dict, "красная площадь");
+	auto result = translateRusToEng(dict, toLower("красная площадь"));
 	ASSERT_EQ(result.size(), 1);
 	EXPECT_EQ(*result.begin(), "The Red Square");
 }
@@ -206,8 +230,9 @@ TEST(LoadDictionary, ValidFile)
 	std::string filename = createTempFile("cat|кот\ndog|собака\n");
 
 	DictionaryData dict;
-	loadDictionary(dict, filename);
+	auto result = loadDictionary(dict, filename);
 
+	EXPECT_EQ(result.error, DictError::Ok);
 	EXPECT_FALSE(dict.modified);
 
 	auto cat = translateEngToRus(dict, "cat");
@@ -224,11 +249,13 @@ TEST(LoadDictionary, ValidFile)
 TEST(LoadDictionary, NonExistentFile)
 {
 	DictionaryData dict;
-	loadDictionary(dict, "nonexistent_file_xyz.txt");
+	auto result = loadDictionary(dict, "nonexistent_file_xyz.txt");
 
 	EXPECT_TRUE(dict.engToRus.empty());
 	EXPECT_TRUE(dict.rusToEng.empty());
 	EXPECT_FALSE(dict.modified);
+	EXPECT_EQ(result.error, DictError::Ok);
+	EXPECT_TRUE(result.fileMissing);
 }
 
 TEST(LoadDictionary, EmptyFile)
@@ -236,9 +263,10 @@ TEST(LoadDictionary, EmptyFile)
 	std::string filename = createTempFile("");
 
 	DictionaryData dict;
-	loadDictionary(dict, filename);
+	auto result = loadDictionary(dict, filename);
 
 	EXPECT_TRUE(dict.engToRus.empty());
+	EXPECT_EQ(result.error, DictError::Ok);
 
 	removeTempFile(filename);
 }
@@ -248,11 +276,12 @@ TEST(LoadDictionary, MalformedLines)
 	std::string filename = createTempFile("cat|кот\nbadline\n|empty\ndog|собака\n");
 
 	DictionaryData dict;
-	loadDictionary(dict, filename);
+	auto result = loadDictionary(dict, filename);
 
 	EXPECT_EQ(dict.engToRus.size(), 2);
 	EXPECT_FALSE(translateEngToRus(dict, "cat").empty());
 	EXPECT_FALSE(translateEngToRus(dict, "dog").empty());
+	EXPECT_EQ(result.malformedLines, 2);
 
 	removeTempFile(filename);
 }
@@ -262,12 +291,12 @@ TEST(LoadDictionary, MultipleTranslationsInFile)
 	std::string filename = createTempFile("cat|кот\ncat|кошка\n");
 
 	DictionaryData dict;
-	loadDictionary(dict, filename);
+	auto result = loadDictionary(dict, filename);
 
-	auto result = translateEngToRus(dict, "cat");
-	ASSERT_EQ(result.size(), 2);
-	EXPECT_TRUE(result.count("кот"));
-	EXPECT_TRUE(result.count("кошка"));
+	auto res = translateEngToRus(dict, "cat");
+	ASSERT_EQ(res.size(), 2);
+	EXPECT_TRUE(res.count("кот"));
+	EXPECT_TRUE(res.count("кошка"));
 
 	removeTempFile(filename);
 }
@@ -277,11 +306,11 @@ TEST(LoadDictionary, WhitespaceAroundDelimiter)
 	std::string filename = createTempFile("  cat  |  кот  \n");
 
 	DictionaryData dict;
-	loadDictionary(dict, filename);
+	auto result = loadDictionary(dict, filename);
 
-	auto result = translateEngToRus(dict, "cat");
-	ASSERT_EQ(result.size(), 1);
-	EXPECT_EQ(*result.begin(), "кот");
+	auto res = translateEngToRus(dict, "cat");
+	ASSERT_EQ(res.size(), 1);
+	EXPECT_EQ(*res.begin(), "кот");
 
 	removeTempFile(filename);
 }
@@ -291,11 +320,11 @@ TEST(LoadDictionary, PreservesCase)
 	std::string filename = createTempFile("The Red Square|Красная Площадь\n");
 
 	DictionaryData dict;
-	loadDictionary(dict, filename);
+	auto result = loadDictionary(dict, filename);
 
-	auto result = translateEngToRus(dict, "the red square");
-	ASSERT_EQ(result.size(), 1);
-	EXPECT_EQ(*result.begin(), "Красная Площадь");
+	auto res = translateEngToRus(dict, "the red square");
+	ASSERT_EQ(res.size(), 1);
+	EXPECT_EQ(*res.begin(), "Красная Площадь");
 
 	auto reverse = translateRusToEng(dict, "красная площадь");
 	ASSERT_EQ(reverse.size(), 1);
@@ -314,12 +343,12 @@ TEST(SaveDictionary, SaveAndReload)
 		DictionaryData dict;
 		addEntry(dict, "cat", "кот");
 		addEntry(dict, "dog", "собака");
-		saveDictionary(dict, filename);
+		EXPECT_EQ(saveDictionary(dict, filename), DictError::Ok);
 	}
 
 	{
 		DictionaryData dict;
-		loadDictionary(dict, filename);
+		auto result = loadDictionary(dict, filename);
 
 		auto cat = translateEngToRus(dict, "cat");
 		ASSERT_EQ(cat.size(), 1);
@@ -340,16 +369,16 @@ TEST(SaveDictionary, PreservesCaseOnSaveReload)
 	{
 		DictionaryData dict;
 		addEntry(dict, "The Red Square", "Красная Площадь");
-		saveDictionary(dict, filename);
+		EXPECT_EQ(saveDictionary(dict, filename), DictError::Ok);
 	}
 
 	{
 		DictionaryData dict;
-		loadDictionary(dict, filename);
+		auto result = loadDictionary(dict, filename);
 
-		auto result = translateRusToEng(dict, "красная площадь");
-		ASSERT_EQ(result.size(), 1);
-		EXPECT_EQ(*result.begin(), "The Red Square");
+		auto res = translateRusToEng(dict, "красная площадь");
+		ASSERT_EQ(res.size(), 1);
+		EXPECT_EQ(*res.begin(), "The Red Square");
 	}
 
 	removeTempFile(filename);
@@ -363,17 +392,17 @@ TEST(SaveDictionary, MultipleTranslationsPreserved)
 		DictionaryData dict;
 		addEntry(dict, "cat", "кот");
 		addEntry(dict, "cat", "кошка");
-		saveDictionary(dict, filename);
+		EXPECT_EQ(saveDictionary(dict, filename), DictError::Ok);
 	}
 
 	{
 		DictionaryData dict;
-		loadDictionary(dict, filename);
+		auto result = loadDictionary(dict, filename);
 
-		auto result = translateEngToRus(dict, "cat");
-		ASSERT_EQ(result.size(), 2);
-		EXPECT_TRUE(result.count("кот"));
-		EXPECT_TRUE(result.count("кошка"));
+		auto res = translateEngToRus(dict, "cat");
+		ASSERT_EQ(res.size(), 2);
+		EXPECT_TRUE(res.count("кот"));
+		EXPECT_TRUE(res.count("кошка"));
 	}
 
 	removeTempFile(filename);
@@ -390,10 +419,10 @@ TEST(Integration, FullWorkflow)
 	addEntry(dict, "dog", "собака");
 	addEntry(dict, "The Red Square", "Красная Площадь");
 
-	auto catResult = translateEngToRus(dict, "CaT");
+	auto catResult = translateEngToRus(dict, toLower("CaT"));
 	EXPECT_EQ(catResult.size(), 2);
 
-	auto kotResult = translateRusToEng(dict, "КОТ");
+	auto kotResult = translateRusToEng(dict, toLower("КОТ"));
 	ASSERT_EQ(kotResult.size(), 1);
 	EXPECT_EQ(*kotResult.begin(), "cat");
 
@@ -416,23 +445,23 @@ TEST(Integration, SaveLoadRoundTrip)
 		addEntry(dict, "cat", "кот");
 		addEntry(dict, "cat", "кошка");
 		addEntry(dict, "Hello World", "Привет Мир");
-		saveDictionary(dict, filename);
+		EXPECT_EQ(saveDictionary(dict, filename), DictError::Ok);
 	}
 
 	{
 		DictionaryData dict;
-		loadDictionary(dict, filename);
+		auto result = loadDictionary(dict, filename);
 		EXPECT_FALSE(dict.modified);
 
 		addEntry(dict, "dog", "собака");
 		EXPECT_TRUE(dict.modified);
 
-		saveDictionary(dict, filename);
+		EXPECT_EQ(saveDictionary(dict, filename), DictError::Ok);
 	}
 
 	{
 		DictionaryData dict;
-		loadDictionary(dict, filename);
+		auto result = loadDictionary(dict, filename);
 
 		EXPECT_EQ(translateEngToRus(dict, "cat").size(), 2);
 		EXPECT_EQ(translateEngToRus(dict, "dog").size(), 1);

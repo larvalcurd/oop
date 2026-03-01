@@ -4,6 +4,27 @@
 #include <string>
 #include <vector>
 
+enum class DictError
+{
+	Ok,
+	OpenFailed,
+	ReadFailed,
+	WriteFailed
+};
+
+enum class AddStatus
+{
+	Added,
+	AlreadyExists
+};
+
+struct DictResult
+{
+	DictError error;
+	bool fileMissing = false;
+	size_t malformedLines = 0;
+};
+
 struct DictionaryData
 {
 	std::map<std::string, std::set<std::string>> engToRus;
@@ -12,10 +33,10 @@ struct DictionaryData
 	bool modified = false;
 };
 
-void loadDictionary(DictionaryData& dict, const std::string& filename);
-void saveDictionary(const DictionaryData& dict, const std::string& filename);
+DictResult loadDictionary(DictionaryData& dict, const std::string& filename);
+DictError saveDictionary(const DictionaryData& dict, const std::string& filename);
 
-void addEntry(DictionaryData& dict, const std::string& eng, const std::string& rus);
+AddStatus addEntry(DictionaryData& dict, const std::string& eng, const std::string& rus);
 
-std::set<std::string> translateEngToRus(const DictionaryData& dict, const std::string& word);
-std::set<std::string> translateRusToEng(const DictionaryData& dict, const std::string& word);
+std::set<std::string> translateEngToRus(const DictionaryData& dict, const std::string& normalizedWord);
+std::set<std::string> translateRusToEng(const DictionaryData& dict, const std::string& normalizedWord);

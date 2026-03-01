@@ -1,70 +1,121 @@
 #include "Dictionary.h"
 #include "StringUtils.h"
 #include <fstream>
-#include <iostream>
 
-void loadDictionary(DictionaryData& dict, const std::string& filename)
+namespace
+{
+AddStatus addEntryInternal(DictionaryData& dict, const std::string& eng, const std::string& rus)
+{
+	std::string engNorm = toLower(eng);
+	std::string rusNorm = toLower(rus);
+
+	auto& rusSet = dict.engToRus[engNorm];
+
+	for (const auto& existingRus : rusSet)
+	{
+		if (toLower(existingRus) == rusNorm)
+		{
+			return AddStatus::AlreadyExists;
+		}
+	}
+
+	rusSet.insert(rus);
+	dict.rusToEng[rusNorm].insert(eng);
+
+	dict.entries.emplace_back(eng, rus);
+
+	return AddStatus::Added;
+}
+} // namespace
+
+DictResult loadDictionary(DictionaryData& dict, const std::string& filename)
 {
 	std::ifstream fin(filename);
 	if (!fin.is_open())
 	{
-		std::cout << "Файл словаря не найден. Создан пустой словарь.\n";
-		return;
+		return { DictError::Ok, true, 0 };
 	}
 
+	DictResult result{};
+	result.error = DictError::Ok;
+
 	std::string line;
-	while (std::getline(fin, line))
+
+	while (true)
 	{
+		if (!std::getline(fin, line))
+		{
+			if (fin.eof())
+			{
+				break;
+			}
+			return { DictError::ReadFailed, false, result.malformedLines };
+		}
+
 		const auto pos = line.find('|');
 		if (pos == std::string::npos)
+		{
+			result.malformedLines++;
 			continue;
+		}
 
 		std::string eng = trim(line.substr(0, pos));
 		std::string rus = trim(line.substr(pos + 1));
 
 		if (eng.empty() || rus.empty())
+		{
+			result.malformedLines++;
 			continue;
+		}
 
-		dict.engToRus[toLower(eng)].insert(rus);
-		dict.rusToEng[toLower(rus)].insert(eng);
-		dict.entries.emplace_back(std::move(eng), std::move(rus));
+		addEntryInternal(dict, eng, rus);
 	}
+
+	return result;
 }
 
-void saveDictionary(const DictionaryData& dict, const std::string& filename)
+DictError saveDictionary(const DictionaryData& dict, const std::string& filename)
 {
 	std::ofstream fout(filename);
 	if (!fout.is_open())
 	{
-		std::cerr << "Ошибка сохранения файла!\n";
-		return;
+		return DictError::OpenFailed;
 	}
 
 	for (const auto& [eng, rus] : dict.entries)
 	{
 		fout << eng << "|" << rus << "\n";
+
+		if (!fout)
+		{
+			return DictError::WriteFailed;
+		}
 	}
+
+	return DictError::Ok;
 }
 
-void addEntry(DictionaryData& dict, const std::string& eng, const std::string& rus)
+AddStatus addEntry(DictionaryData& dict, const std::string& eng, const std::string& rus)
 {
-	dict.engToRus[toLower(eng)].insert(rus);
-	dict.rusToEng[toLower(rus)].insert(eng);
-	dict.entries.emplace_back(eng, rus);
-	dict.modified = true;
+	AddStatus status = addEntryInternal(dict, eng, rus);
+	if (status == AddStatus::Added)
+	{
+		dict.modified = true;
+	}
+	return status;
 }
 
-std::set<std::string> translateEngToRus(const DictionaryData& dict, const std::string& word)
+std::set<std::string> translateEngToRus(const DictionaryData& dict, const std::string& normalizedWord)
 {
-	const auto it = dict.engToRus.find(toLower(word));
+	const auto it = dict.engToRus.find(normalizedWord);
 	if (it != dict.engToRus.end())
 		return it->second;
 	return {};
 }
 
-std::set<std::string> translateRusToEng(const DictionaryData& dict, const std::string& word)
+std::set<std::string> translateRusToEng(const DictionaryData& dict, const std::string& normalizedWord)
 {
-	const auto it = dict.rusToEng.find(toLower(word));
+	const auto it = dict.rusToEng.find(normalizedWord);
 	if (it != dict.rusToEng.end())
 		return it->second;
 	return {};

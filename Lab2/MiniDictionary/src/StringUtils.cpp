@@ -1,5 +1,4 @@
 #include "StringUtils.h"
-#include <algorithm>
 #include <cctype>
 
 
@@ -9,7 +8,7 @@
 //а-п: D0 B0–D0 BF
 //р-я: D1 80–D1 8F
 //ё:   D1 91
-std::string toLower(const std::string& str)
+std::string toLower(std::string_view str)
 {
 	std::string result;
 	result.reserve(str.size());
@@ -65,13 +64,13 @@ std::string toLower(const std::string& str)
 	return result;
 }
 
-std::string trim(const std::string& str)
+std::string trim(std::string_view str)
 {
 	const size_t start = str.find_first_not_of(" \t\r\n");
-	if (start == std::string::npos)
+	if (start == std::string_view::npos)
 		return {};
 	const size_t end = str.find_last_not_of(" \t\r\n");
-	return str.substr(start, end - start + 1);
+	return std::string(str.substr(start, end - start + 1));
 }
 
 bool hasCyrillic(std::string_view str)

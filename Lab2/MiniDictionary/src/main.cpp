@@ -26,6 +26,11 @@ void printPrompt()
 
 void printTranslations(const std::set<std::string>& translations)
 {
+	if (translations.empty())
+	{
+		std::cout << "(нет переводов)\n";
+		return;
+	}
 	auto it = translations.begin();
 	std::cout << *it;
 	for (++it; it != translations.end(); ++it)
@@ -43,7 +48,9 @@ std::string promptTranslation(const std::string& word)
 
 	std::string translation;
 	if (!std::getline(std::cin, translation))
+	{
 		return {};
+	}
 	return trim(translation);
 }
 
@@ -57,21 +64,31 @@ void handleUnknownWord(DictionaryData& dict, const std::string& input, bool isRu
 		return;
 	}
 
-	if (isRussian)
-		addEntry(dict, translation, input);
-	else
-		addEntry(dict, input, translation);
+	AddStatus status = isRussian
+		? addEntry(dict, translation, input)
+		: addEntry(dict, input, translation);
 
-	std::cout << "Слово \"" << input << "\" сохранено в словаре как \""
-			  << translation << "\".\n";
+	if (status == AddStatus::Added)
+	{
+		std::cout << "Слово \"" << input << "\" сохранено в словаре как \""
+				  << translation << "\".\n";
+	}
+	else
+	{
+		std::cout << "Запись \"" << input
+				  << " — " << translation
+				  << "\" уже существует.\n";
+	}
 }
 
 void processInput(DictionaryData& dict, const std::string& input)
 {
 	const bool isRussian = hasCyrillic(input);
-	const auto translations = isRussian
-		? translateRusToEng(dict, input)
-		: translateEngToRus(dict, input);
+	const std::string lowerInput = toLower(input);
+
+	std::set<std::string> translations = isRussian
+		? translateRusToEng(dict, lowerInput)
+		: translateEngToRus(dict, lowerInput);
 
 	if (!translations.empty())
 		printTranslations(translations);
@@ -106,13 +123,18 @@ void promptSave(const DictionaryData& dict, const std::string& filename)
 
 	std::cout << "В словарь были внесены изменения. "
 				 "Введите Y или y для сохранения перед выходом.\n";
-	printPrompt();
 
+	printPrompt();
 	std::string answer;
-	if (std::getline(std::cin, answer) && (answer == "Y" || answer == "y"))
+
+	if (std::getline(std::cin, answer) && toLower(trim(answer)) == "y")
 	{
-		saveDictionary(dict, filename);
-		std::cout << "Изменения сохранены. До свидания.\n";
+		DictError err = saveDictionary(dict, filename);
+
+		if (err == DictError::Ok)
+			std::cout << "Изменения сохранены. До свидания.\n";
+		else
+			std::cout << "Ошибка сохранения файла. До свидания.\n";
 	}
 	else
 	{
@@ -126,13 +148,28 @@ int main(int argc, char* argv[])
 
 	if (argc < 2)
 	{
-		std::cerr << "Использование: " << argv[0] << " <файл_словаря>\n";
+		std::cerr << "Использование: " << argv[0]
+				  << " <файл_словаря>\n";
 		return 1;
 	}
 
 	const std::string filename = argv[1];
 	DictionaryData dict;
-	loadDictionary(dict, filename);
+
+	DictResult loadRes = loadDictionary(dict, filename);
+
+	if (loadRes.fileMissing)
+		std::cout << "Файл словаря отсутствует. Создаём новый словарь.\n";
+
+	if (loadRes.malformedLines > 0)
+		std::cout << "Предупреждение: пропущено битых строк: "
+				  << loadRes.malformedLines << "\n";
+
+	if (loadRes.error != DictError::Ok)
+	{
+		std::cerr << "Ошибка чтения файла словаря.\n";
+		return 1;
+	}
 
 	runDictionary(dict);
 	promptSave(dict, filename);

@@ -2,6 +2,6 @@
 #include <string>
 #include <string_view>
 
-std::string toLower(const std::string& str);
-std::string trim(const std::string& str);
+std::string toLower(std::string_view str);
+std::string trim(std::string_view str);
 bool hasCyrillic(std::string_view str);
