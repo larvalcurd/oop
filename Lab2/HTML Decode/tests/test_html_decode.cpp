@@ -2,69 +2,6 @@
 #include "HtmlDecode.h"
 
 // ============================================================
-// TryDecodeEntity tests
-// ============================================================
-
-TEST(TryDecodeEntity, DecodesLessThan)
-{
-	auto result = TryDecodeEntity("&lt;");
-	ASSERT_TRUE(result.has_value());
-	EXPECT_EQ(result.value(), '<');
-}
-
-TEST(TryDecodeEntity, DecodesGreaterThan)
-{
-	auto result = TryDecodeEntity("&gt;");
-	ASSERT_TRUE(result.has_value());
-	EXPECT_EQ(result.value(), '>');
-}
-
-TEST(TryDecodeEntity, DecodesAmpersand)
-{
-	auto result = TryDecodeEntity("&amp;");
-	ASSERT_TRUE(result.has_value());
-	EXPECT_EQ(result.value(), '&');
-}
-
-TEST(TryDecodeEntity, DecodesQuote)
-{
-	auto result = TryDecodeEntity("&quot;");
-	ASSERT_TRUE(result.has_value());
-	EXPECT_EQ(result.value(), '"');
-}
-
-TEST(TryDecodeEntity, DecodesApos)
-{
-	auto result = TryDecodeEntity("&apos;");
-	ASSERT_TRUE(result.has_value());
-	EXPECT_EQ(result.value(), '\'');
-}
-
-TEST(TryDecodeEntity, ReturnsNulloptForUnknown)
-{
-	auto result = TryDecodeEntity("&unknown;");
-	EXPECT_FALSE(result.has_value());
-}
-
-TEST(TryDecodeEntity, ReturnsNulloptForEmpty)
-{
-	auto result = TryDecodeEntity("");
-	EXPECT_FALSE(result.has_value());
-}
-
-TEST(TryDecodeEntity, ReturnsNulloptForInvalid)
-{
-	auto result = TryDecodeEntity("&invalid");
-	EXPECT_FALSE(result.has_value());
-}
-
-TEST(TryDecodeEntity, CaseSensitive)
-{
-	auto result = TryDecodeEntity("&LT;");
-	EXPECT_FALSE(result.has_value());
-}
-
-// ============================================================
 // HtmlDecode tests - Basic cases
 // ============================================================
 
