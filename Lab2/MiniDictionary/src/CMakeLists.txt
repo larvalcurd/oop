@@ -5,6 +5,8 @@
     Dictionary.cpp
 )
 
+target_include_directories(MiniDictionaryLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
 if(MSVC)
     target_compile_options(MiniDictionaryLib PRIVATE /utf-8)
 endif()
@@ -15,5 +17,3 @@ target_link_libraries(MiniDictionary PRIVATE MiniDictionaryLib)
 if(MSVC)
     target_compile_options(MiniDictionary PRIVATE /utf-8)
 endif()
-
-target_include_directories(MiniDictionaryLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -1,12 +1,18 @@
 include(FetchContent)
 
-FetchContent_Declare(
-    googletest
-    URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
-)
+option(MINIDICTIONARY_USE_BUNDLED_GTEST "Download GoogleTest with FetchContent" ON)
 
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+if(MINIDICTIONARY_USE_BUNDLED_GTEST)
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+    )
+
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+else()
+    find_package(GTest REQUIRED)
+endif()
 
 add_executable(MiniDictionaryTests
     StringUtilsTests.cpp
@@ -24,11 +30,3 @@ endif()
 
 include(GoogleTest)
 gtest_discover_tests(MiniDictionaryTests)
-
-add_custom_command(
-    TARGET MiniDictionaryTests
-    POST_BUILD
-    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure --build-config $<CONFIG>
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMENT "Запуск тестов..."
-)
