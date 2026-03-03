@@ -1,5 +1,6 @@
 ﻿#include "UrlParser.h"
 #include <algorithm>
+#include <cassert>
 #include <cctype>
 #include <regex>
 #include <string>
@@ -17,6 +18,8 @@ int GetDefaultPort(Protocol protocol)
 	case Protocol::FTP:
 		return 21;
 	}
+
+	assert(false && "Bug: unhandled Protocol value");
 	return 0;
 }
 
@@ -51,18 +54,38 @@ bool ParseProtocol(const std::string& str, Protocol& protocol)
 
 bool ParsePort(const std::string& str, int& port)
 {
-	try
-	{
-		const unsigned long value = std::stoul(str);
-		if (value < 1 || value > 65535)
-			return false;
-		port = static_cast<int>(value);
-		return true;
-	}
-	catch (...)
+	if (str.empty())
 	{
 		return false;
 	}
+
+	for (char c : str)
+	{
+		if (!std::isdigit(static_cast<unsigned char>(c)))
+		{
+			return false;
+		}
+	}
+
+	if (str.length() > 1 && str[0] == '0')
+	{
+		return false;
+	}
+
+	if (str.length() > 5)
+	{
+		return false;
+	}
+
+	const unsigned long value = std::stoul(str);
+
+	if (value < 1 || value > 65535)
+	{
+		return false;
+	}
+
+	port = static_cast<int>(value);
+	return true;
 }
 } // namespace
 
@@ -87,13 +110,17 @@ bool ParseURL(
 	std::string& document)
 {
 	static const std::regex urlRegex(
-		std::string(R"(^)")
-			+ R"((https?|ftp))" // группа 1: протокол
-			+ R"(://)"
-			+ R"(([^/:]+))" // группа 2: хост
-			+ R"((?::(\d+))?)" // группа 3: порт (опционально)
-			+ R"((?:/(.*))?)" // группа 4: путь (опционально, может быть пустым)
-			+ R"($)",
+		[]() {
+			const std::string start = R"(^)";
+			const std::string protocol = R"((http|https|ftp))";
+			const std::string separator = R"(://)";
+			const std::string host = R"(([^/:]+))";
+			const std::string port = R"((?::(\d+))?)";
+			const std::string document = R"((?:/(.*))?)";
+			const std::string end = R"($)";
+
+			return start + protocol + separator + host + port + document + end;
+		}(),
 		std::regex_constants::icase);
 
 	std::smatch match;
