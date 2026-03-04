@@ -2,6 +2,7 @@
     numbers.cpp
     numbers.h
 )
+
 target_include_directories(numbers_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(Task1 main.cpp)
