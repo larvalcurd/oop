@@ -1,6 +1,8 @@
 TurnOn
-SetChannelName 3 MTV
-GetChannelByName MTV
-DeleteChannelName MTV
-GetChannelByName MTV
+SetChannelName 7 National Geographic
+SetChannelName 10 BBC
+GetChannelName 7
+GetChannelName 10
+GetChannelByName National Geographic
+GetChannelByName BBC
 Info

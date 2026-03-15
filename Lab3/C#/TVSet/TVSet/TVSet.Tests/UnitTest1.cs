@@ -202,4 +202,52 @@ public class TVSetTests
 
         Assert.That(result, Is.False);
     }
+
+    [Test]
+    public void SetChannelName_NameAlreadyUsed_MovesToNewChannel()
+    {
+        var tvSet = new TVSet();
+        tvSet.TurnOn();
+        tvSet.SetChannelName(5, "News");
+
+        tvSet.SetChannelName(10, "News");
+
+        Assert.That(tvSet.GetChannelByName("News"), Is.EqualTo(10));
+        Assert.That(tvSet.GetChannelName(5), Is.Null);
+    }
+    [Test]
+    public void SetChannelName_ChannelHadOtherName_ReplacesIt()
+    {
+        var tvSet = new TVSet();
+        tvSet.TurnOn();
+        tvSet.SetChannelName(5, "News");
+
+        tvSet.SetChannelName(5, "Sports");
+
+        Assert.That(tvSet.GetChannelName(5), Is.EqualTo("Sports"));
+        Assert.That(tvSet.GetChannelByName("News"), Is.EqualTo(0));
+    }
+
+    [Test]
+    public void SetChannelName_WhenOff_ReturnsFalse()
+    {
+        var tvSet = new TVSet();
+
+        bool result = tvSet.SetChannelName(5, "News");
+
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public void SelectChannelByName_WhenOff_DoesNothing()
+    {
+        var tvSet = new TVSet();
+        tvSet.TurnOn();
+        tvSet.SetChannelName(5, "News");
+        tvSet.TurnOff();
+
+        tvSet.SelectChannel("News");
+
+        Assert.That(tvSet.GetChannel(), Is.EqualTo(0));
+    }
 }
