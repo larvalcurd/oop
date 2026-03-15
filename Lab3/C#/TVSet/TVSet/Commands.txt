@@ -1,0 +1,6 @@
+TurnOn
+SetChannelName 3 MTV
+GetChannelByName MTV
+DeleteChannelName MTV
+GetChannelByName MTV
+Info
