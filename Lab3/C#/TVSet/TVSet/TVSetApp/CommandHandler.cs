@@ -1,6 +1,3 @@
-using TVSetApp;
-using TVSetApp.Commands;
-
 public class CommandHandler
 {
     private readonly TVSet _tv = new();
