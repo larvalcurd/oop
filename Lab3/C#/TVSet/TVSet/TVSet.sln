@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVSet", "TVSet\TVSet.csproj", "{4384D6C1-F623-08C3-93AB-81FD5BE48C91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVSet.Tests", "TVSet.Tests\TVSet.Tests.csproj", "{6A444D76-11BA-C8A7-7B1B-FDAAB68109F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVSetApp", "TVSetApp\TVSetApp.csproj", "{26D4F1E5-730C-850C-4FE5-12F2AAA24640}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4384D6C1-F623-08C3-93AB-81FD5BE48C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4384D6C1-F623-08C3-93AB-81FD5BE48C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4384D6C1-F623-08C3-93AB-81FD5BE48C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4384D6C1-F623-08C3-93AB-81FD5BE48C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A444D76-11BA-C8A7-7B1B-FDAAB68109F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A444D76-11BA-C8A7-7B1B-FDAAB68109F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A444D76-11BA-C8A7-7B1B-FDAAB68109F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A444D76-11BA-C8A7-7B1B-FDAAB68109F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26D4F1E5-730C-850C-4FE5-12F2AAA24640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26D4F1E5-730C-850C-4FE5-12F2AAA24640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26D4F1E5-730C-850C-4FE5-12F2AAA24640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26D4F1E5-730C-850C-4FE5-12F2AAA24640}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E19CE9A-994B-4720-BEC3-0CA9454835AB}
+	EndGlobalSection
+EndGlobal

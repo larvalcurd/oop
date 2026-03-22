@@ -1,3 +1,5 @@
+
+using TVSetApp;
 namespace TVSetApp.Commands;
 
 public interface ICommand

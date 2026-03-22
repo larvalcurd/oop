@@ -65,7 +65,6 @@ public class TVSet
 
     public string? GetChannelName(int channel)
     {
-        // вернуть имя или null, если нет имени
         return _channelToName.TryGetValue(channel, out string? name) ? name : null;
     }
 
