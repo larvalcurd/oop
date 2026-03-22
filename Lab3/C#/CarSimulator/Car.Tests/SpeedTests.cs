@@ -67,4 +67,42 @@ public class SpeedTests
         Assert.That(result, Is.False);
         Assert.That(car.GetSpeed(), Is.EqualTo(20));
     }
+
+    [Test]
+    public void SetSpeed_AtMaxOfGear_ReturnsTrue()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+
+        bool result = car.SetSpeed(30);
+
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void SetSpeed_JustAboveMaxOfGear_ReturnsFalse()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+
+        bool result = car.SetSpeed(31);
+
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public void SetSpeed_SameSpeed_OnNeutral_ReturnsTrue()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+        car.SetSpeed(20);
+        car.SetGear(0);
+
+        bool result = car.SetSpeed(20); 
+
+        Assert.That(result, Is.True);
+    }
 }

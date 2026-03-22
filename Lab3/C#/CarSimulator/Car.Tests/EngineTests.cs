@@ -39,6 +39,18 @@ public class EngineTests
     }
 
     [Test]
+    public void TurnOffEngine_WhenNotInNeutral_ReturnsFalse()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+
+        bool result = car.TurnOffEngine();
+
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
     public void Example4_CannotTurnOffWhileMoving()
     {
         var car = new Car();

@@ -17,7 +17,7 @@ public class SetSpeedCommand : ICommand
             Console.WriteLine("Speed cannot be negative");
             return;
         }
-
+    
         if (!car.IsTurnedOn)
         {
             Console.WriteLine("Cannot set speed while engine is off");

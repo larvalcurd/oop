@@ -117,4 +117,125 @@ public class GearTests
         Assert.That(result, Is.False);
         Assert.That(car.GetGear(), Is.EqualTo(Gear.First));
     }
+
+    [Test]
+    public void SetGear_ToMinus2_ReturnsFalse()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        bool result = car.SetGear(-2);
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public void SetGear_AtExactBoundary_ReturnsTrue()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+        car.SetSpeed(20);
+
+        bool result = car.SetGear(2);
+
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void SetGear_AtExactBoundary_30_ToThird_ReturnsTrue()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+        car.SetSpeed(30);
+
+        bool result = car.SetGear(3);
+
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void SetGear_ToReverse_WhenMovingForward_ReturnsFalse()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+        car.SetSpeed(10);
+
+        bool result = car.SetGear(-1);
+
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public void SetGear_ToReverse_WhenMovingBackwardOnNeutral_ReturnsFalse()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(-1);
+        car.SetSpeed(15);
+        car.SetGear(0);
+
+        bool result = car.SetGear(-1);
+
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public void SetGear_ToFifth_AtSpeed50_ReturnsTrue()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+        car.SetSpeed(30);
+        car.SetGear(3);
+        car.SetSpeed(50);
+
+        bool result = car.SetGear(5);
+
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void SetSpeed_OnFifth_ToMax150_ReturnsTrue()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+        car.SetSpeed(30);
+        car.SetGear(3);
+        car.SetSpeed(50);
+        car.SetGear(5);
+
+        bool result = car.SetSpeed(150);
+
+        Assert.That(result, Is.True);
+    }
+
+    [Test]
+    public void SetSpeed_OnFifth_Above150_ReturnsFalse()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+        car.SetSpeed(30);
+        car.SetGear(3);
+        car.SetSpeed(50);
+        car.SetGear(5);
+
+        bool result = car.SetSpeed(151);
+
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public void SetGear_ToSameGear_ReturnsTrue()
+    {
+        var car = new Car();
+        car.TurnOnEngine();
+        car.SetGear(1);
+
+        bool result = car.SetGear(1);
+
+        Assert.That(result, Is.True);
+    }
 }

@@ -1,0 +1,44 @@
+@startuml
+namespace Car {
+
+enum Direction {
+    StandingStill
+    Forward
+    Backward
+}
+
+enum Gear {
+    Reverse = -1
+    Neutral = 0
+    First = 1
+    Second = 2
+    Third = 3
+    Fourth = 4
+    Fifth = 5
+}
+
+class Car {
+    {static} GearSpeedRanges : Dictionary<Gear, (int MinSpeed, int MaxSpeed)>
+    
+    - _engineOn : bool
+    - _gear : Gear
+    - _speed : int
+    - _direction : Direction
+
+    + IsTurnedOn : bool
+    + GetGear() : Gear
+    + GetSpeed() : int
+    + GetDirection() : Direction
+
+    + TurnOnEngine() : bool
+    + TurnOffEngine() : bool
+    + SetGear(gear : int) : bool
+    + SetSpeed(speed : int) : bool
+}
+
+Car --> Direction : uses
+Car --> Gear : uses
+
+}
+
+@enduml
