@@ -1,0 +1,18 @@
+﻿cmake_minimum_required(VERSION 3.10)
+
+project(EconomicsEmulator LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(MSVC)
+    add_compile_options(/utf-8)
+endif()
+
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+add_subdirectory(external/googletest/googletest-1.14.0)
+
+enable_testing()
+
+add_subdirectory(src)
+add_subdirectory(tests)
