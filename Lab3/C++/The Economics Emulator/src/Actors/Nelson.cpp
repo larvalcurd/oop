@@ -18,29 +18,31 @@ void Nelson::SetShopkeeper(Apu* apu)
 
 void Nelson::Act()
 {
-    ++actionCounter_;
+	++actionCounter_;
 
-    if (victim_ && actionCounter_ % 3 == 0)
-    {
-        Money victimCash = victim_->GetCash();
-        if (victimCash > 0)
-        {
-            Money stealAmount = std::min(victimCash, MAX_STEAL_AMOUNT);
+	if (!victim_ || actionCounter_ % 3 != 0)
+	{
+		return;
+	}
 
-            if (victim_->StealCash(stealAmount))
-            {
-                ReceiveCash(stealAmount);
-                Log("stole $" + std::to_string(stealAmount) + " from Bart. Ha-ha!");
-            }
-        }
-    }
+	const Money victimCash = victim_->GetCash();
+	if (victimCash <= 0)
+	{
+		return;
+	}
 
-    if (apu_ && cash_ >= CIGARETTE_COST)
-    {
-        if (SpendCash(CIGARETTE_COST))
-        {
-            apu_->ReceiveCashPayment(CIGARETTE_COST);
-            Log("bought cigarettes from Apu");
-        }
-    }
+	const Money stealAmount = std::min(victimCash, MAX_STEAL_AMOUNT);
+	if (!victim_->StealCash(stealAmount))
+	{
+		return;
+	}
+
+	ReceiveCash(stealAmount);
+	Log("stole $" + std::to_string(stealAmount) + " from Bart. Ha-ha!");
+
+	if (apu_ && cash_ >= CIGARETTE_COST && SpendCash(CIGARETTE_COST))
+	{
+		apu_->ReceiveCashPayment(CIGARETTE_COST);
+		Log("bought cigarettes from Apu");
+	}
 }
