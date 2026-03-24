@@ -2,18 +2,18 @@
 #include "Homer.h"
 #include "Apu.h"
 
-Snake::Snake(Bank& bank, Money InitialCash)
-    : Actor("Snake", bank, InitialCash)
+Snake::Snake(Bank& bank, Money initialCash)
+    : Actor("Snake", bank, initialCash)
 {
     OpenBankAccount();
 }
 
-void Snake::SetVictim(Homer *homer)
+void Snake::SetVictim(Homer* homer)
 {
     victim_ = homer;
 }
 
-void Snake::SetShopkeeper(Apu *apu)
+void Snake::SetShopkeeper(Apu* apu)
 {
     apu_ = apu;
 }
@@ -21,24 +21,41 @@ void Snake::SetShopkeeper(Apu *apu)
 void Snake::Act()
 {
     ++actionCounter_;
+    TryHackVictim();
+    BuyGroceries();
+}
 
-    if (victim_ && victim_->HasAccount() && actionCounter_ % 5 == 0)
+void Snake::TryHackVictim()
+{
+    if (!victim_ || !victim_->HasAccount())
     {
-        if (GetBank().TrySendMoney(victim_->GetAccountId(), accountId_, HACK_AMOUNT))
-        {
-            Log("hacked Homer's account and stole $" + std::to_string(HACK_AMOUNT));
-        }
-        else
-        {
-            Log("tried to hack Homer but he's broke");
-        }
+        return;
     }
 
-    if (apu_ && apu_->HasAccount())
+    if (actionCounter_ % HACK_PERIOD != 0)
     {
-        if (SendTo(*apu_, GROCERY_COST))
-        {
-            Log("bought groceries from Apu");
-        }
+        return;
+    }
+
+    if (GetBank().TrySendMoney(victim_->GetAccountId(), GetAccountId(), HACK_AMOUNT))
+    {
+        Log("hacked Homer's account and stole $" + std::to_string(HACK_AMOUNT));
+    }
+    else
+    {
+        Log("tried to hack Homer but he's broke");
+    }
+}
+
+void Snake::BuyGroceries()
+{
+    if (!apu_ || !apu_->HasAccount())
+    {
+        return;
+    }
+
+    if (SendTo(*apu_, GROCERY_COST))
+    {
+        Log("bought groceries from Apu");
     }
 }

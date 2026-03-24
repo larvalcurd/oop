@@ -12,7 +12,6 @@
 #include "Actors/Smithers.h"
 #include <vector>
 
-
 class Simulation
 {
 public:
@@ -20,10 +19,14 @@ public:
 
 	void Run(int numIterations);
 	void PrintFinalState() const;
-	bool VerifyInvariants() const;
+	[[nodiscard]] bool VerifyInvariants() const;
 
 private:
 	void Step(int stepNumber);
+	void SetupRelationships();
+	void PrintActorState(const Actor& actor) const;
+	[[nodiscard]] bool VerifyCashInvariant() const;
+	[[nodiscard]] bool VerifyTotalMoneyInvariant() const;
 
 	Bank bank_;
 	Money initialTotalMoney_;
@@ -34,11 +37,9 @@ private:
 	Lisa lisa_;
 	Apu apu_;
 	Burns burns_;
-
 	Nelson nelson_;
 	Snake snake_;
 	Smithers smithers_;
-
 
 	std::vector<Actor*> actors_;
 };

@@ -12,12 +12,14 @@ public:
 
 	void SetEmployee(Homer* homer);
 	void SetAssistant(Smithers* smithers);
-
 	void UpdateAssistantAccount(AccountId accountId);
 
 	void Act() override;
 
 private:
+	void PayHomer();
+	void PaySmithers();
+
 	static constexpr Money HOMER_SALARY = 258;
 	static constexpr Money SMITHERS_SALARY = 50;
 

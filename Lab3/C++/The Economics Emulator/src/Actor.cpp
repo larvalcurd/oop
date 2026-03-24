@@ -9,12 +9,11 @@ Actor::Actor(const std::string& name, Bank& bank, Money initialCash)
 
 Money Actor::GetTotalMoney() const
 {
-	Money total = cash_;
-	if (hasAccount_)
+	if (!hasAccount_)
 	{
-		total += bank_.GetAccountBalance(accountId_);
+		return cash_;
 	}
-	return total;
+	return cash_ + bank_.GetAccountBalance(accountId_);
 }
 
 void Actor::ReceiveCash(Money amount)
@@ -31,18 +30,21 @@ bool Actor::SpendCash(Money amount)
 	{
 		return false;
 	}
+
 	cash_ -= amount;
 	return true;
 }
 
 void Actor::OpenBankAccount()
 {
-	if (!hasAccount_)
+	if (hasAccount_)
 	{
-		accountId_ = bank_.OpenAccount();
-		hasAccount_ = true;
-		Log("opened bank account #" + std::to_string(accountId_));
+		return;
 	}
+
+	accountId_ = bank_.OpenAccount();
+	hasAccount_ = true;
+	Log("opened bank account #" + std::to_string(accountId_));
 }
 
 Money Actor::CloseBankAccount()
@@ -52,8 +54,8 @@ Money Actor::CloseBankAccount()
 		return 0;
 	}
 
-	Money balance = bank_.CloseAccount(accountId_);
-	cash_ += balance; 
+	const Money balance = bank_.CloseAccount(accountId_);
+	cash_ += balance;
 	hasAccount_ = false;
 	Log("closed bank account, received $" + std::to_string(balance) + " cash");
 	return balance;
@@ -86,13 +88,14 @@ bool Actor::WithdrawFromAccount(Money amount)
 		return false;
 	}
 
-	if (bank_.TryWithdrawMoney(accountId_, amount))
+	if (!bank_.TryWithdrawMoney(accountId_, amount))
 	{
-		cash_ += amount;
-		Log("withdrew $" + std::to_string(amount) + " from account");
-		return true;
+		return false;
 	}
-	return false;
+
+	cash_ += amount;
+	Log("withdrew $" + std::to_string(amount) + " from account");
+	return true;
 }
 
 bool Actor::SendTo(Actor& recipient, Money amount)
@@ -102,12 +105,13 @@ bool Actor::SendTo(Actor& recipient, Money amount)
 		return false;
 	}
 
-	if (bank_.TrySendMoney(accountId_, recipient.GetAccountId(), amount))
+	if (!bank_.TrySendMoney(accountId_, recipient.GetAccountId(), amount))
 	{
-		Log("sent $" + std::to_string(amount) + " to " + recipient.GetName());
-		return true;
+		return false;
 	}
-	return false;
+
+	Log("sent $" + std::to_string(amount) + " to " + recipient.GetName());
+	return true;
 }
 
 bool Actor::StealCash(Money amount)
@@ -116,6 +120,7 @@ bool Actor::StealCash(Money amount)
 	{
 		return false;
 	}
+
 	cash_ -= amount;
 	return true;
 }

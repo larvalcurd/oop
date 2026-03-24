@@ -16,8 +16,12 @@ public:
 	void Act() override;
 
 private:
+	Money TryStealFromVictim();
+	void BuyCigarettes(Money budget);
+
 	static constexpr Money MAX_STEAL_AMOUNT = 10;
 	static constexpr Money CIGARETTE_COST = 3;
+	static constexpr int STEAL_PERIOD = 3;
 
 	Bart* victim_ = nullptr;
 	Apu* apu_ = nullptr;

@@ -17,11 +17,13 @@ void Burns::SetAssistant(Smithers* smithers)
 {
 	assistant_ = smithers;
 
-	if (assistant_ && assistant_->HasAccount())
+	if (!assistant_ || !assistant_->HasAccount())
 	{
-		assistantAccountId_ = assistant_->GetAccountId();
-		hasAssistantAccount_ = true;
+		return;
 	}
+
+	assistantAccountId_ = assistant_->GetAccountId();
+	hasAssistantAccount_ = true;
 }
 
 void Burns::UpdateAssistantAccount(AccountId accountId)
@@ -32,34 +34,47 @@ void Burns::UpdateAssistantAccount(AccountId accountId)
 
 void Burns::Act()
 {
-	if (employee_ && employee_->HasAccount())
+	PayHomer();
+	PaySmithers();
+}
+
+void Burns::PayHomer()
+{
+	if (!employee_ || !employee_->HasAccount())
 	{
-		if (SendTo(*employee_, HOMER_SALARY))
+		return;
+	}
+
+	if (SendTo(*employee_, HOMER_SALARY))
+	{
+		Log("paid salary to Homer");
+	}
+	else
+	{
+		Log("couldn't pay salary - not enough money");
+	}
+}
+
+void Burns::PaySmithers()
+{
+	if (!hasAssistantAccount_)
+	{
+		return;
+	}
+
+	try
+	{
+		if (GetBank().TrySendMoney(GetAccountId(), assistantAccountId_, SMITHERS_SALARY))
 		{
-			Log("paid salary to Homer");
+			Log("paid salary to Smithers");
 		}
 		else
 		{
-			Log("couldn't pay salary - not enough money");
+			Log("couldn't pay Smithers - not enough money");
 		}
 	}
-
-	if (hasAssistantAccount_)
+	catch (const BankOperationError&)
 	{
-		try
-		{
-			if (GetBank().TrySendMoney(GetAccountId(), assistantAccountId_, SMITHERS_SALARY))
-			{
-				Log("paid salary to Smithers");
-			}
-			else
-			{
-				Log("couldn't pay Smithers - not enough money");
-			}
-		}
-		catch (const BankOperationError&)
-		{
-			Log("tried to pay Smithers but his account is invalid!");
-		}
+		Log("tried to pay Smithers but his account is invalid!");
 	}
 }

@@ -33,9 +33,8 @@ protected:
 	bool SendTo(Actor& recipient, Money amount);
 
 	void Log(const std::string& message) const;
-	Bank& GetBank() { return bank_; }
+	[[nodiscard]] Bank& GetBank() { return bank_; }
 
-protected:
 	std::string name_;
 	Bank& bank_;
 	Money cash_;

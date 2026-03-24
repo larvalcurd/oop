@@ -30,50 +30,76 @@ void Homer::SetShopkeeper(Apu* apu)
 
 void Homer::Act()
 {
-	if (marge_ && marge_->HasAccount())
+	SendAllowanceToMarge();
+	PayElectricityBill();
+	GiveAllowanceToKids();
+	TryBuyBeer();
+}
+
+void Homer::SendAllowanceToMarge()
+{
+	if (!marge_ || !marge_->HasAccount())
 	{
-		if (!SendTo(*marge_, ALLOWANCE_FOR_MARGE))
-		{
-			Log("couldn't send allowance to Marge - not enough money");
-		}
+		return;
 	}
 
-	if (employer_ && employer_->HasAccount())
+	if (!SendTo(*marge_, ALLOWANCE_FOR_MARGE))
 	{
-		if (!SendTo(*employer_, ELECTRICITY_BILL))
-		{
-			Log("couldn't pay electricity bill - not enough money");
-		}
+		Log("couldn't send allowance to Marge - not enough money");
+	}
+}
+
+void Homer::PayElectricityBill()
+{
+	if (!employer_ || !employer_->HasAccount())
+	{
+		return;
 	}
 
-	Money cashForKids = ALLOWANCE_FOR_KIDS * 2;
-	if (WithdrawFromAccount(cashForKids))
+	if (!SendTo(*employer_, ELECTRICITY_BILL))
 	{
-		if (bart_)
-		{
-			GiveCashTo(*bart_, ALLOWANCE_FOR_KIDS);
-			Log("gave $" + std::to_string(ALLOWANCE_FOR_KIDS) + " cash to Bart");
-		}
-		if (lisa_)
-		{
-			GiveCashTo(*lisa_, ALLOWANCE_FOR_KIDS);
-			Log("gave $" + std::to_string(ALLOWANCE_FOR_KIDS) + " cash to Lisa");
-		}
+		Log("couldn't pay electricity bill - not enough money");
 	}
-	else
+}
+
+void Homer::GiveAllowanceToKids()
+{
+	const Money cashForKids = ALLOWANCE_FOR_KIDS * 2;
+
+	if (!WithdrawFromAccount(cashForKids))
 	{
 		Log("couldn't withdraw cash for kids");
+		return;
 	}
 
-	if (apu_ && apu_->HasAccount() && HasAccount())
+	if (bart_)
 	{
-		Money balance = GetBank().GetAccountBalance(GetAccountId());
-		if (balance >= BEER_PARTY_THRESHOLD)
-		{
-			if (SendTo(*apu_, BEER_PARTY_COST))
-			{
-				Log("bought beer and relaxed with friends");
-			}
-		}
+		GiveCashTo(*bart_, ALLOWANCE_FOR_KIDS);
+		Log("gave $" + std::to_string(ALLOWANCE_FOR_KIDS) + " cash to Bart");
+	}
+
+	if (lisa_)
+	{
+		GiveCashTo(*lisa_, ALLOWANCE_FOR_KIDS);
+		Log("gave $" + std::to_string(ALLOWANCE_FOR_KIDS) + " cash to Lisa");
+	}
+}
+
+void Homer::TryBuyBeer()
+{
+	if (!apu_ || !apu_->HasAccount() || !HasAccount())
+	{
+		return;
+	}
+
+	const Money balance = GetBank().GetAccountBalance(GetAccountId());
+	if (balance < BEER_PARTY_THRESHOLD)
+	{
+		return;
+	}
+
+	if (SendTo(*apu_, BEER_PARTY_COST))
+	{
+		Log("bought beer and relaxed with friends");
 	}
 }

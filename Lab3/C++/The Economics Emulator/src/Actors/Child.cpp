@@ -13,16 +13,17 @@ void Child::SetShopkeeper(Apu* apu)
 
 void Child::Act()
 {
-	if (apu_ && cash_ >= SPENDING_AMOUNT)
-	{
-		if (SpendCash(SPENDING_AMOUNT))
-		{
-			apu_->ReceiveCashPayment(SPENDING_AMOUNT);
-			Log("bought candy from Apu for $" + std::to_string(SPENDING_AMOUNT));
-		}
-	}
-	else if (cash_ < SPENDING_AMOUNT)
+	if (cash_ < SPENDING_AMOUNT)
 	{
 		Log("no money for candy :(");
+		return;
 	}
+
+	if (!apu_ || !SpendCash(SPENDING_AMOUNT))
+	{
+		return;
+	}
+
+	apu_->ReceiveCashPayment(SPENDING_AMOUNT);
+	Log("bought candy from Apu for $" + std::to_string(SPENDING_AMOUNT));
 }

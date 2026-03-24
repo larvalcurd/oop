@@ -3,7 +3,8 @@
 #include "Apu.h"
 #include <algorithm>
 
-Nelson::Nelson(Bank &bank, Money initialCash) : Actor("Nelson", bank, initialCash)
+Nelson::Nelson(Bank& bank, Money initialCash)
+	: Actor("Nelson", bank, initialCash)
 {}
 
 void Nelson::SetVictim(Bart* bart)
@@ -20,29 +21,54 @@ void Nelson::Act()
 {
 	++actionCounter_;
 
-	if (!victim_ || actionCounter_ % 3 != 0)
+	const Money stolenAmount = TryStealFromVictim();
+	if (stolenAmount > 0)
 	{
-		return;
+		BuyCigarettes(stolenAmount);
+	}
+}
+
+Money Nelson::TryStealFromVictim()
+{
+	if (!victim_ || actionCounter_ % STEAL_PERIOD != 0)
+	{
+		return 0;
 	}
 
 	const Money victimCash = victim_->GetCash();
 	if (victimCash <= 0)
 	{
-		return;
+		return 0;
 	}
 
 	const Money stealAmount = std::min(victimCash, MAX_STEAL_AMOUNT);
 	if (!victim_->StealCash(stealAmount))
 	{
-		return;
+		return 0;
 	}
 
 	ReceiveCash(stealAmount);
 	Log("stole $" + std::to_string(stealAmount) + " from Bart. Ha-ha!");
+	return stealAmount;
+}
 
-	if (apu_ && cash_ >= CIGARETTE_COST && SpendCash(CIGARETTE_COST))
+void Nelson::BuyCigarettes(Money budget)
+{
+	if (!apu_)
 	{
-		apu_->ReceiveCashPayment(CIGARETTE_COST);
-		Log("bought cigarettes from Apu");
+		return;
 	}
+
+	while (budget >= CIGARETTE_COST && cash_ >= CIGARETTE_COST)
+	{
+		if (!SpendCash(CIGARETTE_COST))
+		{
+			break;
+		}
+
+		apu_->ReceiveCashPayment(CIGARETTE_COST);
+		budget -= CIGARETTE_COST;
+	}
+
+	Log("bought cigarettes from Apu");
 }

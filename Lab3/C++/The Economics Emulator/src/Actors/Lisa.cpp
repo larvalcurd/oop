@@ -7,13 +7,22 @@ Lisa::Lisa(Bank& bank, Money initialCash)
 
 void Lisa::Act()
 {
-	Child::Act(); 
-	if (apu_ && cash_ >= DOLL_THRESHOLD)
+	Child::Act();
+	TryBuyDoll();
+}
+
+void Lisa::TryBuyDoll()
+{
+	if (!apu_ || cash_ < DOLL_THRESHOLD)
 	{
-		if (SpendCash(DOLL_COST))
-		{
-			apu_->ReceiveCashPayment(DOLL_COST);
-			Log("bought a doll from Apu for $" + std::to_string(DOLL_COST));
-		}
+		return;
 	}
+
+	if (!SpendCash(DOLL_COST))
+	{
+		return;
+	}
+
+	apu_->ReceiveCashPayment(DOLL_COST);
+	Log("bought a doll from Apu for $" + std::to_string(DOLL_COST));
 }

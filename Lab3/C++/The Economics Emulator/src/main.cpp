@@ -2,28 +2,33 @@
 #include <cstdlib>
 #include <iostream>
 
+namespace
+{
+	constexpr Money INITIAL_CASH = 10000;
+
+	int ParseIterations(int argc, char* argv[])
+	{
+		if (argc >= 2)
+		{
+			return std::stoi(argv[1]);
+		}
+
+		std::cout << "Enter number of iterations: ";
+		int iterations = 0;
+		std::cin >> iterations;
+		return iterations;
+	}
+}
+
 int main(int argc, char* argv[])
 {
-	int numIterations = 0;
-
-	if (argc >= 2)
-	{
-		numIterations = std::atoi(argv[1]);
-	}
-
-	if (numIterations <= 0)
-	{
-		std::cout << "Enter number of iterations: ";
-		std::cin >> numIterations;
-	}
+	const int numIterations = ParseIterations(argc, argv);
 
 	if (numIterations <= 0)
 	{
 		std::cerr << "Invalid number of iterations\n";
 		return 1;
 	}
-
-	constexpr Money INITIAL_CASH = 10000;
 
 	Simulation simulation(INITIAL_CASH);
 	simulation.Run(numIterations);

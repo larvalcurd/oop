@@ -15,9 +15,13 @@ public:
 	void Act() override;
 
 private:
+	void DepositCashIfNeeded();
+	void PayElectricityBill();
+	void TryRestockGoods();
+
 	static constexpr Money ELECTRICITY_BILL = 100;
 	static constexpr Money DEPOSIT_THRESHOLD = 50;
-	static constexpr Money RESTOCK_COST = 85; 
+	static constexpr Money RESTOCK_COST = 85;
 	static constexpr Money RESTOCK_THRESHOLD = 260;
 
 	Burns* powerCompany_ = nullptr;

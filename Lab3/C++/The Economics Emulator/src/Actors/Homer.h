@@ -19,10 +19,15 @@ public:
 	void Act() override;
 
 private:
+	void SendAllowanceToMarge();
+	void PayElectricityBill();
+	void GiveAllowanceToKids();
+	void TryBuyBeer();
+
 	static constexpr Money ALLOWANCE_FOR_MARGE = 90;
 	static constexpr Money ALLOWANCE_FOR_KIDS = 15;
 	static constexpr Money ELECTRICITY_BILL = 120;
-	static constexpr Money BEER_PARTY_THRESHOLD = 400; 
+	static constexpr Money BEER_PARTY_THRESHOLD = 400;
 	static constexpr Money BEER_PARTY_COST = 60; 
 
 	Marge* marge_ = nullptr;

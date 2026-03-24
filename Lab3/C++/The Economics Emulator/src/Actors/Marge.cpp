@@ -14,24 +14,42 @@ void Marge::SetShopkeeper(Apu* apu)
 
 void Marge::Act()
 {
-	if (apu_ && apu_->HasAccount())
+	BuyGroceries();
+	TryBuyHouseSupplies();
+}
+
+void Marge::BuyGroceries()
+{
+	if (!apu_ || !apu_->HasAccount())
 	{
-		if (SendTo(*apu_, GROCERY_COST))
-		{
-			Log("bought groceries from Apu");
-		}
-		else
-		{
-			Log("couldn't buy groceries - not enough money");
-		}
+		return;
 	}
 
-	Money balance = GetBank().GetAccountBalance(GetAccountId());
-	if (balance >= HOUSE_SUPPLIES_THRESHOLD)
+	if (SendTo(*apu_, GROCERY_COST))
 	{
-		if (SendTo(*apu_, HOUSE_SUPPLIES_COST))
-		{
-			Log("bought house supplies from Apu");
-		}
+		Log("bought groceries from Apu");
+	}
+	else
+	{
+		Log("couldn't buy groceries - not enough money");
+	}
+}
+
+void Marge::TryBuyHouseSupplies()
+{
+	if (!apu_ || !apu_->HasAccount())
+	{
+		return;
+	}
+
+	const Money balance = GetBank().GetAccountBalance(GetAccountId());
+	if (balance < HOUSE_SUPPLIES_THRESHOLD)
+	{
+		return;
+	}
+
+	if (SendTo(*apu_, HOUSE_SUPPLIES_COST))
+	{
+		Log("bought house supplies from Apu");
 	}
 }

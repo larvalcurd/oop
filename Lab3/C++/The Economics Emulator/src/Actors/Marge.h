@@ -14,6 +14,9 @@ public:
 	void Act() override;
 
 private:
+	void BuyGroceries();
+	void TryBuyHouseSupplies();
+
 	static constexpr Money GROCERY_COST = 85;
 	static constexpr Money HOUSE_SUPPLIES_THRESHOLD = 300;
 	static constexpr Money HOUSE_SUPPLIES_COST = 120;

@@ -10,6 +10,8 @@ public:
 	void Act() override;
 
 private:
+	void TryBuyDoll();
+
 	static constexpr Money DOLL_COST = 50;
 	static constexpr Money DOLL_THRESHOLD = 60;
 };

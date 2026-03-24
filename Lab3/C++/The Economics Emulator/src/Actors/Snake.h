@@ -16,8 +16,12 @@ public:
     void Act() override;
 
 private:
+    void TryHackVictim();
+    void BuyGroceries();
+
     static constexpr Money HACK_AMOUNT = 30;
     static constexpr Money GROCERY_COST = 6;
+    static constexpr int HACK_PERIOD = 5;
 
     Homer* victim_ = nullptr;
     Apu* apu_ = nullptr;
