@@ -24,6 +24,12 @@ public class SetGearCommand : ICommand
             return;
         }
 
+        if (gear == -1 && car.GetSpeed() != 0)
+        {
+            Console.WriteLine("Cannot reverse while moving");
+            return;
+        }
+
         if (gear != 0)
         {
             var range = Car.Car.GearSpeedRanges[(Car.Gear)gear];
@@ -33,12 +39,6 @@ public class SetGearCommand : ICommand
                 Console.WriteLine("Unsuitable current speed");
                 return;
             }
-        }
-
-        if (gear == -1 && car.GetSpeed() != 0)
-        {
-            Console.WriteLine("Cannot reverse while moving");
-            return;
         }
 
         if (!car.SetGear(gear))
