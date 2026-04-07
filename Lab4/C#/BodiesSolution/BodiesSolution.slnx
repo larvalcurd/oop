@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Bodies.App/Bodies.App.csproj" />
+  <Project Path="Bodies.Tests/Bodies.Tests.csproj" />
+  <Project Path="Bodies/Bodies.csproj" />
+</Solution>
