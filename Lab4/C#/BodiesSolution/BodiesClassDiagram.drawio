@@ -1,0 +1,94 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram id="bodies-class-diagram" name="Class Diagram">
+    <mxGraphModel dx="1113" dy="849" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cbody" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="&lt;&lt;abstract&gt;&gt;&#xa;CBody&#xa;-------------------------&#xa;+ GetDensity(): double&#xa;+ GetVolume(): double&#xa;+ GetMass(): double&#xa;+ GetWeightInWater(): double&#xa;+ ToString(): string" vertex="1">
+          <mxGeometry height="170" width="280" x="540" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="csolid" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="&lt;&lt;abstract&gt;&gt;&#xa;CSolidBody&#xa;-------------------------&#xa;- _density: double&#xa;+ GetDensity(): double&#xa;+ GetMass(): double" vertex="1">
+          <mxGeometry height="130" width="280" x="660" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="csphere" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="CSphere&#xa;-------------------------&#xa;- _radius: double&#xa;+ GetRadius(): double&#xa;+ GetVolume(): double" vertex="1">
+          <mxGeometry height="120" width="240" x="200" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="ccone" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="CCone&#xa;-------------------------&#xa;- _baseRadius: double&#xa;- _height: double&#xa;+ GetBaseRadius(): double&#xa;+ GetHeight(): double&#xa;+ GetVolume(): double" vertex="1">
+          <mxGeometry height="150" width="260" x="520" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="ccyl" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="CCylinder&#xa;-------------------------&#xa;- _baseRadius: double&#xa;- _height: double&#xa;+ GetBaseRadius(): double&#xa;+ GetHeight(): double&#xa;+ GetVolume(): double" vertex="1">
+          <mxGeometry height="150" width="260" x="810" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="cpar" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="CParallelepiped&#xa;-------------------------&#xa;- _width: double&#xa;- _height: double&#xa;- _depth: double&#xa;+ GetWidth(): double&#xa;+ GetHeight(): double&#xa;+ GetDepth(): double&#xa;+ GetVolume(): double" vertex="1">
+          <mxGeometry height="170" width="280" x="1140" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="ccompound" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" value="CCompound&#xa;-------------------------&#xa;- _children: List&lt;CBody&gt;&#xa;+ GetChildren(): IReadOnlyList&lt;CBody&gt;&#xa;+ AddChildBody(child: CBody): bool&#xa;+ ContainsBody(body: CBody): bool&#xa;+ GetDensity(): double&#xa;+ GetVolume(): double&#xa;+ GetMass(): double" vertex="1">
+          <mxGeometry height="210" width="320" x="1080" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="bodyutils" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;" value="&lt;&lt;static&gt;&gt;&#xa;BodyUtils&#xa;-------------------------&#xa;+ FindBodyWithMaxMass(bodies: IEnumerable&lt;CBody&gt;): CBody?&#xa;+ FindBodyWithMinWeightInWater(bodies: IEnumerable&lt;CBody&gt;): CBody?" vertex="1">
+          <mxGeometry height="130" width="340" x="160" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="program" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;" value="Program&#xa;-------------------------&#xa;+ Main(): void" vertex="1">
+          <mxGeometry height="90" width="220" x="120" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="bodyreader" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;" value="&lt;&lt;static&gt;&gt;&#xa;BodyReader&#xa;-------------------------&#xa;+ ReadBody(): CBody" vertex="1">
+          <mxGeometry height="100" width="220" x="220" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="bodyprinter" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;" value="&lt;&lt;static&gt;&gt;&#xa;BodyPrinter&#xa;-------------------------&#xa;+ PrintAllBodies(bodies: IReadOnlyList&lt;CBody&gt;): void&#xa;+ PrintMaxMassBody(body: CBody?): void&#xa;+ PrintMinWeightInWaterBody(body: CBody?): void" vertex="1">
+          <mxGeometry height="140" width="360" x="1590" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="consoleinput" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fillColor=none;" value="&lt;&lt;static&gt;&gt;&#xa;ConsoleInput&#xa;-------------------------&#xa;+ ReadPositiveInt(): int&#xa;+ ReadNonNegativeInt(): int&#xa;+ ReadPositiveDouble(): double" vertex="1">
+          <mxGeometry height="120" width="280" x="970" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="csolid" style="endArrow=block;endFill=0;html=1;" target="cbody" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="csphere" style="endArrow=block;endFill=0;html=1;" target="csolid" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="ccone" style="endArrow=block;endFill=0;html=1;" target="csolid" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="ccyl" style="endArrow=block;endFill=0;html=1;" target="csolid" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="cpar" style="endArrow=block;endFill=0;html=1;" target="csolid" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="ccompound" style="endArrow=block;endFill=0;html=1;" target="cbody" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="ccompound" style="startArrow=diamond;startFill=1;endArrow=none;html=1;" target="cbody" value="children 0..*">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="bodyutils" style="dashed=1;endArrow=open;html=1;" target="cbody" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="program" style="dashed=1;endArrow=open;html=1;" target="bodyreader" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="program" style="dashed=1;endArrow=open;html=1;" target="bodyprinter" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="program" style="dashed=1;endArrow=open;html=1;" target="consoleinput" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="program" style="dashed=1;endArrow=open;html=1;" target="bodyutils" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="bodyreader" style="dashed=1;endArrow=open;html=1;" target="cbody" value="creates">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="bodyreader" style="dashed=1;endArrow=open;html=1;" target="consoleinput" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="bodyprinter" style="dashed=1;endArrow=open;html=1;" target="cbody" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="bodyprinter" style="dashed=1;endArrow=open;html=1;" target="ccompound" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
