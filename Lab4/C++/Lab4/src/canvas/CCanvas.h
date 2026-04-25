@@ -29,6 +29,9 @@ public:
     [[nodiscard]] double GetHeight() const;
 
 private:
+    // Efficient draw command counter for testing
+    size_t m_drawCommandCount = 0;
+
     // struct SLineCommand
     // {
     //     CPoint from{};

@@ -31,7 +31,8 @@ CCanvas::CCanvas(double width, double height)
 }
 
 void CCanvas::DrawLine(CPoint from, CPoint to, uint32_t lineColor)
-{    
+{
+    ++m_drawCommandCount;
     if (!m_window)
     {
         throw std::logic_error("Canvas has no active render window");
@@ -53,6 +54,7 @@ void CCanvas::DrawLine(CPoint from, CPoint to, uint32_t lineColor)
 
 void CCanvas::DrawCircle(CPoint center, double radius, uint32_t lineColor, uint32_t fillColor)
 {
+    ++m_drawCommandCount;
     if (!m_window)
     {
         throw std::logic_error("Canvas has no active render window");
@@ -71,6 +73,7 @@ void CCanvas::DrawCircle(CPoint center, double radius, uint32_t lineColor, uint3
 
 void CCanvas::DrawPolygon(const std::vector<CPoint>& points, uint32_t lineColor, uint32_t fillColor)
 {
+    ++m_drawCommandCount;
     if (!m_window)
     {
         throw std::logic_error("Canvas has no active render window");
@@ -140,6 +143,11 @@ void CCanvas::Run(const std::vector<std::shared_ptr<IShape>>& shapes)
 double CCanvas::GetWidth() const
 {
     return m_width;
+}
+
+size_t CCanvas::GetDrawCommandCount() const
+{
+    return m_drawCommandCount;
 }
 
 double CCanvas::GetHeight() const
