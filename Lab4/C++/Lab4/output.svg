@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="800" height="600" viewBox="0 0 800 600">
+  <polygon points="0,0 800,0 800,600 0,600" stroke="#87ceeb" fill="#87ceeb" stroke-width="1" />
+  <polygon points="0,420 800,420 800,600 0,600" stroke="#6b8e23" fill="#6b8e23" stroke-width="1" />
+  <circle cx="680" cy="110" r="60" stroke="#ffa000" fill="#ffd54f" stroke-width="1" />
+  <line x1="620" y1="110" x2="560" y2="110" stroke="#ffa000" stroke-width="1" />
+  <line x1="740" y1="110" x2="780" y2="110" stroke="#ffa000" stroke-width="1" />
+  <line x1="680" y1="50" x2="680" y2="20" stroke="#ffa000" stroke-width="1" />
+  <line x1="680" y1="170" x2="680" y2="200" stroke="#ffa000" stroke-width="1" />
+  <line x1="635" y1="65" x2="600" y2="30" stroke="#ffa000" stroke-width="1" />
+  <line x1="725" y1="65" x2="760" y2="30" stroke="#ffa000" stroke-width="1" />
+  <line x1="635" y1="155" x2="600" y2="190" stroke="#ffa000" stroke-width="1" />
+  <line x1="725" y1="155" x2="760" y2="190" stroke="#ffa000" stroke-width="1" />
+  <circle cx="120" cy="120" r="30" stroke="#cfd8dc" fill="#ffffff" stroke-width="1" />
+  <circle cx="150" cy="110" r="35" stroke="#cfd8dc" fill="#ffffff" stroke-width="1" />
+  <circle cx="185" cy="120" r="28" stroke="#cfd8dc" fill="#ffffff" stroke-width="1" />
+  <polygon points="220,250 480,250 480,440 220,440" stroke="#8b5a2b" fill="#d2b48c" stroke-width="1" />
+  <polygon points="200,250 350,140 500,250" stroke="#8b0000" fill="#b22222" stroke-width="1" />
+  <polygon points="320,340 380,340 380,440 320,440" stroke="#3e2723" fill="#654321" stroke-width="1" />
+  <polygon points="255,290 305,290 305,340 255,340" stroke="#1e3a8a" fill="#add8e6" stroke-width="1" />
+  <polygon points="395,290 445,290 445,340 395,340" stroke="#1e3a8a" fill="#add8e6" stroke-width="1" />
+  <line x1="280" y1="315" x2="280" y2="340" stroke="#1e3a8a" stroke-width="1" />
+  <line x1="255" y1="315" x2="305" y2="315" stroke="#1e3a8a" stroke-width="1" />
+  <line x1="420" y1="315" x2="420" y2="340" stroke="#1e3a8a" stroke-width="1" />
+  <line x1="395" y1="315" x2="445" y2="315" stroke="#1e3a8a" stroke-width="1" />
+  <polygon points="95,300 145,300 145,420 95,420" stroke="#5d4037" fill="#8d6e63" stroke-width="1" />
+  <circle cx="120" cy="270" r="55" stroke="#1b5e20" fill="#2e8b57" stroke-width="1" />
+  <circle cx="160" cy="300" r="40" stroke="#1b5e20" fill="#2e8b57" stroke-width="1" />
+  <polygon points="0,0 800,0 800,60 0,60" stroke="#1a0533" fill="#2d1b69" stroke-width="1" />
+  <polygon points="0,60 800,60 800,120 0,120" stroke="#2d1b69" fill="#4a2080" stroke-width="1" />
+  <polygon points="0,120 800,120 800,180 0,180" stroke="#4a2080" fill="#8b3a8b" stroke-width="1" />
+  <polygon points="0,180 800,180 800,240 0,240" stroke="#8b3a8b" fill="#c0544d" stroke-width="1" />
+  <polygon points="0,240 800,240 800,300 0,300" stroke="#c0544d" fill="#e8863a" stroke-width="1" />
+  <polygon points="0,300 800,300 800,360 0,360" stroke="#e8863a" fill="#f5b041" stroke-width="1" />
+  <polygon points="0,360 800,360 800,420 0,420" stroke="#f5b041" fill="#ffd54f" stroke-width="1" />
+  <polygon points="0,420 150,180 300,420" stroke="#2c3e50" fill="#34495e" stroke-width="1" />
+  <polygon points="200,420 380,150 560,420" stroke="#2c3e50" fill="#3b5068" stroke-width="1" />
+  <polygon points="450,420 620,190 790,420" stroke="#2c3e50" fill="#34495e" stroke-width="1" />
+  <polygon points="700,420 800,250 800,420" stroke="#2c3e50" fill="#3b5068" stroke-width="1" />
+  <polygon points="130,195 150,180 170,200" stroke="#dcdcdc" fill="#f0f0f0" stroke-width="1" />
+  <polygon points="360,165 380,150 400,170" stroke="#dcdcdc" fill="#f0f0f0" stroke-width="1" />
+  <polygon points="600,205 620,190 640,210" stroke="#dcdcdc" fill="#f0f0f0" stroke-width="1" />
+  <polygon points="50,420 200,260 350,420" stroke="#2e5e1e" fill="#3a7828" stroke-width="1" />
+  <polygon points="300,420 470,280 640,420" stroke="#2e5e1e" fill="#3a7828" stroke-width="1" />
+  <polygon points="550,420 700,300 800,420" stroke="#2e5e1e" fill="#3a7828" stroke-width="1" />
+  <polygon points="30,420 380,420 380,500 30,500" stroke="#1a5276" fill="#2980b9" stroke-width="1" />
+  <polygon points="50,430 360,430 360,485 50,485" stroke="#155a7a" fill="#3498db" stroke-width="1" />
+  <line x1="80" y1="445" x2="160" y2="445" stroke="#5dade2" stroke-width="1" />
+  <line x1="120" y1="460" x2="220" y2="460" stroke="#5dade2" stroke-width="1" />
+  <line x1="70" y1="470" x2="180" y2="470" stroke="#5dade2" stroke-width="1" />
+  <line x1="200" y1="450" x2="280" y2="450" stroke="#5dade2" stroke-width="1" />
+  <polygon points="0,500 800,500 800,600 0,600" stroke="#3d5c1e" fill="#4a7c23" stroke-width="1" />
+  <polygon points="380,420 800,420 800,500 380,500" stroke="#3d6b1e" fill="#4a7c23" stroke-width="1" />
+  <polygon points="480,260 660,260 660,500 480,500" stroke="#5c5c5c" fill="#808080" stroke-width="1" />
+  <polygon points="480,250 505,250 505,270 480,270" stroke="#5c5c5c" fill="#707070" stroke-width="1" />
+  <polygon points="515,250 540,250 540,270 515,270" stroke="#5c5c5c" fill="#707070" stroke-width="1" />
+  <polygon points="550,250 575,250 575,270 550,270" stroke="#5c5c5c" fill="#707070" stroke-width="1" />
+  <polygon points="585,250 610,250 610,270 585,270" stroke="#5c5c5c" fill="#707070" stroke-width="1" />
+  <polygon points="620,250 645,250 645,270 620,270" stroke="#5c5c5c" fill="#707070" stroke-width="1" />
+  <polygon points="455,220 505,220 505,500 455,500" stroke="#4a4a4a" fill="#6e6e6e" stroke-width="1" />
+  <polygon points="445,220 480,160 515,220" stroke="#3a3a5c" fill="#5b5ba0" stroke-width="1" />
+  <polygon points="455,210 470,210 470,225 455,225" stroke="#4a4a4a" fill="#5e5e5e" stroke-width="1" />
+  <polygon points="490,210 505,210 505,225 490,225" stroke="#4a4a4a" fill="#5e5e5e" stroke-width="1" />
+  <polygon points="635,220 685,220 685,500 635,500" stroke="#4a4a4a" fill="#6e6e6e" stroke-width="1" />
+  <polygon points="625,220 660,160 695,220" stroke="#3a3a5c" fill="#5b5ba0" stroke-width="1" />
+  <polygon points="635,210 650,210 650,225 635,225" stroke="#4a4a4a" fill="#5e5e5e" stroke-width="1" />
+  <polygon points="670,210 685,210 685,225 670,225" stroke="#4a4a4a" fill="#5e5e5e" stroke-width="1" />
+  <polygon points="540,140 600,140 600,500 540,500" stroke="#555555" fill="#7a7a7a" stroke-width="1" />
+  <polygon points="530,140 570,70 610,140" stroke="#3a3a5c" fill="#6b5ba0" stroke-width="1" />
+  <line x1="570" y1="70" x2="570" y2="30" stroke="#3d3d3d" stroke-width="1" />
+  <polygon points="570,30 595,42 570,55" stroke="#8b0000" fill="#cc0000" stroke-width="1" />
+  <polygon points="550,400 590,400 590,500 550,500" stroke="#2c1a0a" fill="#3e2723" stroke-width="1" />
+  <circle cx="570" cy="400" r="20" stroke="#2c1a0a" fill="#3e2723" stroke-width="1" />
+  <line x1="558" y1="400" x2="558" y2="500" stroke="#1a1a1a" stroke-width="1" />
+  <line x1="570" y1="400" x2="570" y2="500" stroke="#1a1a1a" stroke-width="1" />
+  <line x1="582" y1="400" x2="582" y2="500" stroke="#1a1a1a" stroke-width="1" />
+  <line x1="550" y1="420" x2="590" y2="420" stroke="#1a1a1a" stroke-width="1" />
+  <line x1="550" y1="445" x2="590" y2="445" stroke="#1a1a1a" stroke-width="1" />
+  <line x1="550" y1="470" x2="590" y2="470" stroke="#1a1a1a" stroke-width="1" />
+  <polygon points="500,300 525,300 525,335 500,335" stroke="#1a1a2e" fill="#f5d142" stroke-width="1" />
+  <polygon points="615,300 640,300 640,335 615,335" stroke="#1a1a2e" fill="#f5d142" stroke-width="1" />
+  <polygon points="500,370 525,370 525,405 500,405" stroke="#1a1a2e" fill="#f5d142" stroke-width="1" />
+  <polygon points="615,370 640,370 640,405 615,405" stroke="#1a1a2e" fill="#f5d142" stroke-width="1" />
+  <polygon points="468,260 488,260 488,290 468,290" stroke="#1a1a2e" fill="#f5d142" stroke-width="1" />
+  <polygon points="648,260 668,260 668,290 648,290" stroke="#1a1a2e" fill="#f5d142" stroke-width="1" />
+  <polygon points="555,180 575,180 575,210 555,210" stroke="#1a1a2e" fill="#f5d142" stroke-width="1" />
+  <circle cx="200" cy="200" r="30" stroke="#6b1010" fill="#8b2020" stroke-width="1" />
+  <circle cx="230" cy="190" r="25" stroke="#6b1010" fill="#8b2020" stroke-width="1" />
+  <circle cx="255" cy="185" r="20" stroke="#6b1010" fill="#8b2020" stroke-width="1" />
+  <circle cx="280" cy="175" r="18" stroke="#6b1010" fill="#9b2020" stroke-width="1" />
+  <circle cx="288" cy="170" r="4" stroke="#cccc00" fill="#ffff00" stroke-width="1" />
+  <line x1="295" y1="180" x2="320" y2="185" stroke="#6b1010" stroke-width="1" />
+  <line x1="295" y1="175" x2="320" y2="170" stroke="#6b1010" stroke-width="1" />
+  <polygon points="315,165 360,140 350,180" stroke="#ff4500" fill="#ff6600" stroke-width="1" />
+  <polygon points="340,155 400,145 380,175" stroke="#ff6600" fill="#ffa500" stroke-width="1" />
+  <polygon points="370,148 430,150 400,168" stroke="#ffa500" fill="#ffd700" stroke-width="1" />
+  <circle cx="175" cy="215" r="18" stroke="#6b1010" fill="#8b2020" stroke-width="1" />
+  <circle cx="155" cy="230" r="14" stroke="#6b1010" fill="#8b2020" stroke-width="1" />
+  <circle cx="140" cy="245" r="10" stroke="#6b1010" fill="#8b2020" stroke-width="1" />
+  <circle cx="132" cy="255" r="7" stroke="#6b1010" fill="#9b2020" stroke-width="1" />
+  <polygon points="200,200 150,120 240,170" stroke="#5a0a0a" fill="#7a1515" stroke-width="1" />
+  <polygon points="200,200 240,110 280,170" stroke="#5a0a0a" fill="#7a1515" stroke-width="1" />
+  <polygon points="220,195 260,125 280,180" stroke="#5a0a0a" fill="#6a1010" stroke-width="1" />
+  <line x1="195" y1="228" x2="185" y2="260" stroke="#6b1010" stroke-width="1" />
+  <line x1="185" y1="260" x2="175" y2="258" stroke="#6b1010" stroke-width="1" />
+  <line x1="225" y1="215" x2="218" y2="250" stroke="#6b1010" stroke-width="1" />
+  <line x1="218" y1="250" x2="208" y2="248" stroke="#6b1010" stroke-width="1" />
+  <circle cx="100" cy="60" r="45" stroke="#e8e8d0" fill="#f5f5dc" stroke-width="1" />
+  <circle cx="110" cy="55" r="15" stroke="#d4d4b8" fill="#e0e0c8" stroke-width="1" />
+  <circle cx="85" cy="70" r="8" stroke="#d4d4b8" fill="#e0e0c8" stroke-width="1" />
+  <circle cx="120" cy="70" r="6" stroke="#d4d4b8" fill="#e0e0c8" stroke-width="1" />
+  <circle cx="50" cy="25" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="300" cy="40" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="400" cy="20" r="3" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="250" cy="80" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="350" cy="100" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="450" cy="50" r="3" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="30" cy="100" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="500" cy="30" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="180" cy="30" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="420" cy="90" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="320" cy="15" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <circle cx="550" cy="55" r="2" stroke="#ffffff" fill="#ffffcc" stroke-width="1" />
+  <polygon points="25,450 35,450 35,500 25,500" stroke="#3e2723" fill="#5d4037" stroke-width="1" />
+  <polygon points="5,460 30,400 55,460" stroke="#0d4a0d" fill="#1a7a1a" stroke-width="1" />
+  <polygon points="10,430 30,380 50,430" stroke="#0d4a0d" fill="#1a8a1a" stroke-width="1" />
+  <polygon points="15,405 30,360 45,405" stroke="#0d4a0d" fill="#1a9a1a" stroke-width="1" />
+  <polygon points="740,440 752,440 752,500 740,500" stroke="#3e2723" fill="#5d4037" stroke-width="1" />
+  <polygon points="715,455 746,385 777,455" stroke="#0d4a0d" fill="#1a7a1a" stroke-width="1" />
+  <polygon points="722,420 746,360 770,420" stroke="#0d4a0d" fill="#1a8a1a" stroke-width="1" />
+  <polygon points="728,395 746,345 764,395" stroke="#0d4a0d" fill="#1a9a1a" stroke-width="1" />
+  <polygon points="410,450 420,450 420,500 410,500" stroke="#3e2723" fill="#5d4037" stroke-width="1" />
+  <polygon points="390,460 415,400 440,460" stroke="#0d4a0d" fill="#1a7a1a" stroke-width="1" />
+  <polygon points="395,430 415,380 435,430" stroke="#0d4a0d" fill="#1a8a1a" stroke-width="1" />
+  <polygon points="400,405 415,360 430,405" stroke="#0d4a0d" fill="#1a9a1a" stroke-width="1" />
+  <polygon points="550,500 570,500 560,420" stroke="#6e5c3b" fill="#8b7355" stroke-width="1" />
+  <polygon points="550,500 580,500 610,420" stroke="#6e5c3b" fill="#8b7355" stroke-width="1" />
+  <polygon points="520,500 620,500 620,510 520,510" stroke="#6e5c3b" fill="#8b7355" stroke-width="1" />
+  <circle cx="680" cy="490" r="25" stroke="#1b5e20" fill="#2e8b57" stroke-width="1" />
+  <circle cx="710" cy="495" r="20" stroke="#1b5e20" fill="#2e8b57" stroke-width="1" />
+  <circle cx="650" cy="495" r="22" stroke="#1b5e20" fill="#2e8b57" stroke-width="1" />
+  <circle cx="50" cy="490" r="20" stroke="#1b5e20" fill="#2e8b57" stroke-width="1" />
+  <circle cx="80" cy="492" r="18" stroke="#1b5e20" fill="#2e8b57" stroke-width="1" />
+  <circle cx="620" cy="495" r="4" stroke="#cc2277" fill="#ff4499" stroke-width="1" />
+  <circle cx="650" cy="500" r="3" stroke="#cccc22" fill="#ffff44" stroke-width="1" />
+  <circle cx="700" cy="498" r="4" stroke="#cc2277" fill="#ff4499" stroke-width="1" />
+  <circle cx="90" cy="495" r="3" stroke="#cc2277" fill="#ff4499" stroke-width="1" />
+  <circle cx="440" cy="498" r="4" stroke="#cccc22" fill="#ffff44" stroke-width="1" />
+  <circle cx="460" cy="495" r="3" stroke="#cc2277" fill="#ff4499" stroke-width="1" />
+</svg>

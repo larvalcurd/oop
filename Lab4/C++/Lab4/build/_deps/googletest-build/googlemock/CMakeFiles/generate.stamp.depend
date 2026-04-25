@@ -1,0 +1,10 @@
+# CMake generation dependency list for this directory.
+D:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckCSourceCompiles.cmake
+D:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckIncludeFile.cmake
+D:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckLibraryExists.cmake
+D:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPackageHandleStandardArgs.cmake
+D:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPackageMessage.cmake
+D:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindThreads.cmake
+D:/university/second_grade/oop/Lab4/C++/Lab4/build/_deps/googletest-src/googlemock/CMakeLists.txt
+D:/university/second_grade/oop/Lab4/C++/Lab4/build/_deps/googletest-src/googlemock/cmake/gmock.pc.in
+D:/university/second_grade/oop/Lab4/C++/Lab4/build/_deps/googletest-src/googlemock/cmake/gmock_main.pc.in

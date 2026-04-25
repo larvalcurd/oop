@@ -1,0 +1,114 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram id="variant2-uml" name="Variant2 UML">
+    <mxGraphModel dx="344" dy="1663" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zone-shapes" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#6c757d;dashed=1;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontColor=#000000;labelBackgroundColor=none;" value="Shapes" vertex="1">
+          <mxGeometry height="620" width="1280" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-canvas" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eef7ff;strokeColor=#4a89dc;dashed=1;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontColor=#000000;labelBackgroundColor=none;" value="Canvas" vertex="1">
+          <mxGeometry height="620" width="860" x="1320" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zone-app" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff8e8;strokeColor=#d89b00;dashed=1;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontColor=#000000;labelBackgroundColor=none;" value="App" vertex="1">
+          <mxGeometry height="500" width="2160" x="20" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="IShape" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1f2937;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;&quot;&gt;«interface» IShape&lt;/font&gt;&lt;/b&gt;&lt;hr&gt;&lt;font style=&quot;&quot;&gt;+GetArea() const: double&lt;br&gt;+GetPerimeter() const: double&lt;br&gt;+GetOutlineColor() const: uint32_t&lt;br&gt;+ToString() const: string&lt;/font&gt;" vertex="1">
+          <mxGeometry height="170" width="300" x="280" y="-180" as="geometry" />
+        </mxCell>
+        <mxCell id="ISolidShape" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1f2937;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;&quot;&gt;«interface» ISolidShape&lt;/font&gt;&lt;/b&gt;&lt;hr&gt;&lt;font style=&quot;&quot;&gt;+GetFillColor() const: uint32_t&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="280" x="620" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="CPoint" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#374151;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;CPoint&lt;/b&gt;&lt;hr&gt;+x: double&lt;br&gt;+y: double" vertex="1">
+          <mxGeometry height="100" width="200" x="40" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="CLineSegment" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#111827;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;CLineSegment&lt;/b&gt;&lt;hr&gt;-m_startPoint: CPoint&lt;br&gt;-m_endPoint: CPoint&lt;br&gt;-m_outlineColor: uint32_t&lt;hr&gt;+GetArea() const: double&lt;br&gt;+GetPerimeter() const: double&lt;br&gt;+GetOutlineColor() const: uint32_t&lt;br&gt;+ToString() const: string&lt;br&gt;+Draw(canvas: ICanvas&amp;amp;): void&lt;br&gt;+GetStartPoint() const: CPoint&lt;br&gt;+GetEndPoint() const: CPoint" vertex="1">
+          <mxGeometry height="280" width="310" x="40" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="CRectangle" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#111827;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;CRectangle&lt;/b&gt;&lt;hr&gt;-m_leftTop: CPoint&lt;br&gt;-m_width: double&lt;br&gt;-m_height: double&lt;br&gt;-m_outlineColor: uint32_t&lt;br&gt;-m_fillColor: uint32_t&lt;hr&gt;+GetArea() const: double&lt;br&gt;+GetPerimeter() const: double&lt;br&gt;+GetOutlineColor() const: uint32_t&lt;br&gt;+GetFillColor() const: uint32_t&lt;br&gt;+ToString() const: string&lt;br&gt;+Draw(canvas: ICanvas&amp;amp;): void&lt;br&gt;+GetLeftTop() const: CPoint" vertex="1">
+          <mxGeometry height="300" width="320" x="380" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="CTriangle" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#111827;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;CTriangle&lt;/b&gt;&lt;hr&gt;-m_vertex1: CPoint&lt;br&gt;-m_vertex2: CPoint&lt;br&gt;-m_vertex3: CPoint&lt;br&gt;-m_outlineColor: uint32_t&lt;br&gt;-m_fillColor: uint32_t&lt;hr&gt;+GetArea() const: double&lt;br&gt;+GetPerimeter() const: double&lt;br&gt;+GetOutlineColor() const: uint32_t&lt;br&gt;+GetFillColor() const: uint32_t&lt;br&gt;+ToString() const: string&lt;br&gt;+Draw(canvas: ICanvas&amp;amp;): void&lt;br&gt;+GetVertex1() const: CPoint" vertex="1">
+          <mxGeometry height="300" width="320" x="740" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="CCircle" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#111827;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;CCircle&lt;/b&gt;&lt;hr&gt;-m_center: CPoint&lt;br&gt;-m_radius: double&lt;br&gt;-m_outlineColor: uint32_t&lt;br&gt;-m_fillColor: uint32_t&lt;hr&gt;+GetArea() const: double&lt;br&gt;+GetPerimeter() const: double&lt;br&gt;+GetOutlineColor() const: uint32_t&lt;br&gt;+GetFillColor() const: uint32_t&lt;br&gt;+ToString() const: string&lt;br&gt;+Draw(canvas: ICanvas&amp;amp;): void&lt;br&gt;+GetCenter() const: CPoint&lt;br&gt;+GetRadius() const: double" vertex="1">
+          <mxGeometry height="300" width="300" x="1090" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ICanvasDrawable" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1f2937;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;«interface» ICanvasDrawable&lt;/b&gt;&lt;hr&gt;+Draw(canvas: ICanvas&amp;amp;) const: void" vertex="1">
+          <mxGeometry height="120" width="330" x="1380" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ICanvas" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1f2937;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;«interface» ICanvas&lt;/b&gt;&lt;hr&gt;+DrawLine(from: CPoint, to: CPoint, lineColor: uint32_t): void&lt;br&gt;+DrawCircle(center: CPoint, radius: double, lineColor: uint32_t, fillColor: uint32_t): void&lt;br&gt;+DrawPolygon(points: vector, lineColor: uint32_t, fillColor: uint32_t): void" vertex="1">
+          <mxGeometry height="190" width="420" x="1740" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="CCanvas" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#111827;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;CCanvas&lt;/b&gt;&lt;hr&gt;-m_width: double&lt;br&gt;-m_height: double&lt;br&gt;-m_commands: vector&lt;hr&gt;+DrawLine(...): void&lt;br&gt;+DrawCircle(...): void&lt;br&gt;+DrawPolygon(...): void&lt;br&gt;+Run(): void&lt;br&gt;+GetDrawCommandCount() const: size_t&lt;br&gt;+GetWidth() const: double&lt;br&gt;+GetHeight() const: double" vertex="1">
+          <mxGeometry height="260" width="420" x="1600" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="CShapeFactory" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#111827;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;&quot;&gt;CShapeFactory&lt;/font&gt;&lt;/b&gt;&lt;hr&gt;&lt;font style=&quot;&quot;&gt;+CreateShape(description: string) const: shared_ptr&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="420" x="80" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="CShapeManager" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#111827;fontColor=#000000;labelBackgroundColor=none;" value="&lt;b&gt;&lt;font style=&quot;&quot;&gt;CShapeManager&lt;/font&gt;&lt;/b&gt;&lt;hr&gt;&lt;font style=&quot;&quot;&gt;-m_shapes: vector&amp;gt;&lt;/font&gt;&lt;hr&gt;&lt;font style=&quot;&quot;&gt;+AddShape(shape: ShapePtr): void&lt;br&gt;+FindMaxAreaShape() const: ShapePtr&lt;br&gt;+FindMinPerimeterShape() const: ShapePtr&lt;br&gt;+DrawAll(canvas: ICanvas&amp;amp;) const: void&lt;br&gt;+GetShapes() const: vector&lt;br&gt;+GetCount() const: size_t&lt;br&gt;+IsEmpty() const: bool&lt;/font&gt;" vertex="1">
+          <mxGeometry height="260" width="520" x="560" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="IShape" style="endArrow=block;endFill=0;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="ICanvasDrawable" value="inherits">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="ISolidShape" style="endArrow=block;endFill=0;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="IShape" value="inherits">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="CLineSegment" style="endArrow=block;endFill=0;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="IShape" value="inherits">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="CRectangle" style="endArrow=block;endFill=0;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="ISolidShape" value="inherits">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="CTriangle" style="endArrow=block;endFill=0;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="ISolidShape" value="inherits">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="CCircle" style="endArrow=block;endFill=0;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="ISolidShape" value="inherits">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="CCanvas" style="endArrow=block;endFill=0;dashed=1;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="ICanvas" value="realization">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="ICanvasDrawable" style="endArrow=open;endFill=0;dashed=1;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="ICanvas" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="ICanvas" style="endArrow=open;endFill=0;dashed=1;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="CPoint" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="V1pLCK-TL2KFR0U_vKIw-1" connectable="0" parent="e9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontColor=#000000;labelBackgroundColor=none;" value="Text" vertex="1">
+          <mxGeometry relative="1" x="0.7034" y="4" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="CLineSegment" style="endArrow=open;endFill=0;html=1;strokeWidth=1.2;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="CPoint" value="&lt;span style=&quot;&quot;&gt;has points&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="CRectangle" style="endArrow=open;endFill=0;html=1;strokeWidth=1.2;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="CPoint" value="&lt;span&gt;has point&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="CTriangle" style="endArrow=open;endFill=0;html=1;strokeWidth=1.2;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="CPoint" value="has points">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="CCircle" style="endArrow=open;endFill=0;html=1;strokeWidth=1.2;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="CPoint" value="has point">
+          <mxGeometry relative="1" x="0.1394" y="13" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="640" y="260" />
+              <mxPoint x="590" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="CShapeFactory" style="endArrow=open;endFill=0;dashed=1;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="IShape" value="&lt;span style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;creates&lt;/font&gt;&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="CShapeManager" style="startArrow=diamondThin;startFill=0;endArrow=open;endFill=0;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="IShape" value="contains">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="CShapeManager" style="endArrow=open;endFill=0;dashed=1;html=1;strokeWidth=1.5;fontColor=#000000;labelBackgroundColor=none;strokeColor=#000000;" target="ICanvas" value="uses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

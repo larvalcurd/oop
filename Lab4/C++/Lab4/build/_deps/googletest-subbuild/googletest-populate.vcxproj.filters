@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\cada19d44f6a4244682a2fe0a8b83aa3\googletest-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\cada19d44f6a4244682a2fe0a8b83aa3\googletest-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\cada19d44f6a4244682a2fe0a8b83aa3\googletest-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\cada19d44f6a4244682a2fe0a8b83aa3\googletest-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\cada19d44f6a4244682a2fe0a8b83aa3\googletest-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\cada19d44f6a4244682a2fe0a8b83aa3\googletest-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\cada19d44f6a4244682a2fe0a8b83aa3\googletest-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\cada19d44f6a4244682a2fe0a8b83aa3\googletest-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\616787aa4bd641d4ff7ef795bec107b6\googletest-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\7b8df930de413363d5e5993c6138c559\googletest-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\university\second_grade\oop\Lab4\C++\Lab4\build\_deps\googletest-subbuild\CMakeFiles\googletest-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{57B0D89B-5349-31E7-A462-595E2F02F109}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

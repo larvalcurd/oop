@@ -1,0 +1,3 @@
+D:/university/second_grade/oop/Lab4/C++/Lab4/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate.dir
+D:/university/second_grade/oop/Lab4/C++/Lab4/build/_deps/sfml-subbuild/CMakeFiles/ALL_BUILD.dir
+D:/university/second_grade/oop/Lab4/C++/Lab4/build/_deps/sfml-subbuild/CMakeFiles/ZERO_CHECK.dir

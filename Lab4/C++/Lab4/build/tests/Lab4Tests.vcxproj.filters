@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\shapes\CLineSegmentTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\shapes\CRectangleTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\shapes\CTriangleTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\shapes\CCircleTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\app\CShapeFactoryTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\app\ShapeManagerTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\canvas\ShapeDrawTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\canvas\ShapeManagerDrawOrderTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\canvas\CCanvasTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\university\second_grade\oop\Lab4\C++\Lab4\tests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4121BCE3-DA3A-3631-A9D7-2AACB501A158}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

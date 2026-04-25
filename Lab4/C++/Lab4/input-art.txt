@@ -1,0 +1,194 @@
+rectangle 0 0 800 600 87ceeb 87ceeb
+rectangle 0 420 800 180 6b8e23 6b8e23
+
+circle 680 110 60 ffa000 ffd54f
+line 620 110 560 110 ffa000
+line 740 110 780 110 ffa000
+line 680 50 680 20 ffa000
+line 680 170 680 200 ffa000
+line 635 65 600 30 ffa000
+line 725 65 760 30 ffa000
+line 635 155 600 190 ffa000
+line 725 155 760 190 ffa000
+
+circle 120 120 30 cfd8dc ffffff
+circle 150 110 35 cfd8dc ffffff
+circle 185 120 28 cfd8dc ffffff
+
+rectangle 220 250 260 190 8b5a2b d2b48c
+triangle 200 250 350 140 500 250 8b0000 b22222
+
+rectangle 320 340 60 100 3e2723 654321
+rectangle 255 290 50 50 1e3a8a add8e6
+rectangle 395 290 50 50 1e3a8a add8e6
+
+line 280 315 280 340 1e3a8a
+line 255 315 305 315 1e3a8a
+line 420 315 420 340 1e3a8a
+line 395 315 445 315 1e3a8a
+
+rectangle 95 300 50 120 5d4037 8d6e63
+circle 120 270 55 1b5e20 2e8b57
+circle 160 300 40 1b5e20 2e8b57
+circle 80 305 38 1b5e20 2e8b57
+
+# === НЕБО С ГРАДИЕНТОМ (от тёмно-синего сверху к оранжевому закату) ===
+rectangle 0 0 800 60 1a0533 2d1b69
+rectangle 0 60 800 60 2d1b69 4a2080
+rectangle 0 120 800 60 4a2080 8b3a8b
+rectangle 0 180 800 60 8b3a8b c0544d
+rectangle 0 240 800 60 c0544d e8863a
+rectangle 0 300 800 60 e8863a f5b041
+rectangle 0 360 800 60 f5b041 ffd54f
+
+# === ГОРЫ (дальний план - тёмные) ===
+triangle 0 420 150 180 300 420 2c3e50 34495e
+triangle 200 420 380 150 560 420 2c3e50 3b5068
+triangle 450 420 620 190 790 420 2c3e50 34495e
+triangle 700 420 800 250 800 420 2c3e50 3b5068
+
+# === СНЕЖНЫЕ ВЕРШИНЫ ===
+triangle 130 195 150 180 170 200 dcdcdc f0f0f0
+triangle 360 165 380 150 400 170 dcdcdc f0f0f0
+triangle 600 205 620 190 640 210 dcdcdc f0f0f0
+
+# === ГОРЫ (ближний план - зелёные) ===
+triangle 50 420 200 260 350 420 2e5e1e 3a7828
+triangle 300 420 470 280 640 420 2e5e1e 3a7828
+triangle 550 420 700 300 800 420 2e5e1e 3a7828
+
+# === ОЗЕРО ===
+rectangle 30 420 350 80 1a5276 2980b9
+rectangle 50 430 310 55 155a7a 3498db
+line 80 445 160 445 5dade2
+line 120 460 220 460 5dade2
+line 70 470 180 470 5dade2
+line 200 450 280 450 5dade2
+
+# === ЗЕМЛЯ ===
+rectangle 0 500 800 100 3d5c1e 4a7c23
+rectangle 380 420 420 80 3d6b1e 4a7c23
+
+# === ЗАМОК (главное здание) ===
+rectangle 480 260 180 240 5c5c5c 808080
+rectangle 480 250 25 20 5c5c5c 707070
+rectangle 515 250 25 20 5c5c5c 707070
+rectangle 550 250 25 20 5c5c5c 707070
+rectangle 585 250 25 20 5c5c5c 707070
+rectangle 620 250 25 20 5c5c5c 707070
+
+# === БАШНЯ ЛЕВАЯ ===
+rectangle 455 220 50 280 4a4a4a 6e6e6e
+triangle 445 220 480 160 515 220 3a3a5c 5b5ba0
+rectangle 455 210 15 15 4a4a4a 5e5e5e
+rectangle 490 210 15 15 4a4a4a 5e5e5e
+
+# === БАШНЯ ПРАВАЯ ===
+rectangle 635 220 50 280 4a4a4a 6e6e6e
+triangle 625 220 660 160 695 220 3a3a5c 5b5ba0
+rectangle 635 210 15 15 4a4a4a 5e5e5e
+rectangle 670 210 15 15 4a4a4a 5e5e5e
+
+# === ЦЕНТРАЛЬНАЯ БАШНЯ (высокая) ===
+rectangle 540 140 60 360 555555 7a7a7a
+triangle 530 140 570 70 610 140 3a3a5c 6b5ba0
+line 570 70 570 30 3d3d3d
+triangle 570 30 595 42 570 55 8b0000 cc0000
+
+# === ВОРОТА ЗАМКА ===
+rectangle 550 400 40 100 2c1a0a 3e2723
+circle 570 400 20 2c1a0a 3e2723
+line 558 400 558 500 1a1a1a
+line 570 400 570 500 1a1a1a
+line 582 400 582 500 1a1a1a
+line 550 420 590 420 1a1a1a
+line 550 445 590 445 1a1a1a
+line 550 470 590 470 1a1a1a
+
+# === ОКНА ЗАМКА ===
+rectangle 500 300 25 35 1a1a2e f5d142
+rectangle 615 300 25 35 1a1a2e f5d142
+rectangle 500 370 25 35 1a1a2e f5d142
+rectangle 615 370 25 35 1a1a2e f5d142
+rectangle 468 260 20 30 1a1a2e f5d142
+rectangle 648 260 20 30 1a1a2e f5d142
+rectangle 555 180 20 30 1a1a2e f5d142
+
+# === ДРАКОН ===
+circle 200 200 30 6b1010 8b2020
+circle 230 190 25 6b1010 8b2020
+circle 255 185 20 6b1010 8b2020
+circle 280 175 18 6b1010 9b2020
+circle 288 170 4 cccc00 ffff00
+line 295 180 320 185 6b1010
+line 295 175 320 170 6b1010
+triangle 315 165 360 140 350 180 ff4500 ff6600
+triangle 340 155 400 145 380 175 ff6600 ffa500
+triangle 370 148 430 150 400 168 ffa500 ffd700
+circle 175 215 18 6b1010 8b2020
+circle 155 230 14 6b1010 8b2020
+circle 140 245 10 6b1010 8b2020
+circle 132 255 7 6b1010 9b2020
+triangle 200 200 150 120 240 170 5a0a0a 7a1515
+triangle 200 200 240 110 280 170 5a0a0a 7a1515
+triangle 220 195 260 125 280 180 5a0a0a 6a1010
+line 195 228 185 260 6b1010
+line 185 260 175 258 6b1010
+line 225 215 218 250 6b1010
+line 218 250 208 248 6b1010
+
+# === ЛУНА ===
+circle 100 60 45 e8e8d0 f5f5dc
+circle 110 55 15 d4d4b8 e0e0c8
+circle 85 70 8 d4d4b8 e0e0c8
+circle 120 70 6 d4d4b8 e0e0c8
+
+# === ЗВЁЗДЫ ===
+circle 50 25 2 ffffff ffffcc
+circle 300 40 2 ffffff ffffcc
+circle 400 20 3 ffffff ffffcc
+circle 250 80 2 ffffff ffffcc
+circle 350 100 2 ffffff ffffcc
+circle 450 50 3 ffffff ffffcc
+circle 30 100 2 ffffff ffffcc
+circle 500 30 2 ffffff ffffcc
+circle 180 30 2 ffffff ffffcc
+circle 420 90 2 ffffff ffffcc
+circle 320 15 2 ffffff ffffcc
+circle 550 55 2 ffffff ffffcc
+
+# === ДЕРЕВЬЯ (ёлки) ===
+rectangle 25 450 10 50 3e2723 5d4037
+triangle 5 460 30 400 55 460 0d4a0d 1a7a1a
+triangle 10 430 30 380 50 430 0d4a0d 1a8a1a
+triangle 15 405 30 360 45 405 0d4a0d 1a9a1a
+
+rectangle 740 440 12 60 3e2723 5d4037
+triangle 715 455 746 385 777 455 0d4a0d 1a7a1a
+triangle 722 420 746 360 770 420 0d4a0d 1a8a1a
+triangle 728 395 746 345 764 395 0d4a0d 1a9a1a
+
+rectangle 410 450 10 50 3e2723 5d4037
+triangle 390 460 415 400 440 460 0d4a0d 1a7a1a
+triangle 395 430 415 380 435 430 0d4a0d 1a8a1a
+triangle 400 405 415 360 430 405 0d4a0d 1a9a1a
+
+# === ДОРОЖКА К ЗАМКУ ===
+triangle 550 500 570 500 560 420 6e5c3b 8b7355
+triangle 550 500 580 500 610 420 6e5c3b 8b7355
+rectangle 520 500 100 10 6e5c3b 8b7355
+
+# === КУСТЫ ===
+circle 680 490 25 1b5e20 2e8b57
+circle 710 495 20 1b5e20 2e8b57
+circle 650 495 22 1b5e20 2e8b57
+circle 50 490 20 1b5e20 2e8b57
+circle 80 492 18 1b5e20 2e8b57
+
+# === ЦВЕТЫ ===
+circle 620 495 4 cc2277 ff4499
+circle 650 500 3 cccc22 ffff44
+circle 700 498 4 cc2277 ff4499
+circle 90 495 3 cc2277 ff4499
+circle 440 498 4 cccc22 ffff44
+circle 460 495 3 cc2277 ff4499

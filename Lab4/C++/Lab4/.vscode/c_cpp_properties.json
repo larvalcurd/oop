@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "compilerPath": "D:/Program Files/CLion 2025.3.3/bin/mingw/bin/g++.exe",
+            //"compileCommands": "${workspaceFolder}/cmake-build-debug/compile_commands.json",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "windows-gcc-x64",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        }
+    ],
+    "version": 4
+}

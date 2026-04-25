@@ -1,0 +1,304 @@
+{
+  "tests": 50,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "CLineSegmentTests",
+      "tests": 5,
+      "testsuite": [
+        {
+          "name": "HasZeroArea",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CLineSegmentTests.cpp",
+          "line": 12
+        },
+        {
+          "name": "CalculatesPerimeterAsLength",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CLineSegmentTests.cpp",
+          "line": 18
+        },
+        {
+          "name": "ReturnsStartPointAndEndPoint",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CLineSegmentTests.cpp",
+          "line": 24
+        },
+        {
+          "name": "ReturnsOutlineColor",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CLineSegmentTests.cpp",
+          "line": 37
+        },
+        {
+          "name": "CalculatesPerimeterForVerticalSegment",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CLineSegmentTests.cpp",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "name": "ShapeToStringTests",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "LineContainsRequiredFields",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CLineSegmentTests.cpp",
+          "line": 49
+        },
+        {
+          "name": "RectangleContainsRequiredFields",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CRectangleTests.cpp",
+          "line": 43
+        },
+        {
+          "name": "TriangleContainsRequiredFields",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CTriangleTests.cpp",
+          "line": 56
+        },
+        {
+          "name": "CircleContainsRequiredFields",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CCircleTests.cpp",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "name": "CRectangleTests",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "CalculatesArea",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CRectangleTests.cpp",
+          "line": 12
+        },
+        {
+          "name": "CalculatesPerimeter",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CRectangleTests.cpp",
+          "line": 18
+        },
+        {
+          "name": "ReturnsGeometryGetters",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CRectangleTests.cpp",
+          "line": 24
+        },
+        {
+          "name": "ReturnsColors",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CRectangleTests.cpp",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "name": "CTriangleTests",
+      "tests": 5,
+      "testsuite": [
+        {
+          "name": "CalculatesArea",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CTriangleTests.cpp",
+          "line": 12
+        },
+        {
+          "name": "CalculatesPerimeter",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CTriangleTests.cpp",
+          "line": 18
+        },
+        {
+          "name": "CalculatesAreaAndPerimeterForNonIntegerCoordinates",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CTriangleTests.cpp",
+          "line": 24
+        },
+        {
+          "name": "ReturnsVertices",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CTriangleTests.cpp",
+          "line": 32
+        },
+        {
+          "name": "ReturnsColors",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CTriangleTests.cpp",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "name": "CCircleTests",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "CalculatesArea",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CCircleTests.cpp",
+          "line": 13
+        },
+        {
+          "name": "CalculatesPerimeter",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CCircleTests.cpp",
+          "line": 19
+        },
+        {
+          "name": "ReturnsCenterAndRadius",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CCircleTests.cpp",
+          "line": 25
+        },
+        {
+          "name": "ReturnsColors",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\shapes\\CCircleTests.cpp",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "name": "CShapeFactoryTests",
+      "tests": 22,
+      "testsuite": [
+        {
+          "name": "CreatesLineFromValidInput",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 17
+        },
+        {
+          "name": "CreatesRectangleFromValidInput",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 30
+        },
+        {
+          "name": "CreatesTriangleFromValidInput",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 45
+        },
+        {
+          "name": "CreatesCircleFromValidInput",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 60
+        },
+        {
+          "name": "AcceptsUppercaseHexColor",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 74
+        },
+        {
+          "name": "ThrowsOnEmptyInput",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 84
+        },
+        {
+          "name": "ThrowsOnUnknownShape",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 90
+        },
+        {
+          "name": "ThrowsOnMissingLineParameters",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 96
+        },
+        {
+          "name": "ThrowsOnExtraLineParameters",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 102
+        },
+        {
+          "name": "ThrowsOnZeroLengthLine",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 108
+        },
+        {
+          "name": "ThrowsOnRectangleWithNonPositiveDimensions",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 114
+        },
+        {
+          "name": "ThrowsOnExtraRectangleParameters",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 121
+        },
+        {
+          "name": "ThrowsOnTriangleWithCollinearPoints",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 127
+        },
+        {
+          "name": "ThrowsOnExtraTriangleParameters",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 133
+        },
+        {
+          "name": "ThrowsOnCircleWithNonPositiveRadius",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 139
+        },
+        {
+          "name": "ThrowsOnExtraCircleParameters",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 146
+        },
+        {
+          "name": "ThrowsOnInvalidColorLength",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 152
+        },
+        {
+          "name": "ThrowsOnInvalidColorCharacters",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 158
+        },
+        {
+          "name": "AcceptsLeadingAndTrailingWhitespace",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 164
+        },
+        {
+          "name": "AcceptsScientificNotation",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 174
+        },
+        {
+          "name": "RejectsNaNCoordinates",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 187
+        },
+        {
+          "name": "RejectsInfRadius",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\app\\CShapeFactoryTests.cpp",
+          "line": 193
+        }
+      ]
+    },
+    {
+      "name": "ShapeDrawTests",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "LineDrawsOneLinePrimitive",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\canvas\\ShapeDrawTests.cpp",
+          "line": 14
+        },
+        {
+          "name": "CircleDrawsOneCirclePrimitive",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\canvas\\ShapeDrawTests.cpp",
+          "line": 37
+        },
+        {
+          "name": "TriangleDrawsOnePolygonPrimitive",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\canvas\\ShapeDrawTests.cpp",
+          "line": 60
+        },
+        {
+          "name": "RectangleDrawsPolygonWithExpectedVertexOrder",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\canvas\\ShapeDrawTests.cpp",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "name": "ShapeManagerDrawOrderTests",
+      "tests": 2,
+      "testsuite": [
+        {
+          "name": "DrawAllKeepsInputOrder",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\canvas\\ShapeManagerDrawOrderTests.cpp",
+          "line": 11
+        },
+        {
+          "name": "DrawAllSkipsNullShapeBecauseItIsNotAdded",
+          "file": "D:\\university\\second_grade\\oop\\Lab4\\C++\\Lab4\\tests\\canvas\\ShapeManagerDrawOrderTests.cpp",
+          "line": 36
+        }
+      ]
+    }
+  ]
+}

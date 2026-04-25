@@ -1,0 +1,39 @@
+Lab4/
+│
+├── CMakeLists.txt
+│
+├── src/
+│   ├── CMakeLists.txt
+│   ├── main.cpp
+│   │
+│   ├── shapes/
+│   │   ├── IShape.h
+│   │   ├── ISolidShape.h
+│   │   ├── CPoint.h
+│   │   ├── CLineSegment.h
+│   │   ├── CRectangle.h
+│   │   ├── CTriangle.h
+│   │   └── CCircle.h
+│   │
+│   ├── app/
+│   │   ├── ShapeFactory.h
+│   │   ├── ShapeFactory.cpp
+│   │   ├── ShapeManager.h
+│   │   ├── ShapeManager.cpp
+│   │   ├── CommandHandler.h
+│   │   └── CommandHandler.cpp
+│   │
+│   ├── output/
+│   │   ├── ShapePrinter.h
+│   │   └── ShapePrinter.cpp
+│   │
+│   └── utils/
+│       ├── Color.h
+│       ├── StringUtils.h
+│       └── StringUtils.cpp
+│
+└── tests/
+    ├── CMakeLists.txt
+    ├── shapes/
+    ├── app/
+    └── utils/
