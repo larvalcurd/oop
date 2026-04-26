@@ -1,0 +1,53 @@
+# C++/CMake/Visual Studio
+# Build folders
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+*.dir/
+*.vcxproj*
+*.sln*
+*.user
+*.obj
+*.pdb
+*.idb
+*.ipch
+*.aps
+*.ncb
+*.sdf
+*.opensdf
+*.tlog
+*.log
+*.vspscc
+*.vssscc
+*.suo
+*.cache
+*.ilk
+*.exp
+*.exe
+*.dll
+*.lib
+*.app
+*.iobj
+*.ipdb
+*.pch
+*.res
+*.rsp
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.bak
+*.swp
+*.sbr
+*.db
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+*.vscode/
+# Google Test build artifacts
+_deps/
+# Testing folders
+Testing/
+# Ignore by default
+x64/
