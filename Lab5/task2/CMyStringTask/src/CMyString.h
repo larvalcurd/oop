@@ -29,7 +29,7 @@ public:
     CMyString& operator+=(const CMyString& other);
 
     int Compare(const CMyString& other) const;
-    CMyString Substring(size_t start, size_t length = SIZE_MAX) const;
+    CMyString SubString(size_t start, size_t length = SIZE_MAX) const;
 
 private:
     void Swap(CMyString& other) noexcept;

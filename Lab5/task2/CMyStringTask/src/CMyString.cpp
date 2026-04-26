@@ -308,7 +308,7 @@ const char& CMyString::operator[](size_t index) const
     return m_data[index];
 }
 
-CMyString CMyString::Substring(size_t start, size_t length) const
+CMyString CMyString::SubString(size_t start, size_t length) const
 {
     if (start >= m_length)
     {

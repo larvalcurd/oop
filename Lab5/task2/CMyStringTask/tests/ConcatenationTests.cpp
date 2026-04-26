@@ -48,6 +48,21 @@ TEST(ConcatenationTests, OperatorPlusAssign_LargeAppend_ReallocatesMemory)
     EXPECT_STREQ(s.GetStringData(), "StartMoreText");
 }
 
+TEST(ConcatenationTests, OperatorPlusAssign_WhenLengthExceedsCapacity_DoublesCapacity)
+{
+    CMyString s("0123456789");
+    CMyString suffix("x");
+
+    ASSERT_EQ(s.GetLength(), 10u);
+    ASSERT_EQ(s.GetCapacity(), 10u);
+
+    s += suffix;
+
+    EXPECT_EQ(s.GetLength(), 11u);
+    EXPECT_EQ(s.GetCapacity(), 20u);
+    EXPECT_STREQ(s.GetStringData(), "0123456789x");
+}
+
 TEST(ConcatenationTests, OperatorPlus_TwoMyStrings_ReturnsConcatenated)
 {
     CMyString s1("Hello");
@@ -92,4 +107,24 @@ TEST(ConcatenationTests, OperatorPlusAssign_StringsWithNulls_PreservesBinaryData
     EXPECT_EQ(data[4], '\0');
     EXPECT_EQ(data[5], 'D');
     EXPECT_EQ(data[6], '\0'); 
+}
+
+TEST(ConcatenationTests, OperatorPlus_StringsWithNulls_PreservesBinaryData)
+{
+    const char raw1[] = { 'A', '\0', 'B' };
+    const char raw2[] = { 'C', '\0', 'D' };
+    CMyString s1(raw1, 3);
+    CMyString s2(raw2, 3);
+
+    CMyString result = s1 + s2;
+
+    ASSERT_EQ(result.GetLength(), 6u);
+    const char* data = result.GetStringData();
+    EXPECT_EQ(data[0], 'A');
+    EXPECT_EQ(data[1], '\0');
+    EXPECT_EQ(data[2], 'B');
+    EXPECT_EQ(data[3], 'C');
+    EXPECT_EQ(data[4], '\0');
+    EXPECT_EQ(data[5], 'D');
+    EXPECT_EQ(data[6], '\0');
 }

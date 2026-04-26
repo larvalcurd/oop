@@ -5,7 +5,7 @@ TEST(SubstringTests, Substring_FromBeginningWithExactLength_ReturnsCorrectString
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(0, 5);
+    CMyString sub = s.SubString(0, 5);
 
     EXPECT_EQ(sub.GetLength(), 5u);
     EXPECT_STREQ(sub.GetStringData(), "Hello");
@@ -15,7 +15,7 @@ TEST(SubstringTests, Substring_FromBeginningWithSmallerLength_ReturnsPrefix)
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(0, 2);
+    CMyString sub = s.SubString(0, 2);
 
     EXPECT_EQ(sub.GetLength(), 2u);
     EXPECT_STREQ(sub.GetStringData(), "He");
@@ -25,7 +25,7 @@ TEST(SubstringTests, Substring_FromMiddleWithExactLength_ReturnsCorrectPart)
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(1, 3);
+    CMyString sub = s.SubString(1, 3);
 
     EXPECT_EQ(sub.GetLength(), 3u);
     EXPECT_STREQ(sub.GetStringData(), "ell");
@@ -35,7 +35,7 @@ TEST(SubstringTests, Substring_FromMiddleToEnd_WhenLengthIsTooBig_ReturnsTail)
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(2, 100);
+    CMyString sub = s.SubString(2, 100);
 
     EXPECT_EQ(sub.GetLength(), 3u);
     EXPECT_STREQ(sub.GetStringData(), "llo");
@@ -45,7 +45,7 @@ TEST(SubstringTests, Substring_WithoutLengthArgument_ReturnsTail)
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(2);
+    CMyString sub = s.SubString(2);
 
     EXPECT_EQ(sub.GetLength(), 3u);
     EXPECT_STREQ(sub.GetStringData(), "llo");
@@ -55,7 +55,7 @@ TEST(SubstringTests, Substring_ZeroLength_ReturnsEmptyString)
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(2, 0);
+    CMyString sub = s.SubString(2, 0);
 
     EXPECT_EQ(sub.GetLength(), 0u);
     EXPECT_EQ(sub.GetCapacity(), 0u);
@@ -67,7 +67,7 @@ TEST(SubstringTests, Substring_StartAtEnd_ReturnsEmptyString)
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(5, 3);
+    CMyString sub = s.SubString(5, 3);
 
     EXPECT_EQ(sub.GetLength(), 0u);
     EXPECT_EQ(sub.GetCapacity(), 0u);
@@ -79,7 +79,7 @@ TEST(SubstringTests, Substring_StartPastEnd_ReturnsEmptyString)
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(10, 3);
+    CMyString sub = s.SubString(10, 3);
 
     EXPECT_EQ(sub.GetLength(), 0u);
     EXPECT_EQ(sub.GetCapacity(), 0u);
@@ -91,7 +91,7 @@ TEST(SubstringTests, Substring_OnEmptyString_ReturnsEmptyString)
 {
     CMyString s;
 
-    CMyString sub = s.Substring(0, 5);
+    CMyString sub = s.SubString(0, 5);
 
     EXPECT_EQ(sub.GetLength(), 0u);
     EXPECT_EQ(sub.GetCapacity(), 0u);
@@ -103,7 +103,7 @@ TEST(SubstringTests, Substring_SingleCharacter_ReturnsCorrectString)
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(1, 1);
+    CMyString sub = s.SubString(1, 1);
 
     EXPECT_EQ(sub.GetLength(), 1u);
     EXPECT_STREQ(sub.GetStringData(), "e");
@@ -114,7 +114,7 @@ TEST(SubstringTests, Substring_EmbeddedNulls_PreservesAllCharacters)
     const char raw[] = { 'A', '\0', 'B', 'C', '\0', 'D' };
     CMyString s(raw, 6);
 
-    CMyString sub = s.Substring(1, 4); // '\0', 'B', 'C', '\0'
+    CMyString sub = s.SubString(1, 4); // '\0', 'B', 'C', '\0'
 
     EXPECT_EQ(sub.GetLength(), 4u);
 
@@ -131,7 +131,7 @@ TEST(SubstringTests, Substring_EmbeddedNulls_PreservesAllCharacters)
 TEST(SubstringTests, Substring_ResultIsIndependentFromSource)
 {
     CMyString s("Hello");
-    CMyString sub = s.Substring(1, 3); // "ell"
+    CMyString sub = s.SubString(1, 3); // "ell"
 
     s[1] = 'A';
 
@@ -143,7 +143,7 @@ TEST(SubstringTests, Substring_FullStringWithoutLengthArgument_ReturnsWholeStrin
 {
     CMyString s("Hello");
 
-    CMyString sub = s.Substring(0);
+    CMyString sub = s.SubString(0);
 
     EXPECT_EQ(sub.GetLength(), 5u);
     EXPECT_STREQ(sub.GetStringData(), "Hello");

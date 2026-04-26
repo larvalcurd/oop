@@ -83,3 +83,30 @@ TEST(CopyTests, OperatorAssign_GeneralCase_SourceIsUnchanged)
     EXPECT_EQ(s2.GetLength(), 5u);
     EXPECT_STREQ(s2.GetStringData(), "Hello");
 }
+
+TEST(CopyTests, OperatorAssign_FromCString_UsesConvertingConstructor)
+{
+    CMyString s("Old");
+
+    s = "NewValue";
+
+    EXPECT_EQ(s.GetLength(), 8u);
+    EXPECT_STREQ(s.GetStringData(), "NewValue");
+}
+
+TEST(CopyTests, OperatorAssign_FromStdString_UsesConvertingConstructorAndPreservesEmbeddedNulls)
+{
+    std::string source;
+    source.push_back('A');
+    source.push_back('\0');
+    source.push_back('B');
+
+    CMyString s("Old");
+    s = source;
+
+    ASSERT_EQ(s.GetLength(), 3u);
+    EXPECT_EQ(s[0], 'A');
+    EXPECT_EQ(s[1], '\0');
+    EXPECT_EQ(s[2], 'B');
+    EXPECT_EQ(s.GetStringData()[3], '\0');
+}
