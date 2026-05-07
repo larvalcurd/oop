@@ -7,6 +7,7 @@
 
 namespace
 {
+// количество дней от 01.01.1970 до 31.12.9999 по-любому unsigned, семантическое отражение
 constexpr unsigned MAX_TIMESTAMP = 2932896u; // 31.12.9999
 
 struct DayMonthYear
@@ -19,10 +20,10 @@ struct DayMonthYear
 DayMonthYear TimestampToDayMonthYear(int timestamp)
 {
 	// Сдвиг к "civil calendar" (алгоритм работает от 0000-03-01)
-	long long days = static_cast<long long>(timestamp) + 719468;
+	long long days = static_cast<long long>(timestamp) + 719468; // 719468 дней от 01.03.0000 до 01.01.1970
 
 	// 1. Считаем, сколько прошло 400-летних эпох
-	const long long era = days / 146097;
+	const long long era = days / 146097; // 400 * 365 + 97 = 146097
 
 	// 2. День внутри текущей эпохи [0, 146096]
 	const unsigned dayOfEra = static_cast<unsigned>(days - era * 146097);
@@ -42,7 +43,7 @@ DayMonthYear TimestampToDayMonthYear(int timestamp)
 		- (365 * yearOfEra + yearOfEra / 4 - yearOfEra / 100);
 
 	// 6. Месяц (смещённый, март = 0)
-	const unsigned monthPrime = (5 * dayOfYear + 2) / 153;
+	const unsigned monthPrime = (5 * dayOfYear + 2) / 153; // 31+30+31+30+31 = 153
 
 	// 7. День месяца
 	const unsigned day = dayOfYear
@@ -135,6 +136,9 @@ CDate MakeInvalidDate()
 	return CDate(32, Month::JANUARY, 1970);
 }
 
+// параметр типа long long, потому что на вход может подавать результат выполнений в более широков типе, 
+//например, при сложении двух int может произойти переполнение, и результат будет уже не в диапазоне int, 
+//а в диапазоне long long, поэтому проверка на диапазон должна быть в более широком типе
 bool IsInRange(long long timestamp)
 {
 	return timestamp >= 0 && timestamp <= static_cast<long long>(MAX_TIMESTAMP);
@@ -180,10 +184,18 @@ CDate::CDate(unsigned day, Month month, unsigned year)
 	m_isValid = true;
 }
 
+
+// с unsigned на входе, потому что количество дней от 01.01.1970 до 31.12.9999 по-любому unsigned, семантическое отражение
 CDate::CDate(unsigned timestamp)
 {
+	// при проверке не нужно приводить к long long, 
+	// потому что timestamp по-любому unsigned, а MAX_TIMESTAMP по-любому unsigned, 
+	// и сравнение двух unsigned гарантированно не вызовет переполнение и будет работать корректно
 	if (timestamp <= MAX_TIMESTAMP)
 	{
+		// потери данных при приведении не будет, 
+		// потому что timestamp по-любому unsigned, 
+		// а MAX_TIMESTAMP по-любому unsigned,
 		m_timestamp = static_cast<int>(timestamp);
 		m_isValid = true;
 	}
@@ -250,7 +262,7 @@ CDate& CDate::operator++()
 	{
 		return *this;
 	}
-
+	// без приведения было бы сравнение int и unsigned, что может привести к некорректному результату
 	if (m_timestamp >= static_cast<int>(MAX_TIMESTAMP))
 	{
 		m_timestamp = 0;
@@ -300,14 +312,17 @@ CDate CDate::operator+(int days) const
 	{
 		return MakeInvalidDate();
 	}
-
+	// приведение нужно, чтобы избежать переполнения при сложении, 
+	// если бы мы не использовали long long, то при сложении двух int могло бы произойти переполнение, 
+	// и результат был бы уже не в диапазоне int, а в диапазоне long long, 
+	// поэтому проверка на диапазон должна быть в более широком типе
 	const long long newTimestamp = static_cast<long long>(m_timestamp) + days;
 
 	if (!IsInRange(newTimestamp))
 	{
 		return MakeInvalidDate();
 	}
-
+	// приведение безопасно, потому что мы уже проверили, что newTimestamp в диапазоне [0, MAX_TIMESTAMP],
 	return CDate(static_cast<unsigned>(newTimestamp));
 }
 
@@ -395,7 +410,18 @@ CDate operator+(int days, const CDate& date)
 
 CDate CDate::operator-(int days) const
 {
-	return *this + (-days);
+	if (!m_isValid)
+	{
+		return MakeInvalidDate();
+	}
+	// избегаем переполнения
+	const long long newTimeStamp = static_cast<long long>(m_timestamp) - static_cast<long long>(days);
+	
+	if (!IsInRange(newTimeStamp))
+	{
+		return MakeInvalidDate();
+	}
+	return CDate(static_cast<unsigned>(newTimeStamp));
 }
 
 std::ostream& operator<<(std::ostream& os, const CDate& date)

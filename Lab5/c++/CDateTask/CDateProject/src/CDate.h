@@ -56,6 +56,7 @@ public:
 	CDate& operator+=(int days);
 	CDate& operator-=(int days);
 
+	//spaceship
 	bool operator==(const CDate& other) const;
 	bool operator!=(const CDate& other) const;
 
@@ -65,7 +66,11 @@ public:
 	bool operator>=(const CDate& other) const;
 
 private:
-	int m_timestamp = 0;
+	// здесь int, потому что operator-(const CDate&) возращает m_timestamp - other.m_timestamp
+	// при отрицаительной разнице могло бы быть беззнаково переполнение
+	// удобно при проверке на декремент if (m_timestamp <= 0), потому то читается лучше
+	// максимальное значение 2 932 896 влезает в int, сужение при преобразовании из unsigned безопасно
+	int m_timestamp = 0; 
 	bool m_isValid = true;
 };
 

@@ -7,6 +7,11 @@ ComparisonTests.cpp
 StringAccessTests.cpp
 SubstringTests.cpp
 StreamOperatorsTests.cpp
+IteratorAccessTests.cpp
+IteratorMovementTests.cpp
+IteratorArithmeticTests.cpp
+IteratorAssertTests.cpp
+CMyStringIteratorTests.cpp
 ) 
 target_link_libraries(CMyStringTests PRIVATE CMyString GTest::gtest GTest::gtest_main)
 target_include_directories(CMyStringTests PRIVATE ${CMAKE_SOURCE_DIR}/src)

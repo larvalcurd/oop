@@ -1,6 +1,9 @@
 #include <gtest/gtest.h>
 #include "../src/CMyString.h"
 
+#include <limits>
+#include <stdexcept>
+
 TEST(ConstructorTests, DefaultConstructor_ShouldCreateEmptyString)
 {
     CMyString s; 
@@ -58,4 +61,12 @@ TEST(ConstructorTests, ConstructorWithLength_ZeroLength_ShouldCreateEmptyString)
     ASSERT_NE(data, nullptr);
     EXPECT_STREQ(s.GetStringData(), "");
     EXPECT_EQ(data[0], '\0');
+}
+
+TEST(ConstructorTests, ConstructorWithLength_MaxSizeLength_ThrowsLengthError)
+{
+    EXPECT_THROW(
+        CMyString("Hello", std::numeric_limits<size_t>::max()),
+        std::length_error
+    );
 }

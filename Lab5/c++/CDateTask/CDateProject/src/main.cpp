@@ -11,15 +11,14 @@ void printTestHeader(const std::string& title)
 void demoConstructors()
 {
 	printTestHeader("Constructors & Getters");
-	CDate d1; // default 01.01.1970
-	CDate d2(1, Month::JANUARY, 2023); // explicit date
-	CDate d3(365u); // 1 year after epoch (01.01.1971)
+	CDate d1; 
+	CDate d2(1, Month::JANUARY, 2023); 
+	CDate d3(365u); 
 
 	std::cout << "Default: " << d1 << " (WeekDay: " << static_cast<int>(d1.GetWeekDay()) << ")\n";
 	std::cout << "From parts: " << d2 << " (WeekDay: " << static_cast<int>(d2.GetWeekDay()) << ")\n";
 	std::cout << "From timestamp 365: " << d3 << " (WeekDay: " << static_cast<int>(d3.GetWeekDay()) << ")\n";
 
-	// Invalid constructor
 	CDate invalidDate(29, Month::FEBRUARY, 2023);
 	std::cout << "Invalid (29.02.2023): " << std::boolalpha << invalidDate.IsValid() << " -> " << invalidDate << "\n";
 }
@@ -27,7 +26,7 @@ void demoConstructors()
 void demoArithmetic()
 {
 	printTestHeader("Arithmetic +, -, +=, -=");
-	CDate d(28, Month::FEBRUARY, 2020); // leap year
+	CDate d(28, Month::FEBRUARY, 2020); 
 	std::cout << "Initial: " << d << "\n";
 
 	CDate d2 = d + 3;
@@ -38,16 +37,14 @@ void demoArithmetic()
 	std::cout << "d - 2 = " << d3 << "\n";
 
 	CDate d4(1, Month::JANUARY, 1970);
-	CDate d5 = d4 - 1; // should become invalid
+	CDate d5 = d4 - 1; 
 	std::cout << "01.01.1970 - 1 = " << d5 << " (invalid expected)\n";
 
-	// difference between dates
 	CDate a(1, Month::JANUARY, 2010);
 	CDate b(30, Month::DECEMBER, 2009);
 	int diff = a - b;
 	std::cout << "01.01.2010 - 30.12.2009 = " << diff << " days\n";
 
-	// +=, -=
 	CDate mod(15, Month::MAY, 2023);
 	std::cout << "Before += 10: " << mod;
 	mod += 10;
@@ -102,7 +99,6 @@ void demoIO()
 	printTestHeader("Stream I/O (operator<< and operator>>)");
 	std::cout << "Using stringstream to test input.\n";
 
-	// Valid input
 	std::istringstream iss("15.08.2023");
 	CDate d;
 	if (iss >> d)
@@ -110,7 +106,6 @@ void demoIO()
 		std::cout << "Read '15.08.2023' -> " << d << " (stream good)\n";
 	}
 
-	// Invalid date but correct format
 	iss.clear();
 	iss.str("31.04.2023");
 	if (iss >> d)
@@ -118,7 +113,6 @@ void demoIO()
 		std::cout << "Read '31.04.2023' -> " << d << " (stream good, date invalid)\n";
 	}
 
-	// INVALID string
 	iss.clear();
 	iss.str("INVALID");
 	if (iss >> d)
@@ -126,7 +120,6 @@ void demoIO()
 		std::cout << "Read 'INVALID' -> " << d << " (stream good, date invalid)\n";
 	}
 
-	// Malformed format
 	iss.clear();
 	iss.str("01/01/2020");
 	if (!(iss >> d))
