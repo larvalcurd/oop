@@ -6,7 +6,7 @@ TEST(CDateDifferenceTests, PositiveDifference)
 	CDate d1(1, Month::JANUARY, 2010);
 	CDate d2(30, Month::DECEMBER, 2009);
 
-	EXPECT_EQ(d1 - d2, 2); // timestamp difference
+	EXPECT_EQ(d1 - d2, 2); 
 }
 
 TEST(CDateDifferenceTests, NegativeDifference)
